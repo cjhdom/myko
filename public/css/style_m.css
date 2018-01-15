@@ -1,0 +1,98 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* web-font */
+
+
+@font-face {
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: normal;
+  src: url(../font/NanumGothic.eot);
+  src: url(../font/NanumGothic.eot?#iefix) format('embedded-opentype'),
+       url(../font/NanumGothic.woff) format('woff'),
+       url(../font/NanumGothic.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: bold;
+  src: url(../font/NanumGothicBold.eot);
+  src: url(../font/NanumGothicBold.eot?#iefix) format('embedded-opentype'),
+       url(../font/NanumGothicBold.woff) format('woff'),
+       url(../font/NanumGothicBold.ttf) format('truetype');
+}
+
+
+
+
+/* reset */
+body {margin: 0;}
+h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, input {margin: 0; padding: 0;}
+a {color: inherit; text-decoration: inherit;}
+a img, fieldset, input {border: none;}
+li {list-style: none;}
+address, i, em {font-style: normal;}
+header, main, footer, section, article, aside, nav {display: block;}
+
+/* form reset */
+input, label, select, button, textarea {margin:0; border:0; padding:0; display:inline-block; vertical-align:middle; white-space:normal; background:none; line-height:1;}
+
+/* Remove the stupid outer glow in Webkit */
+input:focus {outline:0;}
+
+/* Box Sizing Reset
+-----------------------------------------------*/
+
+/* All of our custom controls should be what we expect them to be */
+input, textarea {-webkit-box-sizing:content-box; -moz-box-sizing:content-box; box-sizing:content-box;}
+
+/* These elements are usually rendered a certain way by the browser */
+button, input[type=reset], input[type=button], input[type=submit], input[type=checkbox], input[type=radio], select {-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box;}
+
+/* SearchContainer Input
+-----------------------------------------------*/
+
+/* Make webkit render the search input like a normal text field */
+input[type=search] {-webkit-appearance:textfield; -webkit-box-sizing:content-box;}
+
+/* Turn off the recent search for webkit. It adds about 15px padding on the left */
+::-webkit-search-decoration {display:none;}
+
+/* Buttons
+-----------------------------------------------*/
+
+button, input[type="reset"], input[type="button"], input[type="submit"] {
+	/* Fix IE7 display bug */
+	overflow:visible;
+	width:auto;
+}
+
+/* IE8 and FF freak out if this rule is within another selector */
+::-webkit-file-upload-button {padding:0; border:0; background:none;}
+
+/* Textarea
+-----------------------------------------------*/
+
+textarea 
+{
+	/* Move the label to the top */
+	vertical-align:top;
+	
+	/* Turn off scroll bars in IE unless needed */
+	overflow:auto;
+}
+
+/* common */
+body {font-family: '나눔고딕', 'NanumGothic', Dotum, '돋움', Helvetica, AppleSDGothicNeo, sans-serif; font-size: 13px; color: #333333; background: #ffffff;}
+#skip-nav {position: fixed; left: 0; top: -43px; width: 100%; line-height: 40px; text-align: center; background: rgba(0, 0, 0, 0.6); color: #ffffff; font-size: 13px; border-bottom: 1px solid #eeeeee; transition: all 0.3s; z-index: 10000;}
+#skip-nav:focus {top: 0;}
+
+#wrapper {display: none;}
+div.app_down {display: block; position: fixed; z-index: 1001; left: 0; top: 0; right: 0; bottom: 0; background: url(../img/app_down_bg.png);}
+div.app_down div.view {position: absolute; height: 260px; z-index: 1000; left: 30px; right: 30px; top: 50%; margin: -130px 0 0 0; z-index: 1002; color: #ffffff; text-align: center;}
+div.app_down div.view h2 {}
+div.app_down div.view h2 img {width: 120px; vertical-align: middle;}
+div.app_down div.view p {font-size: 16px; line-height: 1.8; margin-top: 30px;}
+div.app_down div.view a.down {background: #ff6699; font-size: 18px; width: 200px; line-height: 60px; border-radius: 20px; margin: 20px auto; display: block; text-align: center;}
+
