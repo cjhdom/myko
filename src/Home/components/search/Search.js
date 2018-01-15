@@ -1,7 +1,8 @@
 import React from 'react';
 import PlacesAutocomplete from 'react-places-autocomplete'
 
-const Search = ({inputProps, handleFormSubmit, handleSelect, cssClasses}) => {
+const Search = ({inputProps, handleFormSubmit, handleSelect, cssClasses, options, shouldFetchSuggestions,
+                    Footer, AutocompleteItem}) => {
     return (
         <form className="search" name="main_search" onSubmit={handleFormSubmit}>
             <fieldset>
@@ -9,6 +10,10 @@ const Search = ({inputProps, handleFormSubmit, handleSelect, cssClasses}) => {
                     inputProps={inputProps}
                     classNames={cssClasses}
                     handleSelect={handleSelect}
+                    options={options}
+                    shouldFetchSuggestions={shouldFetchSuggestions}
+                    Footer={Footer}
+                    AutocompleteItem={AutocompleteItem}
                 />
                 <input type="button" name="search_click" value="검색"
                        ng-click="doMoveKosiwonSearch(place)"/>

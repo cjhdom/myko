@@ -25,9 +25,39 @@ class SearchContainer extends Component {
     }
 
     render () {
+        const AutocompleteItem = ({ formattedSuggestion }) => (
+            <div className="Demo__suggestion-item">
+                <i className="fa fa-map-marker Demo__suggestion-icon" />
+                <strong>{formattedSuggestion.mainText}</strong>{' '}
+                <small className="text-muted">
+                    {formattedSuggestion}
+                </small>
+            </div>
+        )
+
+        const Footer = () => (
+            <div className="Demo__dropdown-footer">
+                <div>
+                    <img
+                        src={''}
+                        className="Demo__dropdown-footer-image"
+                    />
+                </div>
+            </div>
+        )
+
+        const shouldFetchSuggestions = ({ value }) => value.length > 2
+
+        const onError = (status, clearSuggestions) => {
+            console.log(
+                'Error happened while fetching suggestions from Google Maps API',
+                status
+            )
+            clearSuggestions()
+        }
         const inputProps = {
             value: this.state.address,
-            onChange: this.onChange.bind(this),
+            onChange: this.onChange,
             onBlur: () => false,
             type: 'search',
             name: 'search_bar',
@@ -36,10 +66,18 @@ class SearchContainer extends Component {
         const cssClasses = {
             input: ''
         }
+        const options = {
+            types: ['geocode'],
+            componentRestrictions: {country: 'kr'}
+        }
         return <Search inputProps={inputProps}
                        handleFormSubmit={this.handleFormSubmit.bind(this)}
                        cssClasses={cssClasses}
+                       options={options}
                        handleSelect={this.handleSelect.bind(this)}
+                       shouldFetchSuggestions={shouldFetchSuggestions}
+                       Footer={Footer}
+                       AutocompleteItem={AutocompleteItem}
         />
     }
 }
