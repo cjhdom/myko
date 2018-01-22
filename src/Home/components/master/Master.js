@@ -5,13 +5,13 @@ const Master = ({settings, masterList, moveView}) => {
     return (<div className="master">
         <h2>여긴 어때요?<span>마스터</span></h2>
         <Slider {...settings}>
-            {masterList.map(masterPage => {
-                return (<div className="list_slide">
+            {masterList.map((masterPage, key) => {
+                return (<div className="list_slide" key={key}>
                     <ul className="list_banner">
                         <li className="banner_page">
                             <ul>
                                 {masterPage.map(master => {
-                                    return (<li>
+                                    return (<li key={master.id}>
                                         <a onClick={() => moveView(master.id, master.fullName)} target="_blank">
                                             <div className="thumbnail_top">
                                                 <img alt="고시원 사진" src={master.imgPath}/>

@@ -9,7 +9,7 @@ import {DiamondList} from "../../../data/consts";
 
 class DiaContainer extends Component {
     render() {
-        const diaList = chunk(DiamondList, 8)
+        const diaList = chunk(DiamondList, 12)
         var settings = {
             dots: false,
             infinite: true,

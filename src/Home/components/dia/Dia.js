@@ -7,13 +7,13 @@ const Dia = ({settings, diaList}) => {
     return (<div className="diamond">
         <h2>여긴 어때요?<span>마스터</span></h2>
         <Slider {...settings}>
-            {diaList.map(diaPage => {
-                return (<div className="list_slide">
+            {diaList.map((diaPage, key) => {
+                return (<div className="list_slide" key={key}>
                     <ul className="list_banner">
                         <li className="banner_page">
                             <ul>
                                 {diaPage.map(dia => {
-                                    return (<li>
+                                    return (<li key={dia.id}>
                                         <Link to={`/View/${dia.id}`} target="_blank">
                                             <div className="thumbnail_top">
                                                 <img alt="고시원 사진" src={dia.imgPath}/>

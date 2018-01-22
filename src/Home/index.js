@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom'
 import MasterContainer from './components/master/MasterContainer';
 import DiaContainer from './components/dia/DiaContainer';
 import SearchContainer from './components/search/SearchContainer';
+import RecentContainer from "./components/rescent/RecentContainer";
+import FavoriteContainer from "./components/favorite/FavoriteContainer";
 
 class Home extends Component {
     render() {
@@ -13,6 +15,8 @@ class Home extends Component {
                     <SearchContainer/>
                     <MasterContainer/>
                     <DiaContainer/>
+                    <RecentContainer/>
+                    <FavoriteContainer/>
                 </div>
             </div>
         );

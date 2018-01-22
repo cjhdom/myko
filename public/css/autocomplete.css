@@ -1,0 +1,231 @@
+/*
+ * These are the default styles applied to the stock Google Places Autocomplete component. Importantly they preserve
+ * the required "powered by Google" logo.
+ */
+
+.pac-container {
+    background-color: #fff;
+    position: absolute !important;
+    z-index: 1000;
+    border-radius: 2px;
+    border-top: 1px solid #d9d9d9;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 800px
+}
+
+.pac-container:after {
+    content: "";
+    padding: 1px 1px 1px 0;
+    height: 16px;
+    text-align: right;
+    display: block;
+    background-image: url(//maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white2.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 104px 16px
+}
+
+.hdpi.pac-container:after {
+    background-image: url(//maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white2_hdpi.png)
+}
+
+.pac-item {
+    cursor: default;
+    padding: 0 4px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 30px;
+    text-align: left;
+    border-top: 1px solid #e6e6e6;
+    font-size: 11px;
+    color: #999
+}
+
+.pac-item:hover {
+    background-color: #fafafa
+}
+
+.pac-item-selected, .pac-item-selected:hover {
+    background-color: #ebf2fe
+}
+
+.pac-matched {
+    font-weight: 700
+}
+
+.pac-item-query {
+    font-size: 13px;
+    padding-right: 3px;
+    color: #000
+}
+
+.pac-icon {
+    width: 15px;
+    height: 20px;
+    margin-right: 7px;
+    margin-top: 6px;
+    display: inline-block;
+    vertical-align: top;
+    background-image: url(//maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons.png);
+    background-size: 34px
+}
+
+.hdpi .pac-icon {
+    background-image: url(//maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons_hdpi.png)
+}
+
+.pac-icon-search {
+    background-position: -1px -1px
+}
+
+.pac-item-selected .pac-icon-search {
+    background-position: -18px -1px
+}
+
+.pac-icon-marker {
+    background-position: -1px -161px
+}
+
+.pac-item-selected .pac-icon-marker {
+    background-position: -18px -161px
+}
+
+.pac-placeholder {
+    color: gray
+}
+
+.custom-prediction-label {
+    font-style: italic;
+}
+
+.Demo__github-icon {
+    font-size: 24px;
+}
+
+.Demo__github-link {
+    color: #262626;
+    font-size: 20px;
+}
+
+.Demo__github-link:hover,
+.Demo__github-link:active {
+    color: #4078c0;
+    text-decoration: none;
+}
+
+.Demo__suggestion-icon {
+    margin-right: 8px;
+}
+
+.fa.fa-map-marker.header {
+    color: #e53935;
+}
+
+.Demo__search-input,
+.Demo__search-input:focus,
+.Demo__search-input:active {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    border: honeydew;
+    display: block;
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 2px;
+    outline: none;
+}
+
+.Demo__autocomplete-container {
+    border-bottom: honeydew;
+    border-left: honeydew;
+    border-right: honeydew;
+    border-top: 1px solid #e6e6e6;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border-radius: 0 0 2px 2px;
+}
+
+.Demo__suggestion-item {
+    padding: 4px;
+    text-align: left;
+}
+
+.Demo__dropdown-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 4px;
+}
+
+.Demo__dropdown-footer-image {
+    display: inline-block;
+    width: 150px;
+}
+
+.Demo__spinner {
+    color: #18bc9c;
+    font-size: 30px;
+}
+
+@media (max-width: 480px) {
+    .autocomplete-container {
+        text-align: left;
+    }
+}
+
+@media (min-width: 768px) {
+    .alert {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        -webkit-animation: fadein .75s;
+        -moz-animation: fadein .75s;
+        -ms-animation: fadein .75s;
+        -o-animation: fadein .75s;
+        animation: fadein .75s;
+    }
+
+    .btn {
+        margin-top: 1.5rem;
+    }
+
+    .form-group {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5rem;
+        width: 50%;
+    }
+}
+
+.geocoding-results {
+    text-align: left;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
