@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {chunk} from 'lodash'
 
 import Master from './Master'
@@ -10,7 +9,7 @@ import {MasterList} from '../../../data/consts'
 
 class MasterContainer extends Component {
     moveView (id, fullName) {
-        console.log(id, fullName)
+        window.open(`/view/${id}`)
     }
 
     render () {

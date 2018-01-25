@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import 'whatwg-fetch'
 
 import Home from './Home';
 import View from './View';
