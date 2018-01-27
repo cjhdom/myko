@@ -1,25 +1,42 @@
 import React, {Component} from 'react'
+import ImageView from "./ImageView";
+
+const NextButton = ({onClick}) => {
+    return (
+        <p className="control">
+            <a className="next" onClick={onClick}><img alt="다음 이미지" src="/img/btn_right.png"/></a>
+        </p>
+    )
+}
+
+const PrevButton = ({onClick}) => {
+    return (
+        <p className="control">
+            <a className="prev" onClick={onClick}><img alt="이전 이미지" src="/img/btn_left.png"/></a>
+        </p>
+    )
+}
 
 class ImageViewContainer extends Component {
     render() {
+        const {imageList} = this.props
+        console.log(imageList)
+        const settings = {
+            dots: false,
+            infinite: true,
+            speed: 2000,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            prevArrow: <PrevButton/>,
+            nextArrow: <NextButton/>,
+            lazyLoad: true,
+            slide: 'li'
+        };
         return (
-            <div className="image-swipe">
-                <div className="box">
-                    <ul className="image">
-                        <li>
-                            <img alt=""
-                                 src="/files/kosiwons/5a3a639ecd93abf249ad6cfc/5a3a639ecd93abf249ad6cfc_kosiwon_0.jpg"/>
-                        </li>
-                    </ul>
-                    <ul className="indicator">
-                        <li className=""/>
-                    </ul>
-                </div>
-                <p className="control">
-                    <a className="prev"><img alt="이전 이미지" src="/img/btn_left.png"/></a>
-                    <a className="next"><img alt="다음 이미지" src="/img/btn_right.png"/></a>
-                </p>
-            </div>
+            <ImageView settings={settings}
+                imageList={imageList}/>
         )
     }
 }

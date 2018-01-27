@@ -5,7 +5,7 @@ import Info from "./Info";
 class InfoContainer extends Component {
     render() {
         return (
-            <Info/>
+            <Info {...this.props}/>
         );
     }
 }

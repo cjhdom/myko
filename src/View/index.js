@@ -35,10 +35,6 @@ class View extends Component {
             })
         } catch (e) {
             console.log(`error! ${e}`)
-            await this.setStateAsync({
-                success: false,
-                data: null
-            })
         }
     }
 
@@ -75,7 +71,7 @@ class View extends Component {
                 kosiwonVirtualNo,
                 kosiwonZipcode,
                 imageList
-            } = this.state
+            } = this.state.data
             return (
                 <div className="contentWrapper">
                     <div className="sub_detail_wrapper">
