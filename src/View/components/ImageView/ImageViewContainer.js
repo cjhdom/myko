@@ -25,7 +25,7 @@ class ImageViewContainer extends Component {
             dots: false,
             infinite: true,
             speed: 2000,
-            autoplay: true,
+            autoplay: false,
             autoplaySpeed: 5000,
             slidesToShow: 1,
             slidesToScroll: 1,

@@ -10,17 +10,6 @@ const Menu = () => {
                 <h3 className="ng-binding">입실료 40∼55만원</h3>
                 <p><a ng-click="doToggleFavorite()" ng-className="vars.isFavorite ? 'on' : ''"
                       className="on">찜하기</a></p>
-                <div className="popup" ng-style="{ 'display' : (vars.isShowPopup ? 'block' : 'none') }"
-                     style={style}>
-                    <p>
-                        회원 전용 기능입니다.
-                        <br/>
-                        로그인 후 이용이 가능합니다.
-                        <a ng-click="go('/members/login')" className="login">로그인 페이지로</a>
-                        <a ng-click="vars.isShowPopup=false" className="cancel">취소</a>
-                    </p>
-                    <div className="cancel"/>
-                </div>
             </div>
             <ul className="sub_option">
                 <li ng-className="model.isParking ? 'on' : ''" className="on">주차가능</li>

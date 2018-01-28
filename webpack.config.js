@@ -4,6 +4,7 @@ module.exports = {
     entry: [
         'react-hot-loader/patch',
         'whatwg-fetch',
+        'babel-polyfill',
         './src/index.js'
     ],
 

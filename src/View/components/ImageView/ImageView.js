@@ -12,7 +12,7 @@ const ImageView = ({settings, imageList}) => {
                         {imageList.map((image, i) => {
                             return (
                                 <li key={i}>
-                                    <img src={image.imageUri}/>
+                                    <img src={`http://www.kosirock.co.kr/${image.imageUri}`}/>
                                 </li>
                             )
                         })}
