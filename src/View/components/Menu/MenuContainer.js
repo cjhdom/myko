@@ -3,7 +3,7 @@ import Menu from './Menu'
 
 class MenuContainer extends Component {
     render () {
-        return <Menu/>
+        return <Menu {...this.props}/>
     }
 }
 

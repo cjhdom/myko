@@ -7,8 +7,11 @@ import RecentContainer from "./components/rescent/RecentContainer";
 import FavoriteContainer from "./components/favorite/FavoriteContainer";
 
 class Home extends Component {
-    render() {
+    componentWillMount() {
+        document.getElementsByTagName('body')[0].setAttribute('class', 'main');
+    }
 
+    render() {
         return (
             <div className="wrapper">
                 <div className="contentWrapper">

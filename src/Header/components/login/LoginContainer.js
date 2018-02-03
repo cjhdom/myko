@@ -1,20 +1,25 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import LoggedIn from './LoggedIn';
 import NotLoggedIn from './NotLoggedIn';
+import {getIsLoggedIn} from "../../../reducers/user";
 
-const LoginContainer = ({loginState, toggleLogin}) => {
+const LoginContainer = ({isLoggedIn}) => {
     return (
         <ul className="header_top">
-            {loginState.isLoggedIn ? <LoggedIn loginState={loginState} toggleLogin={toggleLogin}/> : <NotLoggedIn loginState={loginState} toggleLogin={toggleLogin}/>}
+            {isLoggedIn ? <LoggedIn/> : <NotLoggedIn/>}
             <li><a>원장님이신가요?</a></li>
         </ul>
     )
 };
 
 LoginContainer.propTypes = {
-    loginState: PropTypes.object.isRequired,
-    toggleLogin: PropTypes.func.isRequired
+    isLoggedIn: PropTypes.bool.isRequired
 };
 
-export default LoginContainer
+export default connect(
+    state => ({
+        isLoggedIn: getIsLoggedIn(state.user)
+    })
+)(LoginContainer)

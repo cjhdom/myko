@@ -3,7 +3,7 @@ import Option from './Option'
 
 class OptionContainer extends Component {
     render () {
-        return <Option/>
+        return <Option {...this.props}/>
     }
 }
 

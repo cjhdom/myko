@@ -2,42 +2,56 @@ import React from 'react'
 
 const style = {display: 'none'}
 
-const Menu = () => {
+const Menu = ({
+                  phonePopup,
+                  togglePhonePopup,
+                  kosiwonName,
+                  kosiwonPhoneNo,
+                  kosiwonUrl,
+                  kosiwonVirtualNo,
+                  kosiwonZipcode,
+                  isMeal,
+                  isParking,
+                  isRestRoom,
+                  isSeparate,
+                  isFavorite,
+                  priceMax,
+                  priceMin
+              }) => {
     return (
         <div className="detail_info">
             <div className="detail_info_top">
-                <h2 className="ng-binding">내자리 원룸텔</h2>
-                <h3 className="ng-binding">입실료 40∼55만원</h3>
-                <p><a ng-click="doToggleFavorite()" ng-className="vars.isFavorite ? 'on' : ''"
-                      className="on">찜하기</a></p>
+                <h2>{kosiwonName}</h2>
+                <h3>{`입실료 ${priceMin}∼${priceMax}만원`}</h3>
+                <p><a ng-click="doToggleFavorite()" className={isFavorite ? 'on' : ''}>찜하기</a></p>
             </div>
             <ul className="sub_option">
-                <li ng-className="model.isParking ? 'on' : ''" className="on">주차가능</li>
-                <li ng-className="model.isMeal ? 'on' : ''" className="on">식사제공</li>
-                <li ng-className="model.isSeparate ? 'on' : ''" className="on">남녀층 분리</li>
-                <li ng-className="model.isRestRoom ? 'on' : ''" className="on">개별 화장실</li>
+                <li className={isParking ? 'on' : ''}>주차가능</li>
+                <li className={isMeal ? 'on' : ''}>식사제공</li>
+                <li className={isSeparate ? 'on' : ''}>남녀층 분리</li>
+                <li className={isRestRoom ? 'on' : ''}>개별 화장실</li>
             </ul>
             <ul className="detail_info_bottom">
                 <li>
                     <a ng-click="vars.isShowQuestionPopup=true">문의전화</a>
-                    <div className="popup_call ng-hide" ng-show="vars.isShowQuestionPopup">
+                    {phonePopup && <div className="popup_call">
                         <ul>
                             <li><h2>문의전화</h2></li>
                             <li><a ng-click="vars.isShowQuestionPopup=false">
                                 <img alt="exit" src="/img/exit_gray.png"/>
                             </a>
                             </li>
-                            <div ng-if="model.kosiwonVirtualNo" ng-bind="model.kosiwonVirtualNo | tel"
-                                 ng-click="gaCheck(model.kosiwonName)" className="ng-binding ng-scope">050-4136-19954
+                            <div ng-if="model.kosiwonVirtualNo"
+                                 ng-click="gaCheck(model.kosiwonName)">{kosiwonVirtualNo || kosiwonPhoneNo}
                             </div>
                         </ul>
                         <div className="cancel" ng-click="vars.isShowQuestionPopup=false()">
                         </div>
-                    </div>
+                    </div>}
                 </li>
                 <li>
-                    <a ng-href="http://naejari1roomtel.garamcs.com" target="blank"
-                       href="http://naejari1roomtel.garamcs.com">홈페이지</a>
+                    <a target="blank"
+                       href={kosiwonUrl}>홈페이지</a>
                 </li>
                 <li ng-show="user.userType!=='W'">
                     <a ng-click="go('/main/kosiwon-singo/'+model._id+'/'+model.kosiwonName)">신고하기</a>

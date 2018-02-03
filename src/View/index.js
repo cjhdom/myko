@@ -11,8 +11,16 @@ class View extends Component {
         super()
         this.state = {
             success: false,
-            data: null
+            data: null,
+            phonePopup: false
         }
+    }
+
+    togglePhonePopup() {
+        this.setState({
+            ...this.state,
+            phonePopup: !this.state.phonePopup
+        })
     }
 
     setStateAsync(newState) {
@@ -22,8 +30,11 @@ class View extends Component {
     }
 
     async componentWillMount() {
+        document.getElementsByTagName('body')[0].setAttribute('class', 'sub_search_list');
         try {
-            const data = await fetch('http://www.kosirock.co.kr/api/kosiwons/5a3a639ecd93abf249ad6cfc', {
+            const {match} = this.props
+            const id = match.params.id
+            const data = await fetch(`http://www.kosirock.co.kr/api/kosiwons/${id}`, {
                 method: 'GET',
                 headers: new Headers({
                     'Accept': 'application/json, text/plain, */*'
@@ -41,7 +52,7 @@ class View extends Component {
     render() {
         const {match} = this.props
         const id = match.params.id
-        const {success} = this.state
+        const {success, phonePopup} = this.state
         if (success) {
             const {
                 description,
@@ -70,12 +81,15 @@ class View extends Component {
                 kosiwonUrl,
                 kosiwonVirtualNo,
                 kosiwonZipcode,
-                imageList
+                imageList,
+                priceMax,
+                priceMin,
+                floor
             } = this.state.data
             return (
                 <div className="contentWrapper">
                     <div className="sub_detail_wrapper">
-                        <div className="sub_detail">
+                        <div id="sub_detail">
                             <ImageViewContainer
                                 imageList={imageList}/>
                             <MenuContainer
@@ -83,11 +97,20 @@ class View extends Component {
                                 kosiwonPhoneNo={kosiwonPhoneNo}
                                 kosiwonUrl={kosiwonUrl}
                                 kosiwonVirtualNo={kosiwonVirtualNo}
-                                kosiwonZipcode={kosiwonZipcode}/>
+                                kosiwonZipcode={kosiwonZipcode}
+                                isMeal={isMeal}
+                                isParking={isParking}
+                                isRestRoom={isRestRoom}
+                                isSeparate={isSeparate}
+                                priceMax={priceMax}
+                                priceMin={priceMin}
+                                togglePhonePopup={this.togglePhonePopup.bind(this)}
+                                phonePopup={phonePopup}/>
                             <MapContainer
                                 location={location}
                                 majorAddress={majorAddress}/>
                             <InfoContainer
+                                floor={floor}
                                 isAlarmByKosirock={isAlarmByKosirock}
                                 isAlarmByOnwer={isAlarmByOnwer}
                                 isElevator={isElevator}

@@ -1,16 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom'
 
-const NotLoggedIn = ({toggleLogin}) => {
+const NotLoggedIn = () => {
     return (
         <li>
-            <a onClick={toggleLogin}>로그인 / 회원가입</a>
+            <Link to={'/Members/login'}>로그인 / 회원가입</Link>
         </li>
     )
-};
-
-NotLoggedIn.propTypes = {
-    toggleLogin: PropTypes.func.isRequired
 };
 
 export default NotLoggedIn

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {chunk} from 'lodash'
+import {withRouter} from 'react-router-dom'
 
 import Master from './Master'
 import PrevButton from './PrevButton';
@@ -9,7 +10,7 @@ import {MasterList} from '../../../data/consts'
 
 class MasterContainer extends Component {
     moveView (id, fullName) {
-        window.open(`/view/${id}`)
+        this.props.history.push(`/View/${id}`)
     }
 
     render () {
@@ -37,4 +38,4 @@ class MasterContainer extends Component {
     }
 }
 
-export default MasterContainer;
+export default withRouter((MasterContainer));

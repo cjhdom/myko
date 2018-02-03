@@ -1,16 +1,23 @@
 import React from 'react'
 
-const Option = () => {
+const Option = ({
+                    optionAircon,
+                    optionBed,
+                    optionCloset,
+                    optionDesk,
+                    optionFan,
+                    optionRefrigerator
+                }) => {
     return (
         <div className="detail_info_in_option">
             <p>내부 옵션</p>
             <ul>
-                <li ng-show="model.optionDesk" className="desk">책상</li>
-                <li ng-show="model.optionBed" className="bedroom">침대</li>
-                <li ng-show="model.optionCloset" className="closet">옷장</li>
-                <li ng-show="model.optionRefrigerator" className="refrigerator">냉장고</li>
-                <li ng-show="model.optionAircon" className="airconditioner">에어컨</li>
-                <li ng-show="model.optionFan" className="fan ng-hide">선풍기</li>
+                {optionDesk && <li className="desk">책상</li>}
+                {optionBed && <li className="bedroom">침대</li>}
+                {optionCloset && <li className="closet">옷장</li>}
+                {optionRefrigerator && <li className="refrigerator">냉장고</li>}
+                {optionAircon && <li className="airconditioner">에어컨</li>}
+                {optionFan && <li className="fan ng-hide">선풍기</li>}
             </ul>
         </div>
     )

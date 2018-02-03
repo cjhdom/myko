@@ -12,7 +12,7 @@ const Master = ({settings, masterList, moveView}) => {
                             <ul>
                                 {masterPage.map(master => {
                                     return (<li key={master.id}>
-                                        <a onClick={() => moveView(master.id, master.fullName)} target="_blank">
+                                        <a onClick={() => moveView(master.id, master.fullName)}>
                                             <div className="thumbnail_top">
                                                 <img alt="고시원 사진" src={master.imgPath}/>
                                             </div>

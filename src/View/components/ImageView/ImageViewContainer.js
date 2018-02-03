@@ -20,19 +20,15 @@ const PrevButton = ({onClick}) => {
 class ImageViewContainer extends Component {
     render() {
         const {imageList} = this.props
-        console.log(imageList)
         const settings = {
-            dots: false,
+            dots: true,
             infinite: true,
-            speed: 2000,
-            autoplay: false,
-            autoplaySpeed: 5000,
+            speed: 1000,
             slidesToShow: 1,
             slidesToScroll: 1,
             prevArrow: <PrevButton/>,
             nextArrow: <NextButton/>,
-            lazyLoad: true,
-            slide: 'li'
+            lazyLoad: false
         };
         return (
             <ImageView settings={settings}

@@ -29,7 +29,7 @@ class Search extends Component {
     componentWillUnmount() {
         const button = document.createElement('input');
         button.removeEventListener('click', this.clickSearch)
-        window.removeEventListener('resize', this.getDrawerPosition)
+        window.removeEventListener('resize', this.getDrawerPosition.bind(this))
     }
 
     getDrawerPosition() {

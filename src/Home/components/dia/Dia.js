@@ -1,7 +1,7 @@
 import React from 'react'
 import Slider from 'react-slick';
 
-import {Link} from 'react-router-dom'
+import Link from 'react-router-redux-dom-link'
 
 const Dia = ({settings, diaList}) => {
     return (<div className="diamond">
@@ -14,7 +14,7 @@ const Dia = ({settings, diaList}) => {
                             <ul>
                                 {diaPage.map(dia => {
                                     return (<li key={dia.id}>
-                                        <Link to={`/View/${dia.id}`} target="_blank">
+                                        <Link to={`/View/${dia.id}`}>
                                             <div className="thumbnail_top">
                                                 <img alt="고시원 사진" src={dia.imgPath}/>
                                             </div>
