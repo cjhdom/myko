@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import 'whatwg-fetch'
-
+import myCookie from './myCookie'
 
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
@@ -15,9 +15,12 @@ import Header from './Header';
 import Member from './Member'
 import reducers from './reducers'
 
+let userData = myCookie.get('userData') || {}
+
 const initialState = {
     user: {
-        isLoggedIn: false
+        isLoggedIn: false,
+        userData
     }
 }
 

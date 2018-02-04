@@ -29,7 +29,7 @@ class View extends Component {
         )
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         document.getElementsByTagName('body')[0].setAttribute('class', 'sub_search_list');
         try {
             const {match} = this.props

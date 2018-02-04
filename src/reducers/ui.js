@@ -1,10 +1,17 @@
-import {TOGGLE_LOGIN_POPUP, TOGGLE_WONJANG_LOGIN_POPUP} from '../data/ActionTypes'
+import {
+    TOGGLE_LOGIN_POPUP,
+    TOGGLE_WONJANG_LOGIN_POPUP,
+    TOGGLE_DELETE_POPUP
+} from '../data/ActionTypes'
 
-export const isLoginPopup = (ui) => ui.loginPopup
+export const isLoginPopup = ui => ui.loginPopup
+
+export const isDeletePopup = ui => ui.deletePopup
 
 const defaultState = {
     loginPopup: false,
-    wonjangLoginPopup: false
+    wonjangLoginPopup: false,
+    deletePopup: false
 }
 
 const ui = (state = defaultState, action) => {
@@ -18,6 +25,11 @@ const ui = (state = defaultState, action) => {
             return {
                 ...state,
                 loginPopup: !state.loginPopup
+            }
+        case TOGGLE_DELETE_POPUP:
+            return {
+                ...state,
+                deletePopup: !state.deletePopup
             }
         default:
             return state

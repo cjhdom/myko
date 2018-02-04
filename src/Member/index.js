@@ -3,8 +3,7 @@ import {Route} from 'react-router'
 import LoginContainer from "./Login/LoginContainer";
 import NormalRegistrationContainer from "./NormalRegistration/NormalRegistrationContainer";
 
-
-class Login extends Component {
+class Member extends Component {
 
     componentWillMount() {
         document.getElementsByTagName('body')[0].setAttribute('className', 'sub_search_list');
@@ -23,4 +22,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default Member;

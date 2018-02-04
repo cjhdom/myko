@@ -2,9 +2,12 @@ export const getIsLoggedIn = (user) => user.isLoggedIn
 
 export const getIsWonjang = user => user.isWonjang
 
+export const getUserData = user => user.userData
+
 const defaultState = {
     isLoggedIn: false,
-    isWonjang: false
+    isWonjang: false,
+    userData: {}
 }
 
 const user = (state = defaultState, action) => {
