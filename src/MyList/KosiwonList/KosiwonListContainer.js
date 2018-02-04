@@ -39,19 +39,13 @@ class KosiwonListContainer extends Component {
             pageSize: 10000
         }
 
-        var req = {
-            method: 'POST',
-            url: '/api/myKosiwons/listBySearchOption',
-            data: option
-        };
-
         try {
             const data = await fetch('http://www.kosirock.co.kr/api/myKosiwons/listBySearchOption', {
                 method: 'POST',
                 headers: new Headers({
                     'Accept': 'application/json, text/plain, */*'
                 }),
-                data: option
+                body: JSON.stringify(option)
             })
 
             await this.setStateAsync({

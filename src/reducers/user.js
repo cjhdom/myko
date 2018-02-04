@@ -1,3 +1,7 @@
+import {
+    LOGIN
+} from '../data/ActionTypes'
+
 export const getIsLoggedIn = (user) => user.isLoggedIn
 
 export const getIsWonjang = user => user.isWonjang
@@ -12,6 +16,12 @@ const defaultState = {
 
 const user = (state = defaultState, action) => {
     switch (action.type) {
+        case LOGIN:
+            return {
+                ...state,
+                isLoggedIn: true,
+                userData: action.userData
+            }
         default:
             return state
     }

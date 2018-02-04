@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import 'whatwg-fetch'
-import myCookie from './myCookie'
+import { createBrowserHistory as createHistory } from "history";
+
+import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
 
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
@@ -15,8 +17,8 @@ import Header from './Header';
 import Member from './Member'
 import reducers from './reducers'
 
-let userData = myCookie.get('userData') || {}
-
+let userData = sessionStorage.getItem('userData') ? JSON.parse(sessionStorage.getItem('userData')) : {}
+console.log(sessionStorage.getItem('userData'))
 const initialState = {
     user: {
         isLoggedIn: false,
@@ -30,20 +32,23 @@ if (process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production') {
     devTools = a => a;
 }
 
+const history = createHistory()
 const store = createStore(
     combineReducers({
-        ...reducers
+        ...reducers,
+        router: routerReducer
     }),
     initialState,
-    compose(applyMiddleware(thunk), devTools)
+    compose(applyMiddleware(thunk, routerMiddleware(history)), devTools, )
 )
+
 
 const rootElement = document.getElementById('root');
 
 const renderApp = () => {
     ReactDom.render(
         <Provider store={store}>
-            <Router>
+            <ConnectedRouter history={history}>
                 <div>
                     <Header/>
                     <Switch>
@@ -54,7 +59,7 @@ const renderApp = () => {
                     </Switch>
                     <Footer/>
                 </div>
-            </Router>
+            </ConnectedRouter>
         </Provider>,
         rootElement
     );

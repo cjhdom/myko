@@ -1,16 +1,20 @@
 import React, {Component} from 'react';
 import {chunk} from 'lodash'
 import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {compose} from 'redux'
 
 import Master from './Master'
 import PrevButton from './PrevButton';
 import NextButton from './NextButton';
 
 import {MasterList} from '../../../data/consts'
+import {routeTo} from "../../../actions";
 
 class MasterContainer extends Component {
     moveView (id, fullName) {
         this.props.history.push(`/View/${id}`)
+        // this.props.routeTo(`/View/${id}`)
     }
 
     render () {
@@ -38,4 +42,11 @@ class MasterContainer extends Component {
     }
 }
 
-export default withRouter((MasterContainer));
+const connectMe = connect(
+    null,
+    {
+        routeTo: routeTo
+    }
+)
+
+export default compose(withRouter, connectMe)(MasterContainer);

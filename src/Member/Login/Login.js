@@ -1,18 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 
-const Login = () => {
+const Login = ({handleChange, onLoginClicked}) => {
     return (
         <div id="login">
             <h1>로그인</h1>
             <form className="login">
-                <input type="email" id="email" placeholder="이메일 (아이디)" ng-model="model.username"
-                       ng-keydown="doEmailKeyDown($event)"/>
+                <input type="email" id="email" placeholder="이메일 (아이디)" onChange={handleChange} />
                 <br/>
-                <input type="password" id="password" placeholder="비밀번호" ng-model="model.password"
-                       ng-keydown="doPasswordKeyDown($event)" maxLength="15"/>
+                <input type="password" id="password" placeholder="비밀번호" maxLength="15" onChange={handleChange}/>
                 <br/>
-                <input type="submit" name="login" value="로그인" ng-click="doLogin()" maxLength="15"/>
+                <input type="button" name="login" value="로그인" onClick={onLoginClicked} maxLength="15" />
                 <br/>
                 <input type="checkbox" name="로그인 정보 저장" value="로그인 정보 저장"
                        ng-model="vars.isChecked"/>

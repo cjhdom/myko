@@ -536,7 +536,7 @@ div.top_line {border-top: 2px solid #ff9999;}
 #login h1 {font-size: 21px; margin-top: 50px;}
 #login form.login input[type=email] {width: 388px; height: 48px; border: 1px solid #999999; font-size: 16px; padding-left: 10px; margin-top: 20px;}
 #login form.login input[type=password] {width: 388px; height: 48px; border: 1px solid #999999; font-size: 16px; padding-left: 10px; margin-top: 10px;}
-#login form.login input[type=submit] {width: 400px; height: 48px; font-size: 16px; margin-top: 10px; color: #ffffff; background: #333333;}
+#login form.login input[type=button] {width: 400px; height: 48px; font-size: 16px; margin-top: 10px; color: #ffffff; background: #333333;}
 #login form.login * {vertical-align: baseline;}
 #login form.login input[type=checkbox] {margin-top: 15px; margin-right: 3px;}
 #login > a {position: absolute; right: 0; top: 227px; text-decoration: underline; color: #6699ff;}
