@@ -49,4 +49,6 @@ const connectMe = connect(
     }
 )
 
-export default compose(withRouter, connectMe)(MasterContainer);
+const reduxComponent = connectMe(MasterContainer)
+
+export default withRouter(reduxComponent);

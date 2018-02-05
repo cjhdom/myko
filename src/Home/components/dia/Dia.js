@@ -12,16 +12,16 @@ const Dia = ({settings, diaList}) => {
                     <ul className="list_banner">
                         <li className="banner_page">
                             <ul>
-                                {diaPage.map(dia => {
-                                    return (<li key={dia.id}>
+                                {diaPage.map((dia, i) => {
+                                    return (<li key={i}>
                                         <Link to={`/View/${dia.id}`}>
                                             <div className="thumbnail_top">
                                                 <img alt="고시원 사진" src={dia.imgPath}/>
                                             </div>
                                             <div className="thumbnail_bottom">
                                                 <h3>{dia.name}</h3>
-                                                <p>{dia.spanList.map(spans =>
-                                                    (<span className={spans.className}>{spans.desc}</span>)
+                                                <p>{dia.spanList.map((spans, y) =>
+                                                    (<span key={y} className={spans.className}>{spans.desc}</span>)
                                                 )}</p>
                                                 <p>{dia.desc}</p>
                                             </div>

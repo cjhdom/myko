@@ -1,24 +1,16 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import {Route, Switch} from 'react-router-dom';
+import { routerReducer, routerMiddleware } from 'react-router-redux'
 import 'whatwg-fetch'
 import { createBrowserHistory as createHistory } from "history";
-
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
-
+import {AppContainer} from 'react-hot-loader'
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
-import {Provider} from 'react-redux'
 
-import Home from './Home';
-import View from './View';
-import Footer from './Footer';
-import Header from './Header';
-import Member from './Member'
+import App from './App';
 import reducers from './reducers'
 
 let userData = sessionStorage.getItem('userData') ? JSON.parse(sessionStorage.getItem('userData')) : {}
-console.log(sessionStorage.getItem('userData'))
 const initialState = {
     user: {
         isLoggedIn: false,
@@ -47,26 +39,28 @@ const rootElement = document.getElementById('root');
 
 const renderApp = () => {
     ReactDom.render(
-        <Provider store={store}>
-            <ConnectedRouter history={history}>
-                <div>
-                    <Header/>
-                    <Switch>
-                        <Route exact path="/" component={Home}/>
-                        <Route path="/Home" component={Home}/>
-                        <Route path="/View/:id" component={View}/>
-                        <Route path="/Members" component={Member}/>
-                    </Switch>
-                    <Footer/>
-                </div>
-            </ConnectedRouter>
-        </Provider>,
+        <AppContainer>
+            <App store={store} history={history} />
+        </AppContainer>,
         rootElement
     );
 };
 
 if (module.hot) {
-    module.hot.accept();
+    module.hot.accept('./App', () => {
+        const App = require('./App').default;
+        ReactDom.render(
+            <AppContainer>
+                <App store={store} history={history} />
+            </AppContainer>,
+            rootElement
+        );
+    })
+
+    module.hot.accept('./reducers', () => {
+        const nextRootReducer = require('./reducers/index');
+        store.replaceReducer(nextRootReducer);
+    });
 }
 
 renderApp();
