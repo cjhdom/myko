@@ -1,10 +1,15 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
+
 import DescContainer from "./components/Desc/DescContainer";
 import ImageViewContainer from "./components/ImageView/ImageViewContainer";
 import OptionContainer from "./components/Option/OptionContainer";
 import MapContainer from "./components/Map/MapContainer";
 import InfoContainer from "./components/Info/InfoContainer";
 import MenuContainer from "./components/Menu/MenuContainer";
+
+import {getIsLoggedIn} from "../reducers/user";
 
 class View extends Component {
     constructor() {
@@ -30,14 +35,17 @@ class View extends Component {
     }
 
     async componentDidMount() {
+        const {match, isLoggedIn} = this.props
+        const id = match.params.id
         document.getElementsByTagName('body')[0].setAttribute('class', 'sub_search_list');
         try {
-            const {match} = this.props
-            const id = match.params.id
             const data = await fetch(`http://www.kosirock.co.kr/api/kosiwons/${id}`, {
                 method: 'GET',
                 headers: new Headers({
-                    'Accept': 'application/json, text/plain, */*'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Pragma': 'no-cache',
+                    'Cache-Control': 'no-cache'
                 })
             })
             await this.setStateAsync({
@@ -46,6 +54,30 @@ class View extends Component {
             })
         } catch (e) {
             console.log(`error! ${e}`)
+        }
+
+        if (!isLoggedIn) {
+            const recentViewList = localStorage.getItem('recentViewList')
+                ? JSON.parse(localStorage.getItem('recentViewList')) : []
+            if (!recentViewList.some(recent => recent.id === id)) {
+                const {
+                    thumbnailUri,
+                    kosiwonName,
+                    priceMax,
+                    priceMin
+                } = this.state.data
+
+                const newRecentView = {
+                    id,
+                    thumbnailUri,
+                    kosiwonName,
+                    priceMax,
+                    priceMin
+                }
+
+                const newRecentViewList = [newRecentView, ...recentViewList].slice(0, 10)
+                localStorage.setItem('recentViewList', JSON.stringify(newRecentViewList))
+            }
         }
     }
 
@@ -141,4 +173,12 @@ class View extends Component {
     }
 }
 
-export default View
+View.propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired
+}
+
+export default connect(
+    state => ({
+        isLoggedIn: getIsLoggedIn(state.user)
+    })
+)(View)

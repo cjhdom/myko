@@ -43,7 +43,10 @@ class KosiwonListContainer extends Component {
             const data = await fetch('http://www.kosirock.co.kr/api/myKosiwons/listBySearchOption', {
                 method: 'POST',
                 headers: new Headers({
-                    'Accept': 'application/json, text/plain, */*'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Pragma': 'no-cache',
+                    'Cache-Control': 'no-cache'
                 }),
                 body: JSON.stringify(option)
             })

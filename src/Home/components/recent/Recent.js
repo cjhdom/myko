@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Favorite = ({
+const Recent = ({
                     id,
                     thumbnailUri,
                     kosiwonName,
@@ -24,7 +24,7 @@ const Favorite = ({
     );
 };
 
-Favorite.propTypes = {
+Recent.propTypes = {
     id: PropTypes.string.isRequired,
     thumbnailUri: PropTypes.string.isRequired,
     kosiwonName: PropTypes.string.isRequired,
@@ -32,4 +32,4 @@ Favorite.propTypes = {
     priceMin: PropTypes.number.isRequired
 };
 
-export default Favorite;
+export default Recent;

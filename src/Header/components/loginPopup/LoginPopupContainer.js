@@ -8,12 +8,6 @@ import {isLoginPopup} from "../../../reducers/ui";
 import {toggleLoginPopup} from "../../../actions"
 
 class LoginPopupContainer extends Component {
-    props: {
-        isLoggedIn: PropTypes.bool.isRequired,
-        loginPopup: PropTypes.bool.isRequired,
-        toggleLoginPopup: PropTypes.func.isRequired
-    }
-
     render() {
         const {
             isLoggedIn,
@@ -32,7 +26,8 @@ class LoginPopupContainer extends Component {
 
 LoginPopupContainer.propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
-    toggleLogin: PropTypes.func.isRequired
+    loginPopup: PropTypes.bool.isRequired,
+    toggleLoginPopup: PropTypes.func.isRequired
 };
 
 export default connect(

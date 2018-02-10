@@ -9,6 +9,7 @@ import Home from "./Home";
 import Member from "./Member";
 import Header from "./Header";
 import Footer from "./Footer";
+import ContactContainer from "./Contact/ContactContainer";
 
 class App extends Component {
     render() {
@@ -23,6 +24,7 @@ class App extends Component {
                             <Route path="/Home" component={Home}/>
                             <Route path="/View/:id" component={View}/>
                             <Route path="/Members" component={Member}/>
+                            <Route path="/contact" component={ContactContainer}/>
                         </Switch>
                         <Footer/>
                     </div>

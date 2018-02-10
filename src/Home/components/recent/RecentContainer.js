@@ -1,25 +1,29 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import EmptyFavorite from './EmptyFavorite'
-import {toggleLoginPopup} from "../../../actions";
+
+import EmptyRecent from "./EmptyRecent";
 import {getIsLoggedIn, getUserData} from "../../../reducers/user";
-import Favorite from "./Favorite";
+
+import Recent from "./Recent";
 import {withRouter} from "react-router-dom";
 
-class FavoriteContainer extends Component {
+class RecentContainer extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            data: [],
-            success: false
+            success: false,
+            data: []
         }
     }
 
-    setStateAsync(newState) {
-        return new Promise(resolve =>
-            resolve(this.setState({...this.state, ...newState}))
-        )
+    setStateAsync(data) {
+        return new Promise(resolve => {
+            this.setState({
+                ...this.state,
+                ...data
+            })
+        })
     }
 
     async componentDidMount() {
@@ -30,7 +34,7 @@ class FavoriteContainer extends Component {
                 populateOption: [],
                 projectOption: {},
                 andOption: [
-                    {key: 'type', value: 'F'},
+                    {key: 'type', value: 'V'},
                     {key: 'createdBy', value: id}
                 ],
                 orOption: [],
@@ -64,52 +68,56 @@ class FavoriteContainer extends Component {
     }
 
     onViewMoreClicked () {
-        const {isLoggedIn, toggleLoginPopup, history} = this.props
-        if (isLoggedIn) {
-            history.push('/list/favorite')
-        } else {
-            toggleLoginPopup()
-        }
+        this.props.history.push('/list/recent')
     }
 
     render() {
-        const {isLoggedIn, toggleLoginPopup} = this.props
-        const {data} = this.state
+        const {isLoggedIn} = this.props
+
+        let showEmptyRecent = true
+        let recentViewList = []
+
+        if (isLoggedIn) {
+            recentViewList = this.state.data
+            if (recentViewList.length > 0) {
+                showEmptyRecent = false
+            }
+        } else if (localStorage.getItem('recentViewList')) {
+            showEmptyRecent = false
+            recentViewList = JSON.parse(localStorage.getItem('recentViewList'))
+            recentViewList = recentViewList.slice(0, 4)
+        }
+
         return (
-            <div className="selectedview">
-                <p>찜한 고시원</p>
+            <div className="recentlyview">
+                <p>최근 본 고시원</p>
                 <a onClick={this.onViewMoreClicked.bind(this)}>더보기</a>
-                {isLoggedIn && data.length > 0 && <ul className="on" style={{display: 'block'}}>
-                    {data.map((recent, key) => {
+                {!showEmptyRecent && <ul className="on" style={{display: 'block'}}>
+                    {recentViewList.map((recent, key) => {
                         return (
-                            <Favorite
+                            <Recent
                                 key={key}
                                 {...recent}
                             />
                         )
                     })}
                 </ul>}
-                {(!isLoggedIn || data.length === 0) && <EmptyFavorite
-                    toggleLoginPopup={toggleLoginPopup}/>}
+                {showEmptyRecent && <EmptyRecent/>}
             </div>
         )
     }
 }
 
-FavoriteContainer.propTypes = {
+RecentContainer.propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
-    userData: PropTypes.object.isRequired,
-    toggleLoginPopup: PropTypes.func.isRequired
+    userData: PropTypes.object.isRequired
 }
 
 const reduxComponent = connect(
     state => ({
         isLoggedIn: getIsLoggedIn(state.user),
         userData: getUserData(state.user)
-    }),
-    {
-        toggleLoginPopup: toggleLoginPopup
-    }
-)(FavoriteContainer)
+    })
+)(RecentContainer)
 
 export default withRouter(reduxComponent)
