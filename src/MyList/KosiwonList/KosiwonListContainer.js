@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import KosiwonList from './KosiwonList'
 import {getIsLoggedIn, getUserData} from "../../reducers/user";
+import {routeTo} from "../../actions";
 
 class KosiwonListContainer extends Component {
     constructor(props) {
@@ -21,14 +22,14 @@ class KosiwonListContainer extends Component {
     }
 
     async componentDidMount() {
-        const {listType, isLoggedIn, userData} = this.props
+        const {listType, isLoggedIn, userData, routeTo} = this.props
         if (!isLoggedIn) {
-            return
+            return routeTo('/')
         }
 
         var option = {
-            populateOption: [],
-            projectOption: {},
+            populateOption: ["kosiwonId"],
+            projectOption: {kosiwonId: 1},
             andOption: [
                 {key: 'type', value: listType === 'favorite' ? 'F' : 'V'},
                 {key: 'createdBy', value: userData.user_id}
@@ -64,7 +65,9 @@ class KosiwonListContainer extends Component {
         const {success, kosiwonList} = this.state
         if (success) {
             return (
-                <KosiwonList/>
+                kosiwonList.map((view, i) => {
+                    return <KosiwonList key={i} kosiwon={view}/>
+                })
             );
         } else {
             return null
@@ -81,5 +84,8 @@ export default connect(
     state => ({
         isLoggedIn: getIsLoggedIn(state.user),
         userData: getUserData(state.user)
-    })
+    }),
+    {
+        routeTo
+    }
 )(KosiwonListContainer);

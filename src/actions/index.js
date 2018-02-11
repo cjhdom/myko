@@ -68,6 +68,5 @@ export const logout = () => dispatch => {
 }
 
 export const routeTo = (url) => dispatch => {
-    console.log('hi')
     dispatch(push(url))
 }

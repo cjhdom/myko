@@ -10,6 +10,7 @@ import Member from "./Member";
 import Header from "./Header";
 import Footer from "./Footer";
 import ContactContainer from "./Contact/ContactContainer";
+import MyList from "./MyList/index";
 
 class App extends Component {
     render() {
@@ -25,6 +26,7 @@ class App extends Component {
                             <Route path="/View/:id" component={View}/>
                             <Route path="/Members" component={Member}/>
                             <Route path="/contact" component={ContactContainer}/>
+                            <Route path="/list" component={MyList}/>
                         </Switch>
                         <Footer/>
                     </div>

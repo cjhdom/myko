@@ -1,7 +1,7 @@
 import React from 'react'
 import Slider from 'react-slick';
 
-import Link from 'react-router-redux-dom-link'
+import {Link} from 'react-router-dom'
 
 const Dia = ({settings, diaList}) => {
     return (<div className="diamond">

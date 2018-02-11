@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom'
+
 import Menu from "./Menu";
 import {getIsLoggedIn, getIsWonjang} from "../../../reducers/user";
 import {toggleLoginPopup, toggleWonjangPopup} from "../../../actions"
@@ -9,9 +11,8 @@ class MenuContainer extends Component {
         const {id} = e.target
         const {isLoggedIn, toggleLoginPopup, toggleWonjangPopup} = this.props
         if (id === 'recent') {
-            if (!isLoggedIn) {
-                return toggleLoginPopup()
-            }
+            const {history} = this.props
+            history.push('/list/recent')
         } else if (id === 'favorite') {
             if (!isLoggedIn) {
                 return toggleLoginPopup()
@@ -30,7 +31,7 @@ class MenuContainer extends Component {
     }
 }
 
-export default connect(
+const reduxComponent = connect(
     state => ({
         isLoggedIn: getIsLoggedIn(state.user),
         isWonjang: getIsWonjang(state.user)
@@ -39,4 +40,6 @@ export default connect(
         toggleLoginPopup: toggleLoginPopup,
         toggleWonjangPopup: toggleWonjangPopup
     }
-)(MenuContainer);
+)(MenuContainer)
+
+export default withRouter(reduxComponent);
