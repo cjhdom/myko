@@ -10,12 +10,14 @@ class MenuContainer extends Component {
     onButtonClick(e) {
         const {id} = e.target
         const {isLoggedIn, toggleLoginPopup, toggleWonjangPopup} = this.props
+        const {history} = this.props
         if (id === 'recent') {
-            const {history} = this.props
             history.push('/list/recent')
         } else if (id === 'favorite') {
             if (!isLoggedIn) {
                 return toggleLoginPopup()
+            } else {
+                history.push('/list/favorite')
             }
         } else if (id === 'upload') {
             if (!isLoggedIn) {

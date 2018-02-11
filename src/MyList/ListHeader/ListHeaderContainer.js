@@ -5,7 +5,7 @@ import ListHeader from "./ListHeader";
 class ListHeaderContainer extends Component {
     render() {
         return (
-            <ListHeader/>
+            <ListHeader toggleDeletePopup={this.props.toggleDeletePopup}/>
         );
     }
 }

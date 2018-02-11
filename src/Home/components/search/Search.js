@@ -9,6 +9,7 @@ class Search extends Component {
             left: 0,
             width: 0
         }
+        this.getDrawerPosition = this.getDrawerPosition.bind(this)
     }
 
     componentDidMount() {
@@ -22,14 +23,15 @@ class Search extends Component {
         $('#PlacesAutocomplete__root').append(button)
         button.addEventListener('click', this.clickSearch);
 
-        window.addEventListener('resize', this.getDrawerPosition.bind(this))
+        window.addEventListener('resize', this.getDrawerPosition)
         this.getDrawerPosition()
     }
 
     componentWillUnmount() {
+        console.log('removing search')
         const button = document.createElement('input');
         button.removeEventListener('click', this.clickSearch)
-        window.removeEventListener('resize', this.getDrawerPosition.bind(this))
+        window.removeEventListener('resize', this.getDrawerPosition)
     }
 
     getDrawerPosition() {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ListHeader = () => {
+const ListHeader = ({toggleDeletePopup}) => {
     return (
         <div id="list_filter" style={{zIndex: "0"}}>
             <ul className="filter">
@@ -120,7 +120,7 @@ const ListHeader = () => {
                         </form>
                     </li>*/}
                 <li className="all_delete">
-                    <p><a href="#">전체&nbsp;삭제</a></p>
+                    <p><a onClick={toggleDeletePopup}>전체&nbsp;삭제</a></p>
                 </li>
             </ul>
         </div>

@@ -1,14 +1,14 @@
 import React from 'react'
 
-const BodyHeader = () => {
+const BodyHeader = ({showPopup, toggleDeletePopup, removeRecentList}) => {
     return (
-        <div className="popup" ng-style="{ 'display' : (vars.isShowPopup ? 'block' : 'none')}">
+        <div className="popup" style={{display: showPopup ? 'block' : 'none'}}>
             <p>
                 리스트에 있는 고시원 내역을
                 <br/>
                 모두 삭제하시겠습니까?
-                <a className="delete" ng-click="doSelectAllForDelete()">전체 삭제</a>
-                <a className="cancel" ng-click="vars.isShowPopup=false">취소</a>
+                <a className="delete" onClick={removeRecentList}>전체 삭제</a>
+                <a className="cancel" onClick={toggleDeletePopup}>취소</a>
             </p>
             <div className="cancel">
             </div>

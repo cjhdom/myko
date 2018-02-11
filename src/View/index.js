@@ -64,7 +64,12 @@ class View extends Component {
                     thumbnailUri,
                     kosiwonName,
                     priceMax,
-                    priceMin
+                    priceMin,
+                    description,
+                    isMeal,
+                    isParking,
+                    isRestRoom,
+                    isSeparate
                 } = this.state.data
 
                 const newRecentView = {
@@ -72,7 +77,12 @@ class View extends Component {
                     thumbnailUri,
                     kosiwonName,
                     priceMax,
-                    priceMin
+                    priceMin,
+                    description,
+                    isMeal,
+                    isParking,
+                    isRestRoom,
+                    isSeparate
                 }
 
                 const newRecentViewList = [newRecentView, ...recentViewList].slice(0, 10)

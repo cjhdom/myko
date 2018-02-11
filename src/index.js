@@ -13,7 +13,7 @@ import reducers from './reducers'
 let userData = sessionStorage.getItem('userData') ? JSON.parse(sessionStorage.getItem('userData')) : {}
 const initialState = {
     user: {
-        isLoggedIn: false,
+        isLoggedIn: userData ? true : false,
         userData
     }
 }
