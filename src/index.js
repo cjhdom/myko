@@ -10,10 +10,10 @@ import thunk from 'redux-thunk'
 import App from './App';
 import reducers from './reducers'
 
-let userData = sessionStorage.getItem('userData') ? JSON.parse(sessionStorage.getItem('userData')) : {}
+let userData = sessionStorage.getItem('userData') ? JSON.parse(sessionStorage.getItem('userData')) : null
 const initialState = {
     user: {
-        isLoggedIn: userData ? true : false,
+        isLoggedIn: !!userData,
         userData
     }
 }
@@ -31,7 +31,7 @@ const store = createStore(
         router: routerReducer
     }),
     initialState,
-    compose(applyMiddleware(thunk, routerMiddleware(history)), devTools, )
+    compose(applyMiddleware(thunk, routerMiddleware(history)), devTools)
 )
 
 

@@ -31,8 +31,10 @@ class RecentContainer extends Component {
         if (isLoggedIn) {
             const {id} = this.props.userData
             const body = {
-                populateOption: [],
-                projectOption: {},
+                populateOption: ['kosiwonId'],
+                projectOption: {
+                    kosiwonId: 1
+                },
                 andOption: [
                     {key: 'type', value: 'V'},
                     {key: 'createdBy', value: id}
@@ -40,7 +42,7 @@ class RecentContainer extends Component {
                 orOption: [],
                 sortOption: '-created',
                 pageNo: 1,
-                pageSize: 10000
+                pageSize: 4
             }
 
             try {
@@ -67,7 +69,7 @@ class RecentContainer extends Component {
         }
     }
 
-    onViewMoreClicked () {
+    onViewMoreClicked() {
         this.props.history.push('/list/recent')
     }
 

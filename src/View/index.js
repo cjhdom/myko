@@ -10,6 +10,8 @@ import InfoContainer from "./components/Info/InfoContainer";
 import MenuContainer from "./components/Menu/MenuContainer";
 
 import {getIsLoggedIn} from "../reducers/user";
+import {fetchHeader} from "../data/consts";
+import {toggleLoginPopup} from "../actions";
 
 class View extends Component {
     constructor() {
@@ -17,8 +19,10 @@ class View extends Component {
         this.state = {
             success: false,
             data: null,
-            phonePopup: false
+            phonePopup: false,
+            isFavorite: false
         }
+        this.favoriteData = {};
     }
 
     togglePhonePopup() {
@@ -34,19 +38,14 @@ class View extends Component {
         )
     }
 
-    async componentDidMount() {
+    async componentWillMount() {
         const {match, isLoggedIn} = this.props
         const id = match.params.id
         document.getElementsByTagName('body')[0].setAttribute('class', 'sub_search_list');
         try {
             const data = await fetch(`http://www.kosirock.co.kr/api/kosiwons/${id}`, {
                 method: 'GET',
-                headers: new Headers({
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Pragma': 'no-cache',
-                    'Cache-Control': 'no-cache'
-                })
+                headers: fetchHeader
             })
             await this.setStateAsync({
                 success: true,
@@ -91,10 +90,101 @@ class View extends Component {
         }
     }
 
+    async componentDidMount() {
+        const {match} = this.props
+        const id = match.params.id
+        try {
+            const data1 = await fetch('http://www.kosirock.co.kr/api/myKosiwons/listBySearchOption', {
+                method: 'POST',
+                headers: fetchHeader,
+                body: JSON.stringify({
+                    andOption: [
+                        { key: 'kosiwonId', value: this.state.data },
+                        { key: 'type',      value: 'V' }
+                    ],
+                    orOption: [],
+                    sortOption:   '-created',
+                    pageNo:        1,
+                    pageSize:      1
+                })
+            })
+            const result = await data1.json()
+
+            await fetch(`http://www.kosirock.co.kr/api/myKosiwons/${result.items[0]._id}`, {
+                method: 'PUT',
+                headers: fetchHeader,
+                body: JSON.stringify(result.items[0])
+            })
+
+            const favorite = await fetch('http://www.kosirock.co.kr/api/myKosiwons/listBySearchOption', {
+                method: 'POST',
+                headers: fetchHeader,
+                body: JSON.stringify({
+                    andOption: [
+                        { key: 'kosiwonId', value: id },
+                        { key: 'type',      value: 'V' }
+                    ],
+                    orOption: [],
+                    sortOption:   '-created',
+                    pageNo:        1,
+                    pageSize:      1
+                })
+            })
+
+            this.favoriteData = (await favorite.json()).items[0]
+        } catch (e) {
+            console.log(`error! ${e}`)
+        }
+    }
+
+    async toggleFavorite() {
+        const {isFavorite} = this.state
+        const {isLoggedIn, toggleLoginPopup} = this.props
+
+        if (!isLoggedIn) {
+            return toggleLoginPopup()
+        }
+
+        try {
+            if (isFavorite) {
+                const result = await fetch(`http://www.kosirock.co.kr/api/myKosiwons/${this.favoriteData._id}`, {
+                    method: 'DELETE',
+                    headers: fetchHeader
+                })
+
+                if (result.ok) {
+                    this.setStateAsync({
+                        isFavorite: !isFavorite
+                    })
+                    this.favoriteData = await result.json()
+                }
+            } else {
+                const favorite = await fetch('http://www.kosirock.co.kr/api/myKosiwons/listBySearchOption', {
+                    method: 'POST',
+                    headers: fetchHeader,
+                    body: JSON.stringify({
+                        andOption: [
+                            { key: 'kosiwonId', value: id },
+                            { key: 'type',      value: 'V' }
+                        ],
+                        orOption: [],
+                        sortOption:   '-created',
+                        pageNo:        1,
+                        pageSize:      1
+                    })
+                })
+
+                this.favoriteData = (await favorite.json()).items[0]
+            }
+        } catch (e) {
+            console.log('error', e)
+        }
+    }
+
     render() {
         const {match} = this.props
         const id = match.params.id
-        const {success, phonePopup} = this.state
+        const {success, phonePopup, isFavorite} = this.state
         if (success) {
             const {
                 description,
@@ -147,7 +237,8 @@ class View extends Component {
                                 priceMax={priceMax}
                                 priceMin={priceMin}
                                 togglePhonePopup={this.togglePhonePopup.bind(this)}
-                                phonePopup={phonePopup}/>
+                                phonePopup={phonePopup}
+                                isFavorite={isFavorite}/>
                             <MapContainer
                                 location={location}
                                 majorAddress={majorAddress}/>
@@ -189,6 +280,7 @@ View.propTypes = {
 
 export default connect(
     state => ({
-        isLoggedIn: getIsLoggedIn(state.user)
+        isLoggedIn: getIsLoggedIn(state.user),
+        toggleLoginPopup: toggleLoginPopup
     })
 )(View)

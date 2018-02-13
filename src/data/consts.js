@@ -1,5 +1,12 @@
 'use strict'
 
+export const fetchHeader = new Headers({
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Pragma': 'no-cache',
+    'Cache-Control': 'no-cache'
+})
+
 export const MasterList = [{
     id: "5922693b962608eb38211d0d",
     fullName: "다솔하우스 신천점",

@@ -27,8 +27,10 @@ class FavoriteContainer extends Component {
         if (isLoggedIn) {
             const {id} = this.props.userData
             const body = {
-                populateOption: [],
-                projectOption: {},
+                populateOption: ['kosiwonId'],
+                projectOption: {
+                    kosiwonId: 1
+                },
                 andOption: [
                     {key: 'type', value: 'F'},
                     {key: 'createdBy', value: id}
@@ -36,9 +38,8 @@ class FavoriteContainer extends Component {
                 orOption: [],
                 sortOption: '-created',
                 pageNo: 1,
-                pageSize: 10000
+                pageSize: 4
             }
-
             try {
                 const result = await fetch('http://www.kosirock.co.kr/api/myKosiwons/listBySearchOption', {
                     method: 'POST',
@@ -63,7 +64,7 @@ class FavoriteContainer extends Component {
         }
     }
 
-    onViewMoreClicked () {
+    onViewMoreClicked() {
         const {isLoggedIn, toggleLoginPopup, history} = this.props
         if (isLoggedIn) {
             history.push('/list/favorite')
