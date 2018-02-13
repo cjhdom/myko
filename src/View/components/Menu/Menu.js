@@ -15,6 +15,7 @@ const Menu = ({
                   isRestRoom,
                   isSeparate,
                   isFavorite,
+                  toggleFavorite,
                   priceMax,
                   priceMin
               }) => {
@@ -23,7 +24,7 @@ const Menu = ({
             <div className="detail_info_top">
                 <h2>{kosiwonName}</h2>
                 <h3>{`입실료 ${priceMin}∼${priceMax}만원`}</h3>
-                <p><a ng-click="doToggleFavorite()" className={isFavorite ? 'on' : ''}>찜하기</a></p>
+                <p><a className={isFavorite ? 'on' : ''} onClick={toggleFavorite}>찜하기</a></p>
             </div>
             <ul className="sub_option">
                 <li className={isParking ? 'on' : ''}>주차가능</li>
