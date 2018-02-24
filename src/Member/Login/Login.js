@@ -1,14 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 
-const Login = ({handleChange, onLoginClicked}) => {
+const Login = ({handleChange, onLoginClicked, handleKeyPress}) => {
     return (
         <div id="login">
             <h1>로그인</h1>
             <form className="login">
                 <input type="email" id="email" placeholder="이메일 (아이디)" onChange={handleChange} />
                 <br/>
-                <input type="password" id="password" placeholder="비밀번호" maxLength="15" onChange={handleChange}/>
+                <input type="password" id="password" placeholder="비밀번호" maxLength="15" onChange={handleChange} onKeyDown={handleKeyPress}/>
                 <br/>
                 <input type="button" name="login" value="로그인" onClick={onLoginClicked} maxLength="15" />
                 <br/>
@@ -24,7 +24,7 @@ const Login = ({handleChange, onLoginClicked}) => {
             </p>
             <p className="signup">
                 <Link className="normal_sign" to="/members/join-user">일반 회원가입</Link>
-                <a className="supplier_sign" ng-click="go('/members/join-wonjang')">고시원 원장 회원가입</a>
+                <Link className="supplier_sign" to="/members/join-wonjang">고시원 원장 회원가입</Link>
             </p>
         </div>
     );

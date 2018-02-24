@@ -10,10 +10,11 @@ import thunk from 'redux-thunk'
 import App from './App';
 import reducers from './reducers'
 
-let userData = sessionStorage.getItem('userData') ? JSON.parse(sessionStorage.getItem('userData')) : null
+const storageData = sessionStorage.getItem('userData')
+let userData = storageData ? JSON.parse(storageData) : {}
 const initialState = {
     user: {
-        isLoggedIn: !!userData,
+        isLoggedIn: !!storageData,
         userData
     }
 }

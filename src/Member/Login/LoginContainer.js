@@ -33,6 +33,12 @@ class LoginContainer extends Component {
         })
     }
 
+    handleKeyPress(e) {
+        if (e.keyCode === 13) {
+            this.onLoginClicked()
+        }
+    }
+
     onLoginClicked () {
         const {doLogin} = this.props
         const {email, password} = this.state
@@ -44,6 +50,7 @@ class LoginContainer extends Component {
             <Login
                 handleChange={this.handleChange.bind(this)}
                 onLoginClicked={this.onLoginClicked.bind(this)}
+                handleKeyPress={this.handleKeyPress.bind(this)}
             />
         );
     }

@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
-import NormalRegistration from "./NormalRegistration";
+import UserRegistration from "./UserRegistration";
+import {withRouter} from 'react-router-dom'
 
-class NormalRegistrationContainer extends Component {
+class UserRegistrationContainer extends Component {
     constructor() {
         super()
         this.state = {
             all: false,
             agree1: false,
             agree2: false,
-            agree3: false
+            agree3: false,
+            isPopupShow: false
         }
     }
 
@@ -46,14 +48,35 @@ class NormalRegistrationContainer extends Component {
         }
     }
 
+    onNextClicked() {
+        const {all} = this.state
+        if (all) {
+            this.props.history.push('/members/register-user')
+        } else {
+            this.togglePopup()
+        }
+    }
+
+    togglePopup() {
+        const {isPopupShow} = this.state
+        this.setState({
+            ...this.state,
+            isPopupShow: !isPopupShow
+        })
+    }
+
     render() {
+        const {isPopupShow} = this.state
         return (
-            <NormalRegistration
+            <UserRegistration
                 toggleAgree={this.toggleAgree.bind(this)}
+                togglePopup={this.togglePopup.bind(this)}
+                onNextClicked={this.onNextClicked.bind(this)}
+                isPopupShow={isPopupShow}
                 {...this.state}
             />
         );
     }
 }
 
-export default NormalRegistrationContainer;
+export default withRouter(UserRegistrationContainer);

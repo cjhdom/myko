@@ -3,12 +3,12 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import LoggedIn from './LoggedIn';
 import NotLoggedIn from './NotLoggedIn';
-import {getIsLoggedIn} from "../../../reducers/user";
+import {getIsLoggedIn, getUserData} from "../../../reducers/user";
 
-const LoginContainer = ({isLoggedIn}) => {
+const LoginContainer = ({isLoggedIn, userData}) => {
     return (
         <ul className="header_top">
-            {isLoggedIn ? <LoggedIn/> : <NotLoggedIn/>}
+            {isLoggedIn ? <LoggedIn /> : <NotLoggedIn/>}
             <li><a>원장님이신가요?</a></li>
         </ul>
     )

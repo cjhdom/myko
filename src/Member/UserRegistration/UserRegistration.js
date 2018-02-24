@@ -1,8 +1,8 @@
 import React from 'react';
 
-const NormalRegistration = ({toggleAgree, all, agree1, agree2, agree3}) => {
+const UserRegistration = ({toggleAgree, all, agree1, agree2, agree3, isPopupShow, togglePopup, onNextClicked}) => {
     return (
-        <div className="top_line ng-scope">
+        <div className="top_line">
             <div id="normalsign">
                 <h1>일반 회원가입</h1>
                 <div className="allagree">
@@ -143,19 +143,18 @@ const NormalRegistration = ({toggleAgree, all, agree1, agree2, agree3}) => {
                         </pre>
                     </li>
                 </ul>
-                <a ng-click="doNext()">동의하고 진행</a>
-                <div className="popup" ng-style="vars.isShowPopup ? {'display': 'block'} : {'display': 'none'}"
-                     >
+                <a onClick={onNextClicked}>동의하고 진행</a>
+                {isPopupShow && <div className="popup" onClick={togglePopup} style={{display: 'block'}}>
                     <p>
                         필수 약관에 모두 동의해주세요.
-                        <a ng-click="vars.isShowPopup=false">확인</a>
+                        <a onClick={togglePopup}>확인</a>
                     </p>
                     <div className="cancel">
                     </div>
-                </div>
+                </div>}
             </div>
         </div>
     );
 };
 
-export default NormalRegistration;
+export default UserRegistration;

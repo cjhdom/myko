@@ -1,10 +1,11 @@
 import {
-    LOGIN
+    LOGIN,
+    LOGOUT
 } from '../data/ActionTypes'
 
 export const getIsLoggedIn = (user) => user.isLoggedIn
 
-export const getIsWonjang = user => user.isWonjang
+export const getIsWonjang = user => getIsLoggedIn(user) ? getUserData(user).userType === 'W' : false
 
 export const getUserData = user => user.userData
 
@@ -22,6 +23,8 @@ const user = (state = defaultState, action) => {
                 isLoggedIn: true,
                 userData: action.userData
             }
+        case LOGOUT:
+            return defaultState
         default:
             return state
     }
