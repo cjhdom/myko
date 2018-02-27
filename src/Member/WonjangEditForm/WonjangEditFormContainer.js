@@ -10,9 +10,13 @@ class WonjangEditFormContainer extends Component {
     constructor(props) {
         super(props)
 
-        const {isWonjang, isLoggedIn} = this.props
-        if (!isLoggedIn || !isWonjang) {
+        const {isWonjang, isLoggedIn, routeTo} = this.props
+        if (!isLoggedIn) {
             routeTo('/')
+        }
+
+        if (!isWonjang) {
+            routeTo('/members/edit-user')
         }
 
         const {userData} = this.props

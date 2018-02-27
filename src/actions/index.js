@@ -262,6 +262,67 @@ export const onWonjangEditClicked = (password, newPassword, newPasswordConfirm, 
     }
 }
 
+export const onUserEditClicked = (password, newPassword, newPasswordConfirm, phoneNo) => async (dispatch, getState) => {
+    const state = getState()
+    try {
+        const userResult = await fetch('http://www.kosirock.co.kr/api/users/listByNameAndPassword', {
+            method: 'POST',
+            headers: fetchHeader,
+            body: JSON.stringify({
+                username: state.user.userData.email,
+                password
+            })
+        })
+
+        const result = await userResult.json()
+        if (result.resultCode === 0) {
+            let body = {
+                ...result.user,
+                password,
+                phoneNo,
+            }
+            if (newPassword && newPasswordConfirm) {
+                body.password = newPasswordConfirm
+                body.newPassword = newPasswordConfirm
+                body.newPasswordConfirm = newPasswordConfirm
+            }
+            const editResult = await fetch(`http://www.kosirock.co.kr/api/users/${result.user._id}`, {
+                method: 'PUT',
+                headers: fetchHeader,
+                body: JSON.stringify(body)
+            })
+
+            if (editResult.ok) {
+                const editData = await editResult.json()
+                dispatch({
+                    type: LOGIN,
+                    userData: {
+                        ...editData,
+                        password: ''
+                    }
+                })
+                alert('수정 되었습니다')
+            }
+        } else {
+            alert('현재 비밀번호가 일치하지 않습니다')
+        }
+    } catch (e) {
+        console.log(`error: ${e}`)
+    }
+}
+
+export const onUnregisterClicked = (id) => async (dispatch) => {
+    const unregisterResult = await fetch(`http://www.kosirock.co.kr/api/users/${id}`, {
+        method: 'DELETE',
+        headers: fetchHeader
+    })
+
+    if (unregisterResult.ok) {
+        alert('회원탈퇴 처리가 완료되었습니다.')
+        dispatch(logout())
+    }
+}
+
 export const logout = () => dispatch => {
     sessionStorage.removeItem('userData')
     dispatch({

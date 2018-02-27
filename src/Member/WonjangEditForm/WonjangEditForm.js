@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 const WonjangEditForm = ({
                              onEditClicked,
@@ -45,6 +46,7 @@ const WonjangEditForm = ({
                 {/*<label className="attachment">미완료</label>*/}
             </form>
             <input type="button" id="sign" value="수정 완료" onClick={onEditClicked}/>
+            <Link to={'/members/unregister'}>회원탈퇴</Link>
         </div>
     );
 };

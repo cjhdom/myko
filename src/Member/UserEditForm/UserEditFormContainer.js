@@ -2,17 +2,27 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 import UserEditForm from "./UserEditForm";
-import {onRegisterClicked} from "../../actions";
+import {onUserEditClicked, routeTo} from "../../actions";
+import {getIsLoggedIn, getIsWonjang, getUserData} from "../../reducers/user";
 
 class UserEditFormContainer extends Component {
     constructor(props) {
         super(props)
+
+        const {isWonjang, isLoggedIn, routeTo} = this.props
+        if (!isLoggedIn) {
+            routeTo('/')
+        }
+        if (isWonjang) {
+            routeTo('/members/edit-wonjang')
+        }
+
+        const {userData} = this.props
         this.state = {
-            email: '',
             password: '',
-            passwordConfirm: '',
-            name: '',
-            phoneNo: '',
+            newPassword: '',
+            newPasswordConfirm: '',
+            phoneNo: userData.phoneNo || '',
         }
     }
 
@@ -26,44 +36,28 @@ class UserEditFormContainer extends Component {
         })
     }
 
-    onRegisterClicked() {
+    onEditClicked() {
         const {
-            email,
             password,
-            passwordConfirm,
-            name,
+            newPassword,
+            newPasswordConfirm,
             phoneNo
         } = this.state
 
-        if (this.validationCheck(email, password, passwordConfirm, name, phoneNo)) {
-            const {onRegisterClicked} = this.props
-            onRegisterClicked(email, password, passwordConfirm, name, phoneNo)
+        if (this.validationCheck(password, newPassword, newPasswordConfirm, phoneNo)) {
+            const {onUserEditClicked} = this.props
+            onUserEditClicked(password, newPassword, newPasswordConfirm, phoneNo)
         }
     }
 
-    validationCheck(email, password, passwordConfirm, name, phoneNo) {
-        if(!email) {
-            alert('이메일 주소는 필수 입력 항목입니다.');
-            return false;
-        }
-
+    validationCheck(password, newPassword, newPasswordConfirm, phoneNo) {
         if(!password) {
             alert('비밀번호는 필수 입력 항목입니다.');
             return false;
         }
 
-        if(!passwordConfirm) {
-            alert('비밀번호 확인은 필수 입력 항목입니다.');
-            return false;
-        }
-
-        if(password !== passwordConfirm) {
+        if(newPassword && newPassword !== newPasswordConfirm) {
             alert('비밀번호가 일치하지 않습니다.');
-            return false;
-        }
-
-        if(!name) {
-            alert('본인성명은 필수 입력 항목입니다.');
             return false;
         }
 
@@ -79,7 +73,8 @@ class UserEditFormContainer extends Component {
         return (
             <UserEditForm
                 onChanged={this.onChanged.bind(this)}
-                onRegisterClicked={this.onRegisterClicked.bind(this)}
+                onEditClicked={this.onEditClicked.bind(this)}
+                {...this.state}
             />
         );
     }
@@ -88,8 +83,12 @@ class UserEditFormContainer extends Component {
 UserEditFormContainer.propTypes = {};
 
 export default connect(
-    state => ({}),
+    state => ({
+        userData: getUserData(state.user),
+        isLoggedIn: getIsLoggedIn(state.user),
+        isWonjang: getIsWonjang(state.user)
+    }),
     {
-        onRegisterClicked
+        onUserEditClicked
     }
 )(UserEditFormContainer);

@@ -7,6 +7,7 @@ import WonjangRegistrationContainer from "./WonjangRegistration/WonjangRegistrat
 import WonjangFormContainer from "./WonjangForm/WonjangFormContainer";
 import UserEditFormContainer from "./UserEditForm/UserEditFormContainer";
 import WonjangEditFormContainer from "./WonjangEditForm/WonjangEditFormContainer";
+import UnregisterContainer from "./Unregister/UnregisterContainer";
 
 class Member extends Component {
     componentWillMount() {
@@ -15,8 +16,6 @@ class Member extends Component {
 
     render() {
         const baseUrl = this.props.match.url
-        const register = 'register'
-        const edit = 'edit'
         return (
             <div id="contentWrapper">
                 <div className="top_line">
@@ -27,6 +26,7 @@ class Member extends Component {
                     <Route path={`${baseUrl}/register-wonjang`} component={WonjangFormContainer}/>
                     <Route path={`${baseUrl}/edit-user`} component={UserEditFormContainer}/>
                     <Route path={`${baseUrl}/edit-wonjang`} component={WonjangEditFormContainer}/>
+                    <Route path={`${baseUrl}/unregister`} component={UnregisterContainer}/>
                 </div>
             </div>
         );
