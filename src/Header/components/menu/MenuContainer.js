@@ -9,7 +9,7 @@ import {toggleLoginPopup, toggleWonjangPopup} from "../../../actions"
 class MenuContainer extends Component {
     onButtonClick(e) {
         const {id} = e.target
-        const {isLoggedIn, toggleLoginPopup, toggleWonjangPopup} = this.props
+        const {isLoggedIn, toggleLoginPopup, toggleWonjangPopup, isWonjang} = this.props
         const {history} = this.props
         if (id === 'recent') {
             history.push('/list/recent')
@@ -20,8 +20,8 @@ class MenuContainer extends Component {
                 history.push('/list/favorite')
             }
         } else if (id === 'upload') {
-            if (!isLoggedIn) {
-                return toggleWonjangPopup()
+            if (isWonjang) {
+                history.push('/members/upload/-1')
             }
         }
     }
@@ -39,8 +39,8 @@ const reduxComponent = connect(
         isWonjang: getIsWonjang(state.user)
     }),
     {
-        toggleLoginPopup: toggleLoginPopup,
-        toggleWonjangPopup: toggleWonjangPopup
+        toggleLoginPopup,
+        toggleWonjangPopup
     }
 )(MenuContainer)
 

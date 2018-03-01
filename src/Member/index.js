@@ -8,6 +8,7 @@ import WonjangFormContainer from "./WonjangForm/WonjangFormContainer";
 import UserEditFormContainer from "./UserEditForm/UserEditFormContainer";
 import WonjangEditFormContainer from "./WonjangEditForm/WonjangEditFormContainer";
 import UnregisterContainer from "./Unregister/UnregisterContainer";
+import KosiwonUploadContainer from "./KosiwonUpload/KosiwonUploadContainer";
 
 class Member extends Component {
     componentWillMount() {
@@ -27,6 +28,7 @@ class Member extends Component {
                     <Route path={`${baseUrl}/edit-user`} component={UserEditFormContainer}/>
                     <Route path={`${baseUrl}/edit-wonjang`} component={WonjangEditFormContainer}/>
                     <Route path={`${baseUrl}/unregister`} component={UnregisterContainer}/>
+                    <Route path={`${baseUrl}/upload/:id`} component={KosiwonUploadContainer}/>
                 </div>
             </div>
         );

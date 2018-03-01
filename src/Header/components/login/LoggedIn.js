@@ -46,7 +46,6 @@ class LoggedIn extends Component {
 }
 
 LoggedIn.propTypes = {
-    toggleLogin: PropTypes.func.isRequired,
     userData: PropTypes.object.isRequired
 };
 
