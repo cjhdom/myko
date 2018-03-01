@@ -48,7 +48,8 @@ const renderApp = () => {
 };
 
 if (module.hot) {
-    module.hot.accept('./App', () => {
+    module.hot.accept()
+    /*module.hot.accept('./App', () => {
         const App = require('./App').default;
         ReactDom.render(
             <AppContainer>
@@ -61,7 +62,7 @@ if (module.hot) {
     module.hot.accept('./reducers', () => {
         const nextRootReducer = require('./reducers/index');
         store.replaceReducer(nextRootReducer);
-    });
+    });*/
 }
 
 renderApp();

@@ -323,6 +323,53 @@ export const onUnregisterClicked = (id) => async (dispatch) => {
     }
 }
 
+export const uploadKosiwon = (isParking, isMeal, isWoman, isSeparate, isRestRoom, isElevator, optionDesk, optionBed,
+                              optionCloset, optionFan, optionAircon, optionRefrigerator, kosiwonName, kosiwonPhoneNo,
+                              kosiwonZipcode, majorAddress, minorAddress, floor, priceMin, priceMax, intro, description,
+                              userId, kosiwonId) => async (dispatch) => {
+    try {
+        const uploadResult = await fetch(`http://www.kosirock.co.kr/api/kosiwons/${kosiwonId}`, {
+            method: kosiwonId ? 'PUT' : 'POST',
+            headers: fetchHeader,
+            body: JSON.stringify({
+                isParking,
+                isMeal,
+                isWoman,
+                isSeparate,
+                isRestRoom,
+                isElevator,
+                optionDesk,
+                optionBed,
+                optionCloset,
+                optionFan,
+                optionAircon,
+                optionRefrigerator,
+                kosiwonName,
+                kosiwonPhoneNo,
+                kosiwonZipcode,
+                majorAddress,
+                minorAddress,
+                floor,
+                priceMin,
+                priceMax,
+                intro,
+                description,
+                nanbangType: 'C',
+                uploadedBy: userId,
+                createdBy: userId,
+                location: [0, 0]
+            })
+        })
+
+        if (uploadResult.ok) {
+            const {_id} = await uploadResult.json()
+            dispatch(routeTo(`/members/uploadcompleted/${_id}`))
+        }
+    } catch (e) {
+        console.log(`error! ${e}`)
+    }
+}
+
 export const logout = () => dispatch => {
     sessionStorage.removeItem('userData')
     dispatch({

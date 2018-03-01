@@ -9,8 +9,7 @@ const LoginPopup = ({toggleLoginPopup}) => {
             <a className="login">로그인 페이지로</a>
             <a href="#" className="cancel" onClick={toggleLoginPopup}>취소</a>
         </p>
-        <div className="cancel" onClick={toggleLoginPopup}>
-        </div>
+        <div className="cancel" onClick={toggleLoginPopup}/>
     </div>
     )
 };

@@ -1,8 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 const KosiwonUpload = ({
                            onChanged,
                            onToggle,
+                           onKosiwonRegisterClicked,
+                           togglePopup,
                            isParking,
                            isMeal,
                            isWoman,
@@ -37,9 +40,9 @@ const KosiwonUpload = ({
                        maxLength="12" onChange={onChanged} value={kosiwonPhoneNo}/>
                 <label>주소</label>
                 <input type="text" id="kosiwonZipcode" readOnly placeholder="우편번호" value={kosiwonZipcode}/>
-                <a ng-click="doShowJusoPopup()" className="address_find">우편번호 찾기</a>
+                <a ng-click="doShowJusoPopup()" className="address_find" onClick={togglePopup}>우편번호 찾기</a>
                 <input type="text" id="majorAddress" readOnly placeholder="고시원 주소" value={majorAddress}/>
-                <input type="text" id="minorAddress" placeholder="상세 주소를 입력해주세요." onChange={minorAddress}
+                <input type="text" id="minorAddress" placeholder="상세 주소를 입력해주세요." onChange={onChanged}
                        value={minorAddress}/>
                 <label>건물층 선택</label>
                 <input type="text" id="floor" placeholder="건물 층을 입력해주세요. 예). 1, 2, 3" onChange={onChanged}
@@ -55,7 +58,6 @@ const KosiwonUpload = ({
                            value={priceMax}/>
                     <p className="maxwon">만원</p>
                 </div>
-
                 <label>세부 옵션</label>
                 <ul className="dt_info">
                     <li>
@@ -126,9 +128,59 @@ const KosiwonUpload = ({
                     </li>
                 </ul>
             </form>
-            <input type="button" value="올리기 신청" ng-click="doSave()"/>
+            <input type="button" value="올리기 신청" onClick={onKosiwonRegisterClicked}/>
         </div>
     );
 };
+
+KosiwonUpload.propTypes = {
+    isParking: PropTypes.bool,
+    isMeal: PropTypes.bool,
+    isWoman: PropTypes.bool,
+    isSeparate: PropTypes.bool,
+    isRestRoom: PropTypes.bool,
+    isElevator: PropTypes.bool,
+    optionDesk: PropTypes.bool,
+    optionBed: PropTypes.bool,
+    optionCloset: PropTypes.bool,
+    optionFan: PropTypes.bool,
+    optionAircon: PropTypes.bool,
+    optionRefrigerator: PropTypes.bool,
+    kosiwonName: PropTypes.string,
+    kosiwonPhoneNo: PropTypes.string,
+    kosiwonZipcode: PropTypes.string,
+    majorAddress: PropTypes.string,
+    minorAddress: PropTypes.string,
+    floor: PropTypes.string,
+    priceMin: PropTypes.string,
+    priceMax: PropTypes.string,
+    intro: PropTypes.string,
+    description: PropTypes.string
+}
+
+KosiwonUpload.defaultProps = {
+    isParking: false,
+    isMeal: false,
+    isWoman: false,
+    isSeparate: false,
+    isRestRoom: false,
+    isElevator: false,
+    optionDesk: false,
+    optionBed: false,
+    optionCloset: false,
+    optionFan: false,
+    optionAircon: false,
+    optionRefrigerator: false,
+    kosiwonName: '',
+    kosiwonPhoneNo: '',
+    kosiwonZipcode: '',
+    majorAddress: '',
+    minorAddress: '',
+    floor: '',
+    priceMin: '',
+    priceMax: '',
+    intro: '',
+    description: ''
+}
 
 export default KosiwonUpload;
