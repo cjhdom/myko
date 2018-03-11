@@ -1,8 +1,10 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const style = {display: 'none'}
 
 const Menu = ({
+                  id,
                   phonePopup,
                   togglePhonePopup,
                   kosiwonName,
@@ -17,7 +19,8 @@ const Menu = ({
                   isFavorite,
                   toggleFavorite,
                   priceMax,
-                  priceMin
+                  priceMin,
+                  isWonjang
               }) => {
     return (
         <div className="detail_info">
@@ -34,19 +37,17 @@ const Menu = ({
             </ul>
             <ul className="detail_info_bottom">
                 <li>
-                    <a ng-click="vars.isShowQuestionPopup=true">문의전화</a>
+                    <a onClick={togglePhonePopup}>문의전화</a>
                     {phonePopup && <div className="popup_call">
                         <ul>
                             <li><h2>문의전화</h2></li>
-                            <li><a ng-click="vars.isShowQuestionPopup=false">
+                            <li><a onClick={togglePhonePopup}>
                                 <img alt="exit" src="/img/exit_gray.png"/>
                             </a>
                             </li>
-                            <div ng-if="model.kosiwonVirtualNo"
-                                 ng-click="gaCheck(model.kosiwonName)">{kosiwonVirtualNo || kosiwonPhoneNo}
-                            </div>
+                            <div ng-click="gaCheck(model.kosiwonName)">{kosiwonVirtualNo || kosiwonPhoneNo}</div>
                         </ul>
-                        <div className="cancel" ng-click="vars.isShowQuestionPopup=false()">
+                        <div className="cancel" onClick={togglePhonePopup}>
                         </div>
                     </div>}
                 </li>
@@ -54,12 +55,12 @@ const Menu = ({
                     <a target="blank"
                        href={kosiwonUrl}>홈페이지</a>
                 </li>
-                <li ng-show="user.userType!=='W'">
+                {!isWonjang && <li>
                     <a ng-click="go('/main/kosiwon-singo/'+model._id+'/'+model.kosiwonName)">신고하기</a>
-                </li>
-                <li ng-show="user.userType==='W'" className="ng-hide">
-                    <a ng-click="go('/members/kosiwon-edit/'+model._id)">수정하기</a>
-                </li>
+                </li>}
+                {isWonjang && <li>
+                    <Link to={`/members/upload/${id}`}>수정하기</Link>
+                </li>}
             </ul>
         </div>
     )

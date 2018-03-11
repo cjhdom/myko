@@ -13,10 +13,10 @@ class MyKosiwonListContainer extends Component {
     }
 
     setStateAsync(newState) {
-        return new Promise(resolve => this.setState({
+        return new Promise(resolve => resolve(this.setState({
             ...this.state,
             ...newState
-        }))
+        })))
     }
 
     async componentDidMount() {

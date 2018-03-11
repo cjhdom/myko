@@ -9,7 +9,7 @@ import MapContainer from "./components/Map/MapContainer";
 import InfoContainer from "./components/Info/InfoContainer";
 import MenuContainer from "./components/Menu/MenuContainer";
 
-import {getIsLoggedIn, getUserData} from "../reducers/user";
+import {getIsLoggedIn, getIsWonjang, getUserData} from "../reducers/user";
 import {fetchHeader} from "../data/consts";
 import {toggleLoginPopup} from "../actions";
 
@@ -200,8 +200,10 @@ class View extends Component {
 
     render() {
         const {success, phonePopup, isFavorite} = this.state
+        const {isWonjang} = this.props
         if (success) {
             const {
+                _id,
                 description,
                 optionAircon,
                 optionBed,
@@ -240,6 +242,7 @@ class View extends Component {
                             <ImageViewContainer
                                 imageList={imageList}/>
                             <MenuContainer
+                                id={_id}
                                 kosiwonName={kosiwonName}
                                 kosiwonPhoneNo={kosiwonPhoneNo}
                                 kosiwonUrl={kosiwonUrl}
@@ -254,24 +257,20 @@ class View extends Component {
                                 togglePhonePopup={this.togglePhonePopup.bind(this)}
                                 phonePopup={phonePopup}
                                 isFavorite={isFavorite}
-                                toggleFavorite={this.toggleFavorite.bind(this)}/>
+                                toggleFavorite={this.toggleFavorite.bind(this)}
+                                isWonjang={isWonjang}/>
                             <MapContainer
                                 location={location}
                                 majorAddress={majorAddress}/>
                             <InfoContainer
                                 floor={floor}
-                                isAlarmByKosirock={isAlarmByKosirock}
-                                isAlarmByOnwer={isAlarmByOnwer}
                                 isElevator={isElevator}
                                 isMeal={isMeal}
                                 isParking={isParking}
-                                isPromotion={isPromotion}
                                 isPublic={isPublic}
-                                isReAuctionAlarm={isReAuctionAlarm}
                                 isRestRoom={isRestRoom}
                                 isSeparate={isSeparate}
-                                isWoman={isWoman}
-                                minorAddress={minorAddress}/>
+                                isWoman={isWoman}/>
                             <OptionContainer
                                 optionAircon={optionAircon}
                                 optionBed={optionBed}
@@ -298,6 +297,7 @@ export default connect(
     state => ({
         isLoggedIn: getIsLoggedIn(state.user),
         toggleLoginPopup: toggleLoginPopup,
-        userData: getUserData(state.user)
+        userData: getUserData(state.user),
+        isWonjang: getIsWonjang(state.user)
     })
 )(View)
