@@ -30,11 +30,9 @@ class WonjangRegistrationContainer extends Component {
                 agree5: !all
             })
         } else {
-            let newState = {}
-            newState[id] = !this.state[id]
             this.setState({
                 ...this.state,
-                ...newState
+                [id]: !this.state[id]
             }, () => {
                 const {agree1, agree2, agree3, agree4, agree5} = this.state
                 if (agree1 && agree2 && agree3 && agree4 && agree5) {

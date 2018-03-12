@@ -11,6 +11,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import ContactContainer from "./Contact/ContactContainer";
 import MyList from "./MyList/index";
+import ReportContainer from "./Report/ReportContainer";
 
 class App extends Component {
     render() {
@@ -27,6 +28,7 @@ class App extends Component {
                             <Route path="/Members" component={Member}/>
                             <Route path="/contact" component={ContactContainer}/>
                             <Route path="/list" component={MyList}/>
+                            <Route path="/report/:id/:kosiwonName" component={ReportContainer}/>
                         </Switch>
                         <Footer/>
                     </div>

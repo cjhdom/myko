@@ -25,11 +25,9 @@ class LoginContainer extends Component {
 
     handleChange(e) {
         const {id, value} = e.target
-        let newState = {}
-        newState[id] = value
         this.setState({
             ...this.state,
-            ...newState
+            [id]: value
         })
     }
 

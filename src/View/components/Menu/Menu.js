@@ -52,11 +52,11 @@ const Menu = ({
                     </div>}
                 </li>
                 <li>
-                    <a target="blank"
-                       href={kosiwonUrl}>홈페이지</a>
+                    <Link target="blank"
+                       to={kosiwonUrl}>홈페이지</Link>
                 </li>
                 {!isWonjang && <li>
-                    <a ng-click="go('/main/kosiwon-singo/'+model._id+'/'+model.kosiwonName)">신고하기</a>
+                    <Link to={`/report/${id}/${encodeURI(kosiwonName)}`}>신고하기</Link>
                 </li>}
                 {isWonjang && <li>
                     <Link to={`/members/upload/${id}`}>수정하기</Link>

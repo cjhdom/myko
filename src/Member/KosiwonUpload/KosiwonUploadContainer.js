@@ -18,22 +18,18 @@ class KosiwonUploadContainer extends Component {
 
     onChanged(e) {
         const {id, value} = e.target
-        const newState = {}
-        newState[id] = value
         this.setState({
             ...this.state,
-            ...newState
+            [id]: value
         })
     }
 
     onToggle(e) {
         const {id} = e.target
         const value = !this.state[id]
-        let newState = {}
-        newState[id] = value
         this.setState({
             ...this.state,
-            ...newState
+            [id]: value
         })
     }
 
@@ -89,13 +85,10 @@ class KosiwonUploadContainer extends Component {
             majorAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
         }
 
-        let newState = {
-            majorAddress,
-            kosiwonZipcode: data.zonecode
-        }
         this.setState({
             ...this.state,
-            ...newState
+            majorAddress,
+            kosiwonZipcode: data.zonecode
         })
         this.togglePopup()
     }
