@@ -7,6 +7,8 @@ import {
     LOGOUT
 } from "../data/ActionTypes";
 import {fetchHeader} from '../data/consts'
+import Cookies from '../get-cookie-helper'
+console.log(Cookies)
 
 export const toggleLoginPopup = () => ({
     type: TOGGLE_LOGIN_POPUP
@@ -49,7 +51,7 @@ export const doLogin = (username, password) => async (dispatch, getState) => {
                     type: LOGIN,
                     userData
                 })
-                sessionStorage.setItem('userData', JSON.stringify(userData))
+                Cookies.set('userData', JSON.stringify(userData))
                 dispatch(push('/'))
             } else {
                 alert(result.message)
@@ -371,7 +373,7 @@ export const uploadKosiwon = (isParking, isMeal, isWoman, isSeparate, isRestRoom
 }
 
 export const logout = () => dispatch => {
-    sessionStorage.removeItem('userData')
+    Cookies.remove('userData')
     dispatch({
         type: LOGOUT
     })

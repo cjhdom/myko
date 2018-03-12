@@ -4,17 +4,19 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 import 'whatwg-fetch'
 import { createBrowserHistory as createHistory } from "history";
 import {AppContainer} from 'react-hot-loader'
+import Cookies from './get-cookie-helper'
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 
 import App from './App';
 import reducers from './reducers'
 
-const storageData = sessionStorage.getItem('userData')
-let userData = storageData ? JSON.parse(storageData) : {}
+const cookieData = Cookies.get('userData');
+console.log(cookieData);
+let userData = cookieData ? JSON.parse(cookieData) : null;
 const initialState = {
     user: {
-        isLoggedIn: !!storageData,
+        isLoggedIn: !!userData,
         userData
     }
 }
