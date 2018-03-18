@@ -5,13 +5,16 @@ import DaumPostcode from 'react-daum-postcode';
 import {uploadKosiwon, routeTo} from "../../actions";
 import {getIsWonjang, getUserData} from "../../reducers/user";
 import {fetchHeader} from "../../data/consts";
+import {uniqWith, uniqBy, isEqual} from 'lodash'
 
 class KosiwonUploadContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
             isShowPopup: false,
-            isUpdate: false
+            isUpdate: false,
+            fileList: [],
+            tempList: []
         }
         this.togglePopup = this.togglePopup.bind(this)
     }
@@ -71,6 +74,28 @@ class KosiwonUploadContainer extends Component {
         )
     }
 
+    onFileSelected(e) {
+        const files = e.target.files
+        const newList = uniqBy([...this.state.fileList, ...files], ({name}) => name)
+
+        if (files && files[0]) {
+            let reader = new FileReader()
+            reader.onload = () => {
+                document.getElementById('test').src = reader.result
+            }
+            Array.from(files).forEach((file) => {
+
+            })
+
+            reader.readAsDataURL(files[0]);
+
+            this.setState({
+                ...this.state,
+                fileList: newList
+            })
+        }
+    }
+
     handleAddress(data) {
         let majorAddress = data.address;
         let extraAddress = '';
@@ -116,16 +141,15 @@ class KosiwonUploadContainer extends Component {
             priceMin,
             priceMax,
             intro,
-            description,
-            isUpdate
+            description
         } = this.state
         const {userData, uploadKosiwon} = this.props
         const id = this.props.match.params.id
-
+        const files = document.getElementById('files').files
         if (this.validationCheck(kosiwonName, kosiwonPhoneNo, kosiwonZipcode, priceMin, priceMax, intro, description)) {
             uploadKosiwon(isParking, isMeal, isWoman, isSeparate, isRestRoom, isElevator, optionDesk, optionBed,
                 optionCloset, optionFan, optionAircon, optionRefrigerator, kosiwonName, kosiwonPhoneNo, kosiwonZipcode,
-                majorAddress, minorAddress, floor, priceMin, priceMax, intro, description, userData._id, id)
+                majorAddress, minorAddress, floor, priceMin, priceMax, intro, description, userData._id, id, files)
         }
     }
 
@@ -173,10 +197,12 @@ class KosiwonUploadContainer extends Component {
         const props = {style: {height: '100%'}}
         return (
             <div>
+                <img src="" id="test" />
                 <KosiwonUpload onChanged={this.onChanged.bind(this)}
                                onToggle={this.onToggle.bind(this)}
                                togglePopup={this.togglePopup}
                                onKosiwonRegisterClicked={this.onKosiwonRegisterClicked.bind(this)}
+                               onFileSelected={this.onFileSelected.bind(this)}
                                {...this.state}/>
                 {isShowPopup && <div className="popup">
                     <div style={{

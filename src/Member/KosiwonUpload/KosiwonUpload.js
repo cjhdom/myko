@@ -6,6 +6,7 @@ const KosiwonUpload = ({
                            onToggle,
                            onKosiwonRegisterClicked,
                            togglePopup,
+                           onFileSelected,
                            isParking,
                            isMeal,
                            isWoman,
@@ -27,7 +28,9 @@ const KosiwonUpload = ({
                            priceMin,
                            priceMax,
                            intro,
-                           description
+                           description,
+                           imageList,
+                           tempList
                        }) => {
     return (
         <div id="listup">
@@ -119,14 +122,23 @@ const KosiwonUpload = ({
                 <textarea id="description" placeholder="고시원 상세 설명" onChange={onChanged} value={description}/>
                 <label>고시원 사진</label>
                 {/*<!-- <input type="file" value="" id="upload[]" multiple /></li> -->*/}
-                <input ng-click="doAddKosiwonImage()"/>
-                <ul>
-                    <li ng-repeat="image in imageList"
-                        ngf-select="doUploadKosiwonImage($file, $index)">
-                        <img src="" style={{width: "100px", height: "100px"}}/>
-                        <a>삭제</a>
-                    </li>
+                <input className="upload" type="button" value="사진 올리기"
+                       onClick={() => document.getElementById('files').click()}/>
+                <ul className="img_upload">
+                    {imageList.map((img) => (
+                        <li key={img.imageUri}>
+                            <img src={`http://www.kosirock.co.kr${img.imageUri}`} style={{width: "100px", height: "100px"}}/>
+                            <a>삭제</a>
+                        </li>
+                    ))}
+                    {Array.from(tempList).map((temp, idx) => (
+                        <li key={idx}>
+                            <img src={temp} style={{width: "100px", height: "100px"}}/>
+                            <a>삭제</a>
+                        </li>
+                    ))}
                 </ul>
+                <input type="file" style={{display: 'none'}} multiple id="files" onChange={onFileSelected}/>
             </form>
             <input type="button" value="올리기 신청" onClick={onKosiwonRegisterClicked}/>
         </div>
@@ -155,7 +167,9 @@ KosiwonUpload.propTypes = {
     priceMin: PropTypes.string,
     priceMax: PropTypes.string,
     intro: PropTypes.string,
-    description: PropTypes.string
+    description: PropTypes.string,
+    imageList: PropTypes.array,
+    tempList: PropTypes.array
 }
 
 KosiwonUpload.defaultProps = {
@@ -180,7 +194,9 @@ KosiwonUpload.defaultProps = {
     priceMin: '',
     priceMax: '',
     intro: '',
-    description: ''
+    description: '',
+    imageList: [],
+    tempList: []
 }
 
 export default KosiwonUpload;

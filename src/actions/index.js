@@ -247,6 +247,7 @@ export const onWonjangEditClicked = (password, newPassword, newPasswordConfirm, 
 
             if (editResult.ok) {
                 const editData = await editResult.json()
+
                 dispatch({
                     type: LOGIN,
                     userData: {
@@ -254,7 +255,24 @@ export const onWonjangEditClicked = (password, newPassword, newPasswordConfirm, 
                         password: ''
                     }
                 })
-                alert('수정 되었습니다')
+
+                let formData = new FormData();
+                formData.append('categoryName', 'kosiwon')
+                formData.append('dirName', editData._id)
+                formData.append('fileName', `${editData._id}_registration`)
+                formData.append('file', files)
+
+                const fileTest = await fetch('http://www.kosirock.co.kr/api/upload', {
+                    method: 'POST',
+                    body: formData
+                })
+
+                if (fileTest.ok) {
+                    alert('수정 되었습니다')
+                } else {
+                    alert('수정되었지만 사진 업로드 중 오류가 발생하였으니\n' +
+                        '신청 내역 수정하기를 클릭하여 사진을 재업로드 해주세요')
+                }
             }
         } else {
             alert('현재 비밀번호가 일치하지 않습니다')
@@ -328,7 +346,7 @@ export const onUnregisterClicked = (id) => async (dispatch) => {
 export const uploadKosiwon = (isParking, isMeal, isWoman, isSeparate, isRestRoom, isElevator, optionDesk, optionBed,
                               optionCloset, optionFan, optionAircon, optionRefrigerator, kosiwonName, kosiwonPhoneNo,
                               kosiwonZipcode, majorAddress, minorAddress, floor, priceMin, priceMax, intro, description,
-                              userId, kosiwonId) => async (dispatch) => {
+                              userId, kosiwonId, files) => async (dispatch) => {
     try {
         const uploadResult = await fetch(`http://www.kosirock.co.kr/api/kosiwons/${kosiwonId}`, {
             method: kosiwonId ? 'PUT' : 'POST',
@@ -365,10 +383,34 @@ export const uploadKosiwon = (isParking, isMeal, isWoman, isSeparate, isRestRoom
 
         if (uploadResult.ok) {
             const {_id} = await uploadResult.json()
+
+            if (files && files.length > 0) {
+                await Promise.all(Array.from(files).map(async (file, index) => {
+                    let formData = new FormData();
+                    formData.append('categoryName', 'kosiwons')
+                    formData.append('dirName', _id)
+                    formData.append('fileName', `${_id}_kosiwon_${index}`)
+                    formData.append('file', file)
+
+                    const fileTest = await fetch('http://www.kosirock.co.kr/api/upload', {
+                        method: 'POST',
+                        body: formData
+                    })
+
+                    if (fileTest.ok) {
+                        return Promise.resolve(true)
+                    } else {
+                        return Promise.reject(new Error('이미지 업로드 중 오류가 발생했습니다'))
+                    }
+                }))
+
+            }
+
+            alert('수정 되었습니다')
             dispatch(routeTo(`/members/uploadcompleted/${_id}`))
         }
     } catch (e) {
-        console.log(`error! ${e}`)
+        alert(e.message)
     }
 }
 
