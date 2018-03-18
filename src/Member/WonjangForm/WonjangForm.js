@@ -34,7 +34,6 @@ const WonjangForm = ({
                        maxLength="10" onChange={onChanged} value={registrationNo}/>
                 <input type="button" value="사업자 등록증 첨부" onClick={onFileUploadClicked}/>
                 <input type="file" id="registrationUri" style={{display: 'none'}}/>
-                <label className="attachment">미완료</label>
             </form>
             <input type="button" id="sign" value="가입 신청하기" onClick={onRegisterClicked}/>
         </div>

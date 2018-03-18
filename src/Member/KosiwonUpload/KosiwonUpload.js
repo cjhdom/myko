@@ -29,6 +29,8 @@ const KosiwonUpload = ({
                            priceMax,
                            intro,
                            description,
+                           onFileUploadClick,
+                           isEdit,
                            imageList,
                            tempList
                        }) => {
@@ -120,10 +122,19 @@ const KosiwonUpload = ({
                        value={intro}/>
                 <label>상세 설명</label>
                 <textarea id="description" placeholder="고시원 상세 설명" onChange={onChanged} value={description}/>
+                <input type="file" style={{display: 'none'}} multiple id="files" onChange={onFileSelected}/>
+                {/*{isEdit && <label>업로드 완료된 사진</label>}
+                {isEdit && <ul className="img_upload">
+                        {imageList.map((img) => (
+                            <li key={img.imageUri}>
+                                <img src={`http://www.kosirock.co.kr${img.imageUri}`} style={{width: "100px", height: "100px"}}/>
+                                <a>삭제</a>
+                            </li>
+                        ))}
+                </ul>}*/}
                 <label>고시원 사진</label>
-                {/*<!-- <input type="file" value="" id="upload[]" multiple /></li> -->*/}
                 <input className="upload" type="button" value="사진 올리기"
-                       onClick={() => document.getElementById('files').click()}/>
+                       onClick={onFileUploadClick}/>
                 <ul className="img_upload">
                     {imageList.map((img) => (
                         <li key={img.imageUri}>
@@ -138,7 +149,6 @@ const KosiwonUpload = ({
                         </li>
                     ))}
                 </ul>
-                <input type="file" style={{display: 'none'}} multiple id="files" onChange={onFileSelected}/>
             </form>
             <input type="button" value="올리기 신청" onClick={onKosiwonRegisterClicked}/>
         </div>

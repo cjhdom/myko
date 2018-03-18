@@ -5,7 +5,6 @@ import DaumPostcode from 'react-daum-postcode';
 import {uploadKosiwon, routeTo} from "../../actions";
 import {getIsWonjang, getUserData} from "../../reducers/user";
 import {fetchHeader} from "../../data/consts";
-import {uniqWith, uniqBy, isEqual} from 'lodash'
 
 class KosiwonUploadContainer extends Component {
     constructor(props) {
@@ -13,8 +12,8 @@ class KosiwonUploadContainer extends Component {
         this.state = {
             isShowPopup: false,
             isUpdate: false,
-            fileList: [],
-            tempList: []
+            tempList: [],
+            removeList: []
         }
         this.togglePopup = this.togglePopup.bind(this)
     }
@@ -76,24 +75,29 @@ class KosiwonUploadContainer extends Component {
 
     onFileSelected(e) {
         const files = e.target.files
-        const newList = uniqBy([...this.state.fileList, ...files], ({name}) => name)
-
-        if (files && files[0]) {
-            let reader = new FileReader()
-            reader.onload = () => {
-                document.getElementById('test').src = reader.result
+        this.setState({
+            ...this.state,
+            tempList: []
+        }, () => {
+            if (files && files[0]) {
+                Array.from(files).forEach(file => {
+                    if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+                        let reader = new FileReader()
+                        reader.onload = () => {
+                            this.setState({
+                                ...this.state,
+                                tempList: [...this.state.tempList, reader.result]
+                            })
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                })
             }
-            Array.from(files).forEach((file) => {
+        })
+    }
 
-            })
-
-            reader.readAsDataURL(files[0]);
-
-            this.setState({
-                ...this.state,
-                fileList: newList
-            })
-        }
+    onFileUploadClick() {
+        document.getElementById('files').click()
     }
 
     handleAddress(data) {
@@ -195,6 +199,7 @@ class KosiwonUploadContainer extends Component {
     render() {
         const {isShowPopup} = this.state
         const props = {style: {height: '100%'}}
+        const isEdit = this.props.match.params.id !== '-1'
         return (
             <div>
                 <img src="" id="test" />
@@ -203,6 +208,8 @@ class KosiwonUploadContainer extends Component {
                                togglePopup={this.togglePopup}
                                onKosiwonRegisterClicked={this.onKosiwonRegisterClicked.bind(this)}
                                onFileSelected={this.onFileSelected.bind(this)}
+                               onFileUploadClick={this.onFileUploadClick}
+                               isEdit={isEdit}
                                {...this.state}/>
                 {isShowPopup && <div className="popup">
                     <div style={{

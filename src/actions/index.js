@@ -8,6 +8,7 @@ import {
 } from "../data/ActionTypes";
 import {fetchHeader} from '../data/consts'
 import Cookies from '../get-cookie-helper'
+
 console.log(Cookies)
 
 export const toggleLoginPopup = () => ({
@@ -382,14 +383,15 @@ export const uploadKosiwon = (isParking, isMeal, isWoman, isSeparate, isRestRoom
         })
 
         if (uploadResult.ok) {
-            const {_id} = await uploadResult.json()
+            const uploadData = await uploadResult.json()
+            const {_id, imageList} = uploadData
 
             if (files && files.length > 0) {
-                await Promise.all(Array.from(files).map(async (file, index) => {
+                const uploadFileResult = await Promise.all(Array.from(files).map(async (file, index) => {
                     let formData = new FormData();
                     formData.append('categoryName', 'kosiwons')
                     formData.append('dirName', _id)
-                    formData.append('fileName', `${_id}_kosiwon_${index}`)
+                    formData.append('fileName', `${_id}_kosiwon_${imageList.length + index}`)
                     formData.append('file', file)
 
                     const fileTest = await fetch('http://www.kosirock.co.kr/api/upload', {
@@ -398,12 +400,24 @@ export const uploadKosiwon = (isParking, isMeal, isWoman, isSeparate, isRestRoom
                     })
 
                     if (fileTest.ok) {
-                        return Promise.resolve(true)
+                        const fileUploadResult = await fileTest.json()
+                        return Promise.resolve(fileUploadResult.fileName)
                     } else {
                         return Promise.reject(new Error('이미지 업로드 중 오류가 발생했습니다'))
                     }
                 }))
+                const uploadedFileList = uploadFileResult.map(_ => ({
+                    imageUri: `/files/kosiwons/${_id}/${_}`
+                }))
 
+                await fetch(`http://www.kosirock.co.kr/api/kosiwons/${_id}`, {
+                    method: 'PUT',
+                    headers: fetchHeader,
+                    body: JSON.stringify({
+                        ...uploadData,
+                        imageList: [...imageList, ...uploadedFileList]
+                    })
+                })
             }
 
             alert('수정 되었습니다')

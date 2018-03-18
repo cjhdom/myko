@@ -12,7 +12,6 @@ import App from './App';
 import reducers from './reducers'
 
 const cookieData = Cookies.get('userData');
-console.log(cookieData);
 let userData = cookieData ? JSON.parse(cookieData) : null;
 const initialState = {
     user: {
@@ -50,8 +49,8 @@ const renderApp = () => {
 };
 
 if (module.hot) {
-    module.hot.accept()
-    /*module.hot.accept('./App', () => {
+    // module.hot.accept()
+    module.hot.accept('./App', () => {
         const App = require('./App').default;
         ReactDom.render(
             <AppContainer>
@@ -61,7 +60,7 @@ if (module.hot) {
         );
     })
 
-    module.hot.accept('./reducers', () => {
+    /*module.hot.accept('./reducers', () => {
         const nextRootReducer = require('./reducers/index');
         store.replaceReducer(nextRootReducer);
     });*/
