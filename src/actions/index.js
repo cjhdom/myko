@@ -33,12 +33,7 @@ export const doLogin = (username, password) => async (dispatch, getState) => {
         try {
             const data = await fetch('http://www.kosirock.co.kr/api/users/listByNameAndPassword', {
                 method: 'POST',
-                headers: new Headers({
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Pragma': 'no-cache',
-                    'Cache-Control': 'no-cache'
-                }),
+                headers: fetchHeader,
                 body: JSON.stringify(body)
             })
 
@@ -121,6 +116,41 @@ export const onRegisterClicked = (email, password, passwordConfirm, name, phoneN
                 const message = retData.message
                 alert(message || '회원가입중 오류가 발생하였습니다. 다시 시도해주세요')
             }
+        }
+    } catch (e) {
+        console.log(`error: ${e}`)
+    }
+}
+
+export const onSocialLoginClicked = (id, name, loginType) => async dispatch => {
+    try {
+        const body = {
+            andOption:  [{key: 'username', value: id}],
+            orOption:   [],
+            sortOption: '-created',
+            pageNo:     1,
+            pageSize:   1
+        }
+
+        const data = await fetch('http://www.kosirock.co.kr/api/users/listBySearchOption', {
+            method: 'POST',
+            headers: fetchHeader,
+            body: JSON.stringify(body)
+        })
+
+        const result = await data.json()
+        if (result.items.length > 0) {
+            const userData = {
+                ...result.items[0]
+            }
+            dispatch({
+                type: LOGIN,
+                userData
+            })
+            Cookies.set('userData', JSON.stringify(userData))
+            dispatch(push('/'))
+        } else {
+            alert(result.message)
         }
     } catch (e) {
         console.log(`error: ${e}`)

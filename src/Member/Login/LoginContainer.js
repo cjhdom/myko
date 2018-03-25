@@ -5,6 +5,7 @@ import Login from "./Login";
 import {getIsLoggedIn} from "../../reducers/user";
 import {withRouter} from 'react-router-dom'
 import {doLogin} from '../../actions'
+import {onSocialLoginClicked} from "../../actions/index";
 
 class LoginContainer extends Component {
     constructor(props) {
@@ -43,12 +44,29 @@ class LoginContainer extends Component {
         doLogin(email, password)
     }
 
+    facebookResponse (res) {
+        const {onSocialLoginClicked} = this.props
+        onSocialLoginClicked(res.id, res.name, 'F')
+    }
+
+    kakaoSuccess (res) {
+        const {onSocialLoginClicked} = this.props
+        onSocialLoginClicked(res.id, res.nickname, 'K')
+    }
+
+    kakaoFail (res) {
+        console.log(res)
+    }
+
     render() {
         return (
             <Login
                 handleChange={this.handleChange.bind(this)}
                 onLoginClicked={this.onLoginClicked.bind(this)}
                 handleKeyPress={this.handleKeyPress.bind(this)}
+                facebookResponse={this.facebookResponse.bind(this)}
+                kakaoSuccess={this.kakaoSuccess.bind(this)}
+                kakaoFail={this.kakaoFail.bind(this)}
             />
         );
     }
@@ -64,6 +82,7 @@ export default withRouter(connect(
         isLoggedIn: getIsLoggedIn(state.user)
     }),
     {
-        doLogin
+        doLogin,
+        onSocialLoginClicked
     }
 )(LoginContainer));

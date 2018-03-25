@@ -542,8 +542,11 @@ div.top_line {border-top: 2px solid #ff9999;}
 #login > a {position: absolute; right: 0; top: 227px; text-decoration: underline; color: #6699ff;}
 #login p.messenger {width: 400px; margin-top: 50px;}
 #login p.messenger a {line-height: 50px; display: block; text-align: center; font-size: 16px;}
+#login p.messenger button {line-height: 50px; display: block; text-align: center; font-size: 16px;}
 #login p.messenger a.facebook {background: #3a589b url(../img/facebook_login.png) 20px 11px no-repeat; color: #ffffff;}
+#login p.messenger button.facebook {background: #3a589b url(../img/facebook_login.png) 20px 11px no-repeat; color: #ffffff;}
 #login p.messenger a.kakaotalk {background: #fdeb1d url(../img/kakaotalk.png) 15px 15px no-repeat; color: #3b1e1e; font-weight: bold;}
+#login p.messenger button.kakaotalk {width: 400px; height: 50px; background: #fdeb1d url(../img/kakaotalk.png) 15px 15px no-repeat; color: #3b1e1e; font-weight: bold;}
 #login p.signup {margin-top: 50px; text-align: center; border-top: 2px solid #cccccc; border-bottom: 2px solid #999999; height: 50px;}
 #login p.signup a {font-size: 16px; font-weight: bold; width: 198px; float: left; line-height: 48px;}
 #login p.signup a:active {color: #999999;}

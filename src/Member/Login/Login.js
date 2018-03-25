@@ -1,7 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import KakaoLogin from 'react-kakao-login'
 
-const Login = ({handleChange, onLoginClicked, handleKeyPress}) => {
+
+const Login = ({handleChange, onLoginClicked, handleKeyPress, facebookResponse, kakaoFail, kakaoSuccess}) => {
     return (
         <div id="login">
             <h1>로그인</h1>
@@ -18,9 +21,23 @@ const Login = ({handleChange, onLoginClicked, handleKeyPress}) => {
             </form>
             <a ng-click="go('/members/find-password')">비밀번호 찾기</a>
             <p className="messenger">
-                <a className="facebook" ng-click="doFacebookLogin()">페이스북으로 로그인</a>
+                <FacebookLogin appId="1791787454442544"
+                               autoLoad={true}
+                               fields="name,email"
+                               scope="public_profile"
+                               callback={facebookResponse}
+                               render={renderProps => (
+                                   <a className="facebook" onClick={renderProps.onClick}>페이스북으로 로그인</a>
+                               )} />
                 <br/>
-                <a className="kakaotalk" ng-click="doKakaoLogin()">카카오톡으로 로그인</a>
+                <KakaoLogin
+                    jsKey="ca0b57e057b75181c3c1c90d940ad004"
+                    onSuccess={kakaoSuccess}
+                    onFailure={kakaoFail}
+                    getProfile={true}
+                    buttonClass="kakaotalk"
+                    buttonText="카카오톡으로 로그인"
+                />
             </p>
             <p className="signup">
                 <Link className="normal_sign" to="/members/join-user">일반 회원가입</Link>
