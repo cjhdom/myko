@@ -121,7 +121,7 @@ class Demo extends React.Component {
                 console.log('Focused!')
             },
             autoFocus: true,
-            placeholder: 'Search Places',
+            placeholder: 'HeaderSearch Places',
             name: 'Demo__input',
             id: 'my-input-id',
         }

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import Search from './Search';
-import {geocodeByAddress} from 'react-places-autocomplete'
+import HeaderSearch from './HeaderSearch';
+import {geocodeByAddress} from "react-places-autocomplete";
 
-class SearchContainer extends Component {
+class HeaderSearchContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {address: ''}
@@ -25,7 +25,7 @@ class SearchContainer extends Component {
         })
     }
 
-    render() {
+    render () {
         const AutocompleteItem = ({formattedSuggestion}) => (
             <div className="pac-item">
                 <i className="pac-icon hdpi"/>
@@ -43,18 +43,18 @@ class SearchContainer extends Component {
             onChange: this.onChange,
             onBlur: () => false,
             type: 'search',
-            name: 'search_bar',
-            id: 'search_bar',
-            placeholder: '지역명, 지하철역명, 대학교명을 입력하세요.'
+            name: 'testtest',
+            id: 'testtest',
+            placeholder: '검색'
         }
 
-        return <Search inputProps={inputProps}
+        return <HeaderSearch inputProps={inputProps}
                        handleFormSubmit={this.handleFormSubmit.bind(this)}
                        handleSelect={this.handleSelect.bind(this)}
                        shouldFetchSuggestions={shouldFetchSuggestions}
                        autocompleteItem={AutocompleteItem}
         />
     }
-}
+};
 
-export default SearchContainer;
+export default HeaderSearchContainer

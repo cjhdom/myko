@@ -13,6 +13,12 @@ module.exports = {
         filename: 'bundle.js'
     },
 
+    externals: [
+        {
+            "daum": "daum"
+        }
+    ],
+
     devServer: {
         inline: true,
         port: 7777,

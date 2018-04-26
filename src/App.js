@@ -19,7 +19,7 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <ConnectedRouter history={history}>
-                    <div>
+                    <div id="wrapper">
                         <Header/>
                         <Switch>
                             <Route exact path="/" component={Home}/>

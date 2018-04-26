@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import PlacesAutocomplete from 'react-places-autocomplete'
-import $ from 'jquery'
+import $ from "jquery";
 
-class Search extends Component {
+class HeaderSearch extends Component {
     constructor() {
         super()
         this.position = {
@@ -34,24 +35,19 @@ class Search extends Component {
     }
 
     getDrawerPosition() {
-        const domEl = document.getElementById('search_bar')
+        const domEl = document.getElementById('testtest')
         const rect = domEl.getBoundingClientRect()
         const docEl = document.documentElement
         const body = document.body
         const scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop
-        const scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft
 
         this.position = {
-            width: rect.width - 20,
+            width: rect.width,
             height: rect.height,
             top: rect.top + rect.height + scrollTop,
-            left: rect.left + scrollLeft
+            left: 0
         };
         this.handleSelect(this.props.inputProps.value)
-    }
-
-    clickSearch() {
-        console.log('hello!')
     }
 
     render() {
@@ -81,26 +77,23 @@ class Search extends Component {
         }
 
         return (
-            <form className="search" name="main_search" onSubmit={this.props.handleFormSubmit}>
-                <fieldset>
-                    <PlacesAutocomplete
-                        inputProps={this.props.inputProps}
-                        classNames={cssClasses}
-                        handleSelect={this.props.handleSelect}
-                        options={options}
-                        shouldFetchSuggestions={this.props.shouldFetchSuggestions}
-                        googleLogo={false}
-                        autocompleteItem={this.props.autocompleteItem}
-                        styles={styles}
-                    />
-                </fieldset>
-                <div className="huesik">
-                    <a ng-click="moveView('5a24fc784d07bbff4160aff7', '휴식 사가정 본점')" target="_blank">
-                    </a>
-                </div>
+            <form className="header_search" name="header_search" id="header_search" onSubmit={this.props.handleFormSubmit}
+                  style={{marginBottom: '1em', marginTop: '0em'}}>
+                <PlacesAutocomplete
+                    inputProps={this.props.inputProps}
+                    classNames={cssClasses}
+                    handleSelect={this.props.handleSelect}
+                    options={options}
+                    shouldFetchSuggestions={this.props.shouldFetchSuggestions}
+                    googleLogo={false}
+                    autocompleteItem={this.props.autocompleteItem}
+                    styles={styles}
+                />
             </form>
-        )
+        );
     }
-};
+}
 
-export default Search;
+HeaderSearch.propTypes = {};
+
+export default HeaderSearch;

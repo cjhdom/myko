@@ -211,19 +211,14 @@ class View extends Component {
                 optionDesk,
                 optionFan,
                 optionRefrigerator,
-                isAlarmByKosirock,
-                isAlarmByOnwer,
                 isElevator,
                 isMeal,
                 isParking,
-                isPromotion,
                 isPublic,
-                isReAuctionAlarm,
                 isRestRoom,
                 isSeparate,
                 isWoman,
-                minorAddress,
-                majorAddress,
+                kosiwonAddress,
                 location,
                 kosiwonName,
                 kosiwonPhoneNo,
@@ -261,7 +256,8 @@ class View extends Component {
                                 isWonjang={isWonjang}/>
                             <MapContainer
                                 location={location}
-                                majorAddress={majorAddress}/>
+                                kosiwonAddress={kosiwonAddress}
+                                kosiwonName={kosiwonName}/>
                             <InfoContainer
                                 floor={floor}
                                 isElevator={isElevator}

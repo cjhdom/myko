@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
 
-import SearchContainer from './components/search/SeachContainer';
+import SearchContainer from './components/header-search/HeaderSeachContainer';
 import LoginContainer from './components/login/LoginContainer';
 import LoginPopupContainer from "./components/loginPopup/LoginPopupContainer";
 import MenuContainer from "./components/Menu/MenuContainer";
@@ -15,10 +15,12 @@ class Header extends Component {
     }
 
     render() {
+        const {pathname} = this.props.location
+        const showSearch = pathname !== '/'
         return (
             <div id="header">
                 <h1><a style={cursorStyle} onClick={this.goHome.bind(this)}><img alt="kosirock" src="/img/Logo.png"/></a></h1>
-                {false && <SearchContainer/>}
+                {showSearch && <SearchContainer/>}
                 <LoginContainer />
                 <MenuContainer/>
                 <LoginPopupContainer/>
