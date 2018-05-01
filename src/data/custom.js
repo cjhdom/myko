@@ -34,7 +34,7 @@ function getDaumServerUrl() {
     return Consts.DAUM_SERVER_URL;
 }
 
-function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
+export const getDistanceFromLatLonInKm = (lat1,lng1,lat2,lng2) => {
     function deg2rad(deg) {
         return deg * (Math.PI/180)
     }
@@ -48,7 +48,16 @@ function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
     return d;
 }
 
-
+export const getDiameter = (distance, isShowClusterList, height, width) => {
+    let newHeight;
+    if(!isShowClusterList) {
+        newHeight = height-53-52;
+    } else {
+        newHeight = height-53-52-240;
+    }
+    const diagonal = Math.sqrt(Math.pow(width, 2) + Math.pow(newHeight, 2));
+    return Math.floor(distance*width/diagonal*1000); // m
+}
 
 
 function leadingZeros(n, digits) {

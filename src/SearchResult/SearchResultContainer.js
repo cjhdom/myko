@@ -11,13 +11,6 @@ import {parse} from 'query-string'
 
 const checkIsAllSelected = original => every(original)
 
-const parseOptions = options => (
-    Object.keys(options).map(_ => ({
-        key: _,
-        value: options[_]
-    })).filter(_ => _.value)
-)
-
 class SearchResultContainer extends Component {
     constructor(props) {
         super(props);
@@ -50,82 +43,6 @@ class SearchResultContainer extends Component {
         this.handleOnChange = this.handleOnChange.bind(this)
         this.handleOnChangeAll = this.handleOnChangeAll.bind(this)
         this.handleSelect = this.handleSelect.bind(this)
-    }
-
-    async callApi() {
-        const {priceRange, detailOptions, roomOptions} = this.state
-        const {match} = this.props
-        const {longitude, latitude} = match.params
-
-        const detailOptionsParsed = parseOptions(detailOptions)
-        const roomOptionsParsed = parseOptions(roomOptions)
-
-        let priceRangeParsed = []
-
-        if (priceRange.priceMin !== '0') {
-            priceRangeParsed.push({
-                operator: '$lte',
-                type: 'number',
-                key: 'priceMin',
-                value: priceRange.priceMin
-            })
-        }
-
-        if (priceRange.priceMax !== '0') {
-            priceRangeParsed.push({
-                operator: '$gte',
-                type: 'number',
-                key: 'priceMax',
-                value: priceRange.priceMax
-            })
-        }
-
-        const body = {
-            andOption: {
-                ...detailOptionsParsed,
-                ...roomOptionsParsed,
-                ...priceRangeParsed
-            },
-            populateOption: false,
-            projectOption: {
-                kosiwonAddress: 1,
-                kosiwonName: 1,
-                location: 1
-            },
-            orOption: [],
-            longitude,
-            latitude,
-            maxDistance: false,
-            minDistance: false,
-            sortOption: {
-                priority: -1
-            },
-            pageNo: 1,
-            pageSize: 10000
-        }
-
-        try {
-            const searchFetch = await fetch(`http://www.kosirock.co.kr/api/kosiwons/listBySearchOptionNear`, {
-                method: 'POST',
-                headers: fetchHeader,
-                body: JSON.stringify(body)
-            })
-
-            const result = await searchFetch.json()
-            const items = result.items
-            await this.setStateAsync(items)
-        } catch (e) {
-
-        }
-    }
-
-    async setStateAsync(newState) {
-        return new Promise(resolve => (
-            resolve(this.setState({
-                ...this.state,
-                ...newState
-            }))
-        ))
     }
 
     handleSelect(e) {
@@ -221,7 +138,10 @@ class SearchResultContainer extends Component {
                         {/*{!isShowMap && <SearchResultList items={items}/>}*/}
                         {isShowMap && <SearchResultMapContainer items={items}
                                                                 longitude={longitude}
-                                                                latitude={latitude} />}
+                                                                latitude={latitude}
+                                                                priceRange={priceRange}
+                                                                detailOptions={detailOptions}
+                                                                roomOptions={roomOptions}/>}
                     </div>
                 </div>
             </div>
