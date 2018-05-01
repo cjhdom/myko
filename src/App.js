@@ -4,15 +4,15 @@ import {Route, Switch} from 'react-router-dom';
 import {ConnectedRouter} from 'react-router-redux'
 import {Provider} from 'react-redux'
 
-import View from "./View";
-import Home from "./Home";
-import Member from "./Member";
-import Header from "./Header";
-import Footer from "./Footer";
-import ContactContainer from "./Contact/ContactContainer";
-import MyList from "./MyList/index";
-import ReportContainer from "./Report/ReportContainer";
-import SearchResultContainer from "./SearchResult/SearchResultContainer";
+import View from "./components/View";
+import Home from "./components/Home";
+import Member from "./components/Member";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ContactContainer from "./components/Contact/ContactContainer";
+import MyList from "./components/MyList/index";
+import ReportContainer from "./components/Report/ReportContainer";
+import SearchResultContainer from "./components/SearchResult/SearchResultContainer";
 
 class App extends Component {
     render() {
