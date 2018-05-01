@@ -419,12 +419,12 @@ class SearchResultMapContainer extends Component {
         }
 
         const body = {
-            andOption: {
-                key: 'isPublic', value: true,
+            andOption: [
+                {key: 'isPublic', value: true},
                 ...detailOptionsParsed,
                 ...roomOptionsParsed,
                 ...priceRangeParsed
-            },
+            ],
             populateOption: false,
             projectOption: {
                 kosiwonAddress: 1,

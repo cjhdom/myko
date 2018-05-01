@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import SearchMenu from "./SearchMenu";
-import SearchResultList from "./SearchResultList";
+import SearchResultList from "./SearchResultListContainer";
 import SearchResultMapContainer from "./SearchResultMapContainer";
 import $ from 'jquery'
 import {withRouter} from "react-router";
@@ -136,8 +136,7 @@ class SearchResultContainer extends Component {
                                     handleOnChangeAll={this.handleOnChangeAll}
                                     handleSelect={this.handleSelect}/>
                         {/*{!isShowMap && <SearchResultList items={items}/>}*/}
-                        {isShowMap && <SearchResultMapContainer items={items}
-                                                                longitude={longitude}
+                        {isShowMap && <SearchResultMapContainer longitude={longitude}
                                                                 latitude={latitude}
                                                                 priceRange={priceRange}
                                                                 detailOptions={detailOptions}
