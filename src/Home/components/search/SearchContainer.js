@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import Search from './Search';
-import {geocodeByAddress} from 'react-places-autocomplete'
+import {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
+import {withRouter} from "react-router";
 
 class SearchContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {address: ''}
-        this.onChange = (address) => this.setState({address})
+        this.onChange = this.onChange.bind(this)
+        this.handleSelect = this.handleSelect.bind(this)
     }
 
     handleFormSubmit(event) {
@@ -18,7 +20,15 @@ class SearchContainer extends Component {
             .catch(error => console.error('Error', error))
     }
 
-    handleSelect(address) {
+    handleSelect() {
+        event.preventDefault()
+        const {address} = this.state
+        geocodeByAddress(address)
+            .then(results => getLatLng(results[0]))
+            .then(latLng => this.props.history.push(`/search?latitude=${latLng.lat}&longitude=${latLng.lng}`))
+    }
+
+    onChange(address) {
         this.setState({
             ...this.state,
             address
@@ -57,4 +67,4 @@ class SearchContainer extends Component {
     }
 }
 
-export default SearchContainer;
+export default withRouter(SearchContainer);

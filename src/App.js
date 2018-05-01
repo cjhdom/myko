@@ -12,6 +12,7 @@ import Footer from "./Footer";
 import ContactContainer from "./Contact/ContactContainer";
 import MyList from "./MyList/index";
 import ReportContainer from "./Report/ReportContainer";
+import SearchResultContainer from "./SearchResult/SearchResultContainer";
 
 class App extends Component {
     render() {
@@ -29,6 +30,7 @@ class App extends Component {
                             <Route path="/contact" component={ContactContainer}/>
                             <Route path="/list" component={MyList}/>
                             <Route path="/report/:id/:kosiwonName" component={ReportContainer}/>
+                            <Route path="/search" component={SearchResultContainer}/>
                         </Switch>
                         <Footer/>
                     </div>

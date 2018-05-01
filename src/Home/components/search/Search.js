@@ -13,15 +13,13 @@ class Search extends Component {
     }
 
     componentDidMount() {
-        this.handleSelect = this.props.handleSelect.bind(this)
-
         const button = document.createElement('input');
         button.type = 'button'
         button.id = 'home_search_button'
         button.name = 'search_click'
         button.value = '검색'
         $('#PlacesAutocomplete__root').append(button)
-        button.addEventListener('click', this.clickSearch);
+        button.addEventListener('click', this.props.handleSelect);
 
         window.addEventListener('resize', this.getDrawerPosition)
         this.getDrawerPosition()
@@ -29,7 +27,7 @@ class Search extends Component {
 
     componentWillUnmount() {
         const button = document.getElementById('home_search_button');
-        button.removeEventListener('click', this.clickSearch)
+        button.removeEventListener('click', this.props.handleSelect)
         window.removeEventListener('resize', this.getDrawerPosition)
     }
 
@@ -47,11 +45,6 @@ class Search extends Component {
             top: rect.top + rect.height + scrollTop,
             left: rect.left + scrollLeft
         };
-        this.handleSelect(this.props.inputProps.value)
-    }
-
-    clickSearch() {
-        console.log('hello!')
     }
 
     render() {
@@ -86,7 +79,6 @@ class Search extends Component {
                     <PlacesAutocomplete
                         inputProps={this.props.inputProps}
                         classNames={cssClasses}
-                        handleSelect={this.props.handleSelect}
                         options={options}
                         shouldFetchSuggestions={this.props.shouldFetchSuggestions}
                         googleLogo={false}

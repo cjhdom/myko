@@ -9,8 +9,6 @@ import {
 import {fetchHeader} from '../data/consts'
 import Cookies from '../get-cookie-helper'
 
-console.log(Cookies)
-
 export const toggleLoginPopup = () => ({
     type: TOGGLE_LOGIN_POPUP
 })

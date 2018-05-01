@@ -7,6 +7,7 @@ class HeaderSearchContainer extends Component {
         super(props)
         this.state = {address: ''}
         this.onChange = (address) => this.setState({address})
+        this.onSelect = this.onSelect.bind(this)
     }
 
     handleFormSubmit(event) {
@@ -23,6 +24,10 @@ class HeaderSearchContainer extends Component {
             ...this.state,
             address
         })
+    }
+
+    onSelect (e) {
+
     }
 
     render () {
@@ -42,6 +47,7 @@ class HeaderSearchContainer extends Component {
             value: this.state.address,
             onChange: this.onChange,
             onBlur: () => false,
+            onSelect: this.onSelect,
             type: 'search',
             name: 'testtest',
             id: 'testtest',

@@ -13,14 +13,12 @@ class Home extends Component {
 
     render() {
         return (
-            <div className="wrapper">
-                <div className="contentWrapper">
-                    <SearchContainer/>
-                    <MasterContainer/>
-                    <DiaContainer/>
-                    <RecentContainer/>
-                    <FavoriteContainer/>
-                </div>
+            <div className="contentWrapper">
+                <SearchContainer/>
+                <MasterContainer/>
+                <DiaContainer/>
+                <RecentContainer/>
+                <FavoriteContainer/>
             </div>
         );
     }
