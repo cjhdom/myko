@@ -9,7 +9,7 @@ const LoginContainer = ({isLoggedIn}) => {
     return (
         <ul className="header_top">
             {isLoggedIn ? <LoggedIn /> : <NotLoggedIn/>}
-            <li><a>원장님이신가요?</a></li>
+            <li><a href="/contact">원장님이신가요?</a></li>
         </ul>
     )
 };

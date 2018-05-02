@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PlacesAutocomplete from 'react-places-autocomplete'
+import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
 import $ from 'jquery'
 
 class Search extends Component {
@@ -74,7 +74,7 @@ class Search extends Component {
         }
 
         return (
-            <form className="search" name="main_search" onSubmit={this.props.handleFormSubmit}>
+            <form className="search" name="main_search">
                 <fieldset>
                     <PlacesAutocomplete
                         inputProps={this.props.inputProps}
@@ -84,6 +84,7 @@ class Search extends Component {
                         googleLogo={false}
                         autocompleteItem={this.props.autocompleteItem}
                         styles={styles}
+                        onSelect={this.props.handleSelect}
                     />
                 </fieldset>
                 <div className="huesik">

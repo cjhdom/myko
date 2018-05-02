@@ -11,18 +11,7 @@ class SearchContainer extends Component {
         this.handleSelect = this.handleSelect.bind(this)
     }
 
-    handleFormSubmit(event) {
-        event.preventDefault()
-
-        geocodeByAddress(this.state.address)
-            .then(results => getLatLng(results[0]))
-            .then(latLng => console.log('Success', latLng))
-            .catch(error => console.error('Error', error))
-    }
-
-    handleSelect() {
-        event.preventDefault()
-        const {address} = this.state
+    handleSelect (address) {
         geocodeByAddress(address)
             .then(results => getLatLng(results[0]))
             .then(latLng => this.props.history.push(`/search?latitude=${latLng.lat}&longitude=${latLng.lng}`))
@@ -51,7 +40,6 @@ class SearchContainer extends Component {
         const inputProps = {
             value: this.state.address,
             onChange: this.onChange,
-            onBlur: () => false,
             type: 'search',
             name: 'search_bar',
             id: 'search_bar',
@@ -59,8 +47,7 @@ class SearchContainer extends Component {
         }
 
         return <Search inputProps={inputProps}
-                       handleFormSubmit={this.handleFormSubmit.bind(this)}
-                       handleSelect={this.handleSelect.bind(this)}
+                       handleSelect={this.handleSelect}
                        shouldFetchSuggestions={shouldFetchSuggestions}
                        autocompleteItem={AutocompleteItem}
         />

@@ -1,36 +1,30 @@
 import React, {Component} from 'react';
 import HeaderSearch from './HeaderSearch';
-import {geocodeByAddress} from "react-places-autocomplete";
+import {geocodeByAddress, getLatLng} from "react-places-autocomplete";
+import {withRouter} from "react-router";
 
 class HeaderSearchContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {address: ''}
-        this.onChange = (address) => this.setState({address})
-        this.onSelect = this.onSelect.bind(this)
-    }
-
-    handleFormSubmit(event) {
-        event.preventDefault()
-
-        geocodeByAddress(this.state.address)
-            .then(results => getLatLng(results[0]))
-            .then(latLng => console.log('Success', latLng))
-            .catch(error => console.error('Error', error))
+        this.onChange = this.onChange.bind(this)
+        this.handleSelect = this.handleSelect.bind(this)
     }
 
     handleSelect(address) {
+        geocodeByAddress(address)
+            .then(results => getLatLng(results[0]))
+            .then(latLng => this.props.history.push(`/search?latitude=${latLng.lat}&longitude=${latLng.lng}`))
+    }
+
+    onChange(address) {
         this.setState({
             ...this.state,
             address
         })
     }
 
-    onSelect (e) {
-
-    }
-
-    render () {
+    render() {
         const AutocompleteItem = ({formattedSuggestion}) => (
             <div className="pac-item">
                 <i className="pac-icon hdpi"/>
@@ -46,8 +40,6 @@ class HeaderSearchContainer extends Component {
         const inputProps = {
             value: this.state.address,
             onChange: this.onChange,
-            onBlur: () => false,
-            onSelect: this.onSelect,
             type: 'search',
             name: 'testtest',
             id: 'testtest',
@@ -55,12 +47,11 @@ class HeaderSearchContainer extends Component {
         }
 
         return <HeaderSearch inputProps={inputProps}
-                       handleFormSubmit={this.handleFormSubmit.bind(this)}
-                       handleSelect={this.handleSelect.bind(this)}
-                       shouldFetchSuggestions={shouldFetchSuggestions}
-                       autocompleteItem={AutocompleteItem}
+                             handleSelect={this.handleSelect}
+                             shouldFetchSuggestions={shouldFetchSuggestions}
+                             autocompleteItem={AutocompleteItem}
         />
     }
 };
 
-export default HeaderSearchContainer
+export default withRouter(HeaderSearchContainer)

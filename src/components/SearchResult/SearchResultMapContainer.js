@@ -296,7 +296,6 @@ class SearchResultMapContainer extends Component {
     }
 
     updateResultList () {
-        console.log('updating', this.clusterList.length)
         return this.props.setParentStateAsync({
             pageNo: this.pageNo,
             pageNoList: this.pageNoList,

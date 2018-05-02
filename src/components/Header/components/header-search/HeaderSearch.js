@@ -82,12 +82,12 @@ class HeaderSearch extends Component {
                 <PlacesAutocomplete
                     inputProps={this.props.inputProps}
                     classNames={cssClasses}
-                    handleSelect={this.props.handleSelect}
                     options={options}
                     shouldFetchSuggestions={this.props.shouldFetchSuggestions}
                     googleLogo={false}
                     autocompleteItem={this.props.autocompleteItem}
                     styles={styles}
+                    onSelect={this.props.handleSelect}
                 />
             </form>
         );
