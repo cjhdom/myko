@@ -23,8 +23,10 @@ class MyList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            showPopup: false
+            showPopup: false,
+            index: 1
         }
+        this.setIndex = this.setIndex.bind(this)
     }
 
     toggleDeletePopup() {
@@ -47,10 +49,20 @@ class MyList extends Component {
         })
     }
 
+    setIndex(index) {
+        if (index > 0 || index < 10) {
+
+        }
+        this.setState({
+            ...this.state,
+            index
+        })
+    }
+
     render() {
         const baseUrl = this.props.match.url
         const {isLoggedIn} = this.props
-        const {showPopup} = this.state
+        const {showPopup, index} = this.state
         return (
             <div id="contentWrapper">
                 <div id="main_search_list">
@@ -62,10 +74,11 @@ class MyList extends Component {
                             removeRecentList={this.removeRecentList.bind(this)}
                         />
                         <ul className="thumbnail_list">
-                            <Route path={`${baseUrl}/favorite`} component={FavoriteList}/>
-                            <Route path={`${baseUrl}/recent`} component={RecentList(isLoggedIn)}/>
+                            <Route path={`${baseUrl}/favorite`} component={FavoriteList} index={index}/>
+                            <Route path={`${baseUrl}/recent`} component={RecentList(isLoggedIn)} index={index}/>
                         </ul>
-                        <BodyFooterContainer/>
+                        <BodyFooterContainer setIndex={this.setIndex}
+                                             index={index}/>
                     </div>
                 </div>
             </div>

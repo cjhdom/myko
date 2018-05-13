@@ -1,9 +1,9 @@
 import React from 'react'
 
-const BodyFooter = () => {
+const BodyFooter = ({setIndex, index}) => {
     return (
         <ul className="list_number">
-            <li><a className="prev" ng-className="vars.pageNo>1 ? 'on' : ''"
+            <li><a className={`prev${index > 1 ? ' on' : ''}`} onClick={() => setIndex(index - 1)}
                    ng-click="goPage(vars.pageNo-1)">이전</a></li>
             {/*  ngRepeat: pageNo in vars.pageNoList  */}
             <li ng-repeat="pageNo in vars.pageNoList" ng-className="pageNo===vars.pageNo ? 'on' : ''"

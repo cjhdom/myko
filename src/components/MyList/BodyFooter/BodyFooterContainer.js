@@ -3,7 +3,7 @@ import BodyFooter from "./BodyFooter";
 
 class BodyFooterContainer extends Component {
     render () {
-        return <BodyFooter />
+        return <BodyFooter {...this.props}/>
     }
 }
 

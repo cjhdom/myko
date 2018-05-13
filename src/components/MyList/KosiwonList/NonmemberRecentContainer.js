@@ -2,8 +2,15 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Kosiwon from "./Kosiwon";
 import {routeTo} from "../../../actions";
+import {reverse} from 'lodash'
 
 class NonmemberRecentContainer extends Component {
+    constructor(props) {
+        super(props);
+
+    }
+
+
     getRecentList() {
         const storageList = localStorage.getItem('recentViewList')
         return storageList ? JSON.parse(storageList) : []
@@ -22,7 +29,7 @@ class NonmemberRecentContainer extends Component {
         const {routeTo} = this.props
         const recentViewList = this.getRecentList()
         return (
-            recentViewList.map((view, i) => {
+            reverse(recentViewList).map((view, i) => {
                 return <Kosiwon
                     index={i}
                     key={view.id}

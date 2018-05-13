@@ -7,22 +7,32 @@ import {getIsLoggedIn, getUserData} from "../../../../reducers/user";
 
 import Recent from "./Recent";
 import {withRouter} from "react-router-dom";
+import {reverse} from 'lodash'
 
 class RecentContainer extends Component {
     constructor(props) {
         super(props);
+
+        const {isLoggedIn} = this.props
+        let recentViewList = []
+
+        if (!isLoggedIn && localStorage.getItem('recentViewList')) {
+            recentViewList = JSON.parse(localStorage.getItem('recentViewList'))
+        }
+
         this.state = {
             success: false,
-            data: []
+            data: [],
+            recentViewList
         }
     }
 
     setStateAsync(data) {
         return new Promise(resolve => {
-            this.setState({
+            resolve(this.setState({
                 ...this.state,
                 ...data
-            })
+            }))
         })
     }
 
@@ -61,7 +71,7 @@ class RecentContainer extends Component {
 
                 await this.setStateAsync({
                     success: true,
-                    data: data ? data.items.map(a => a.kosiwonId) : []
+                    recentViewList: data ? data.items.map(a => a.kosiwonId) : []
                 })
             } catch (e) {
                 console.log(`error: ${e}`)
@@ -75,19 +85,13 @@ class RecentContainer extends Component {
 
     render() {
         const {isLoggedIn} = this.props
+        const {recentViewList} = this.state
 
-        let showEmptyRecent = true
-        let recentViewList = []
+        let showEmptyRecent = recentViewList.length === 0
+        let renderList = recentViewList
 
-        if (isLoggedIn) {
-            recentViewList = this.state.data
-            if (recentViewList.length > 0) {
-                showEmptyRecent = false
-            }
-        } else if (localStorage.getItem('recentViewList')) {
-            showEmptyRecent = false
-            recentViewList = JSON.parse(localStorage.getItem('recentViewList'))
-            recentViewList = recentViewList.slice(0, 4)
+        if (!isLoggedIn && !showEmptyRecent) {
+            renderList = reverse(renderList).slice(0, 5)
         }
 
         return (
@@ -95,7 +99,7 @@ class RecentContainer extends Component {
                 <p>최근 본 고시원</p>
                 <a onClick={this.onViewMoreClicked.bind(this)}>더보기</a>
                 {!showEmptyRecent && <ul className="on" style={{display: 'block'}}>
-                    {recentViewList.map((recent, key) => {
+                    {renderList.map((recent, key) => {
                         return (
                             <Recent
                                 key={key}
