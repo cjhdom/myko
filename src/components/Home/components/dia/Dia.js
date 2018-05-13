@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 
 const Dia = ({settings, diaList}) => {
     return (<div className="diamond">
-        <h2>여긴 어때요?<span>마스터</span></h2>
+        <h2>여기도 있어요!<span>다이아</span></h2>
         <Slider {...settings}>
             {diaList.map((diaPage, key) => {
                 return (<div className="list_slide" key={key}>

@@ -13,21 +13,23 @@ class Search extends Component {
     }
 
     componentDidMount() {
+        const {address} = this.props
         const button = document.createElement('input');
         button.type = 'button'
         button.id = 'home_search_button'
         button.name = 'search_click'
         button.value = '검색'
         $('#PlacesAutocomplete__root').append(button)
-        button.addEventListener('click', this.props.handleSelect);
+        button.addEventListener('click', () => this.props.handleSelect(address));
 
         window.addEventListener('resize', this.getDrawerPosition)
         this.getDrawerPosition()
     }
 
     componentWillUnmount() {
+        const {address} = this.props
         const button = document.getElementById('home_search_button');
-        button.removeEventListener('click', this.props.handleSelect)
+        button.removeEventListener('click', () => this.props.handleSelect(address))
         window.removeEventListener('resize', this.getDrawerPosition)
     }
 
@@ -85,6 +87,7 @@ class Search extends Component {
                         autocompleteItem={this.props.autocompleteItem}
                         styles={styles}
                         onSelect={this.props.handleSelect}
+                        onEnterKeyDown={this.props.handleSelect}
                     />
                 </fieldset>
                 <div className="huesik">

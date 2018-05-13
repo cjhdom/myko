@@ -166,6 +166,7 @@ class SearchResultContainer extends Component {
                                                                 roomOptions={roomOptions}
                                                                 setParentState={this.setParentState}
                                                                 setParentStateAsync={this.setParentStateAsync}
+                                                                key={longitude + '' + latitude}
                         />}
                         {isShowClusterList && <SearchResultListContainer pageNo={pageNo}
                                                                          pageNoList={pageNoList}

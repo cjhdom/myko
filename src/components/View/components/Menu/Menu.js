@@ -11,7 +11,6 @@ const Menu = ({
                   kosiwonPhoneNo,
                   kosiwonUrl,
                   kosiwonVirtualNo,
-                  kosiwonZipcode,
                   isMeal,
                   isParking,
                   isRestRoom,
@@ -19,8 +18,7 @@ const Menu = ({
                   isFavorite,
                   toggleFavorite,
                   priceMax,
-                  priceMin,
-                  isWonjang
+                  priceMin
               }) => {
     return (
         <div className="detail_info">
@@ -55,12 +53,9 @@ const Menu = ({
                     <Link target="blank"
                        to={kosiwonUrl}>홈페이지</Link>
                 </li>
-                {!isWonjang && <li>
+                <li>
                     <Link to={`/report/${id}/${encodeURI(kosiwonName)}`}>신고하기</Link>
-                </li>}
-                {isWonjang && <li>
-                    <Link to={`/members/upload/${id}`}>수정하기</Link>
-                </li>}
+                </li>
             </ul>
         </div>
     )

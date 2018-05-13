@@ -14,6 +14,7 @@ class HeaderSearch extends Component {
     }
 
     componentDidMount() {
+        const {address} = this.props
         this.handleSelect = this.props.handleSelect.bind(this)
 
         const button = document.createElement('input');
@@ -22,15 +23,16 @@ class HeaderSearch extends Component {
         button.name = 'search_click'
         button.value = '검색'
         $('#PlacesAutocomplete__root').append(button)
-        button.addEventListener('click', this.clickSearch);
+        button.addEventListener('click', () => this.props.handleSelect(address));
 
         window.addEventListener('resize', this.getDrawerPosition)
         this.getDrawerPosition()
     }
 
     componentWillUnmount() {
+        const {address} = this.props
         const button = document.getElementById('home_search_button');
-        button.removeEventListener('click', this.clickSearch)
+        button.removeEventListener('click', () => this.props.handleSelect(address))
         window.removeEventListener('resize', this.getDrawerPosition)
     }
 
@@ -47,7 +49,6 @@ class HeaderSearch extends Component {
             top: rect.top + rect.height + scrollTop,
             left: 0
         };
-        this.handleSelect(this.props.inputProps.value)
     }
 
     render() {
@@ -88,6 +89,7 @@ class HeaderSearch extends Component {
                     autocompleteItem={this.props.autocompleteItem}
                     styles={styles}
                     onSelect={this.props.handleSelect}
+                    onEnterKeyDown={this.props.handleSelect}
                 />
             </form>
         );

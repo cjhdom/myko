@@ -12,7 +12,7 @@ class HeaderSearchContainer extends Component {
     }
 
     handleSelect(address) {
-        geocodeByAddress(address)
+        geocodeByAddress(address || this.state.address)
             .then(results => getLatLng(results[0]))
             .then(latLng => this.props.history.push(`/search?latitude=${latLng.lat}&longitude=${latLng.lng}`))
     }
@@ -25,6 +25,7 @@ class HeaderSearchContainer extends Component {
     }
 
     render() {
+        const {address} = this.state
         const AutocompleteItem = ({formattedSuggestion}) => (
             <div className="pac-item">
                 <i className="pac-icon hdpi"/>
@@ -50,6 +51,7 @@ class HeaderSearchContainer extends Component {
                              handleSelect={this.handleSelect}
                              shouldFetchSuggestions={shouldFetchSuggestions}
                              autocompleteItem={AutocompleteItem}
+                             address={address}
         />
     }
 };
