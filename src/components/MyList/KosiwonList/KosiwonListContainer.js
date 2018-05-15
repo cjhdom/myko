@@ -9,19 +9,9 @@ import Kosiwon from "./Kosiwon";
 class KosiwonListContainer extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            kosiwonList: [],
-            success: false
-        }
     }
 
-    setStateAsync(newState) {
-        return new Promise(resolve =>
-            resolve(this.setState({...this.state, ...newState}))
-        )
-    }
-
-    async removeRecentAsync (id) {
+    async removeRecentAsync(id) {
         try {
             await fetch('http://www.kosirock.co.kr/api/myKosiwons/deleteMulti', {
                 method: 'POST',
@@ -41,7 +31,7 @@ class KosiwonListContainer extends Component {
     }
 
     async loadData() {
-        const {listType, isLoggedIn, userData, routeTo} = this.props
+        const {listType, isLoggedIn, userData, routeTo, setParentStateAsync} = this.props
         if (!isLoggedIn) {
             return routeTo('/')
         }
@@ -73,9 +63,10 @@ class KosiwonListContainer extends Component {
 
             const data = await result.json()
 
-            await this.setStateAsync({
-                success: true,
-                kosiwonList: data ? data.items.map(a => a.kosiwonId) : []
+            await setParentStateAsync({
+                items: data ? data.items.map(a => a.kosiwonId) : [],
+                lastIndex: data.items.length,
+                pageNoList: data.items.map((item, key) => (key + 1))
             })
         } catch (e) {
             console.log(`error! ${e}`)
@@ -87,23 +78,18 @@ class KosiwonListContainer extends Component {
     }
 
     render() {
-        const {success, kosiwonList} = this.state
-        const {routeTo} = this.props
-        if (success) {
-            return (
-                kosiwonList.map((view, i) => {
-                    return <Kosiwon
-                        index={i}
-                        key={view.id}
-                        kosiwon={view}
-                        routeTo={routeTo}
-                        removeRecent={this.removeRecentAsync.bind(this)}
-                    />
-                })
-            );
-        } else {
-            return null
-        }
+        const {routeTo, items} = this.props
+        return (
+            items.map((view, i) => {
+                return <Kosiwon
+                    index={i}
+                    key={view.id}
+                    kosiwon={view}
+                    routeTo={routeTo}
+                    removeRecent={this.removeRecentAsync.bind(this)}
+                />
+            })
+        );
     }
 }
 

@@ -7,7 +7,19 @@ import {reverse} from 'lodash'
 class NonmemberRecentContainer extends Component {
     constructor(props) {
         super(props);
+    }
 
+    updateRecent() {
+        const recentList = this.getRecentList()
+        this.props.setParentState({
+            items: recentList,
+            lastIndex: recentList.length,
+            pageNoList: recentList.map((item, key) => (key + 1))
+        })
+    }
+
+    componentDidMount() {
+        this.updateRecent()
     }
 
 
@@ -21,15 +33,14 @@ class NonmemberRecentContainer extends Component {
         if (idx !== 'undefined') {
             recentViewList.splice(idx, 1)
             localStorage.setItem('recentViewList', JSON.stringify(recentViewList))
-            this.forceUpdate()
+            this.updateRecent()
         }
     }
 
     render() {
-        const {routeTo} = this.props
-        const recentViewList = this.getRecentList()
+        const {routeTo, items} = this.props
         return (
-            reverse(recentViewList).map((view, i) => {
+            reverse(items).map((view, i) => {
                 return <Kosiwon
                     index={i}
                     key={view.id}

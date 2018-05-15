@@ -8,25 +8,19 @@ import NonmemberRecentContainer from "./KosiwonList/NonmemberRecentContainer";
 import BodyFooterContainer from "./BodyFooter/BodyFooterContainer";
 import BodyHeader from "./BodyHeader/BodyHeader";
 
-const FavoriteList = () =>
-    <KosiwonListContainer listType="favorite"/>
-
-const RecentList = (isLoggedIn) => () => {
-    if (isLoggedIn) {
-        return (<KosiwonListContainer listType="recent"/>)
-    } else {
-        return (<NonmemberRecentContainer/>)
-    }
-}
-
 class MyList extends Component {
     constructor(props) {
         super(props)
         this.state = {
             showPopup: false,
-            index: 1
+            index: 1,
+            items: [],
+            lastIndex: 1,
+            pageNoList: []
         }
         this.setIndex = this.setIndex.bind(this)
+        this.setParentState = this.setParentState.bind(this)
+        this.setParentStateAsync = this.setParentStateAsync.bind(this)
     }
 
     toggleDeletePopup() {
@@ -50,19 +44,37 @@ class MyList extends Component {
     }
 
     setIndex(index) {
-        if (index > 0 || index < 10) {
-
-        }
         this.setState({
             ...this.state,
             index
         })
     }
 
+    setParentState(newState) {
+        this.setState({
+            ...this.state,
+            ...newState
+        })
+    }
+
+    setParentStateAsync(newState) {
+        return new Promise(resolve =>
+            resolve(this.setState({...this.state, ...newState}))
+        )
+    }
+
     render() {
         const baseUrl = this.props.match.url
         const {isLoggedIn} = this.props
-        const {showPopup, index} = this.state
+        const {showPopup, index, items, lastIndex, pageNoList} = this.state
+        const propsToPass = {
+            index,
+            items,
+            lastIndex,
+            pageNoList,
+            setParentState: this.setParentState,
+            setParentStateAsync: this.setParentStateAsync
+        }
         return (
             <div id="contentWrapper">
                 <div id="main_search_list">
@@ -74,11 +86,22 @@ class MyList extends Component {
                             removeRecentList={this.removeRecentList.bind(this)}
                         />
                         <ul className="thumbnail_list">
-                            <Route path={`${baseUrl}/favorite`} component={FavoriteList} index={index}/>
-                            <Route path={`${baseUrl}/recent`} component={RecentList(isLoggedIn)} index={index}/>
+                            <Route path={`${baseUrl}/favorite`} render={() => (
+                                <KosiwonListContainer listType="favorite" {...propsToPass}/>
+                            )}/>
+                            <Route path={`${baseUrl}/recent`} render={() => {
+                                if (isLoggedIn) {
+                                    return (<KosiwonListContainer listType="recent" {...propsToPass}/>)
+                                } else {
+                                    return (<NonmemberRecentContainer {...propsToPass}/>)
+                                }
+                            }}/>
                         </ul>
                         <BodyFooterContainer setIndex={this.setIndex}
-                                             index={index}/>
+                                             index={index}
+                                             lastIndex={lastIndex}
+                                             pageNoList={pageNoList}
+                        />
                     </div>
                 </div>
             </div>
