@@ -8,6 +8,8 @@ import NonmemberRecentContainer from "./KosiwonList/NonmemberRecentContainer";
 import BodyFooterContainer from "./BodyFooter/BodyFooterContainer";
 import BodyHeader from "./BodyHeader/BodyHeader";
 
+const itemsPerPage = 10
+
 class MyList extends Component {
     constructor(props) {
         super(props)
@@ -67,9 +69,10 @@ class MyList extends Component {
         const baseUrl = this.props.match.url
         const {isLoggedIn} = this.props
         const {showPopup, index, items, lastIndex, pageNoList} = this.state
+        const minIndex = (index - 1) * itemsPerPage
         const propsToPass = {
             index,
-            items,
+            items: items.slice(minIndex, minIndex + itemsPerPage),
             lastIndex,
             pageNoList,
             setParentState: this.setParentState,

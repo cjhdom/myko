@@ -88,7 +88,7 @@ class View extends Component {
                     isSeparate
                 }
 
-                const newRecentViewList = [newRecentView, ...recentViewList].slice(0, 10)
+                const newRecentViewList = [newRecentView, ...recentViewList].slice(0, 50)
                 localStorage.setItem('recentViewList', JSON.stringify(newRecentViewList))
             }
         } else {
@@ -109,17 +109,14 @@ class View extends Component {
                 })
 
                 const recentData = await recent.json()
-                if (recentData.totalItems === 0) {
+                const recentDataKosiwon = (recentData.items && recentData.items[0] && recentData.items[0]) || null
+
+                if (recentDataKosiwon) {
                     // 최근본 고시원 추가
-                    await fetch('http://www.kosirock.co.kr/api/myKosiwons', {
+                    await fetch(`http://www.kosirock.co.kr/api/myKosiwons/${recentDataKosiwon.id}`, {
                         method: 'POST',
                         headers: fetchHeader,
-                        body: JSON.stringify({
-                            type: 'V',
-                            kosiwonId: id,
-                            createdBy: userData.id,
-                            updatedBy: userData.id
-                        })
+                        body: JSON.stringify(recentDataKosiwon)
                     })
                 }
 

@@ -4,6 +4,15 @@ import Kosiwon from "./Kosiwon";
 import {routeTo} from "../../../actions";
 import {reverse} from 'lodash'
 
+const makeArray = (length) => {
+    let retArray = []
+    let i = 0
+    while (i < length) {
+        retArray.push(++i)
+    }
+    return retArray
+}
+
 class NonmemberRecentContainer extends Component {
     constructor(props) {
         super(props);
@@ -11,17 +20,17 @@ class NonmemberRecentContainer extends Component {
 
     updateRecent() {
         const recentList = this.getRecentList()
+        const length = recentList.length
         this.props.setParentState({
             items: recentList,
-            lastIndex: recentList.length,
-            pageNoList: recentList.map((item, key) => (key + 1))
+            lastIndex: length,
+            pageNoList: makeArray(Math.ceil(length / 10))
         })
     }
 
     componentDidMount() {
         this.updateRecent()
     }
-
 
     getRecentList() {
         const storageList = localStorage.getItem('recentViewList')
@@ -40,7 +49,7 @@ class NonmemberRecentContainer extends Component {
     render() {
         const {routeTo, items} = this.props
         return (
-            reverse(items).map((view, i) => {
+            items.map((view, i) => {
                 return <Kosiwon
                     index={i}
                     key={view.id}
