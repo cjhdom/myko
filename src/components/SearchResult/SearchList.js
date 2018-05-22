@@ -19,18 +19,19 @@ const SearchList = ({
                         goPage,
                         toggleList,
                         isShowClusterList,
-                        doToggleClusterList
+                        doToggleClusterList,
+                        isShowMap
                     }) => {
     return (
-        <div id="list" style={{boxShadow: getListClass(isShowClusterList), zIndex: 1}}>
-            <p className="all_view">
+        <div id={isShowMap ? 'list' : 'only_list'} style={{boxShadow: getListClass(isShowClusterList), zIndex: 1}}>
+            {isShowMap && <p className="all_view">
                 <a style={cursorStyle} onClick={toggleList}>리스트 전체 보기</a>
-            </p>
-            <p className="close">
+            </p>}
+            {isShowMap && <p className="close">
                 <a style={cursorStyle} onClick={() => doToggleClusterList(!isShowClusterList)}>
                     <img alt="닫기" src={getClusterListImageUri(isShowClusterList)}/>
                 </a>
-            </p>
+            </p>}
             <ul className="thumbnail_list">
                 {clusterList.map(data => {
                     return (

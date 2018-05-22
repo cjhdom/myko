@@ -14,7 +14,7 @@ import MyKosiwonListContainer from "./MyKosiwonList/MyKosiwonListContainer";
 
 class Member extends Component {
     componentWillMount() {
-        document.getElementsByTagName('body')[0].setAttribute('className', 'sub_search_list');
+        document.getElementsByTagName('body')[0].setAttribute('class', 'sub_search_list');
     }
 
     render() {

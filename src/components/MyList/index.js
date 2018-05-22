@@ -25,6 +25,10 @@ class MyList extends Component {
         this.setParentStateAsync = this.setParentStateAsync.bind(this)
     }
 
+    componentWillMount() {
+        document.getElementsByTagName('body')[0].setAttribute('class', 'sub_search_list');
+    }
+
     toggleDeletePopup() {
         this.setState({
             ...this.state,

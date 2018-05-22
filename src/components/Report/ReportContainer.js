@@ -13,6 +13,10 @@ class ReportContainer extends Component {
         }
     }
 
+    componentWillMount() {
+        document.getElementsByTagName('body')[0].setAttribute('class', 'sub_search_list');
+    }
+
     onGoBackClicked() {
         this.props.history.goBack()
     }
@@ -41,26 +45,34 @@ class ReportContainer extends Component {
 
     async onSave() {
         const {id, kosiwonName} = this.props.match.params
-        const {_id} = this.props.userData
+        const {userData} = this.props
         const {question} = this.state
+
+        let body = {
+            type: 'R',
+            status: 'Q',
+            kosiwonName,
+            kosiwonId: id,
+            question
+        }
+
+        if (userData && userData._id) {
+            body = {
+                ...body,
+                createdBy: _id,
+                updatedBy: _id
+            }
+        }
         try {
-            await this.setStateAsync({showPopup: true})
-            /*const questionResult = await fetch('http://www.kosirock.com/api/contacts', {
+            const questionResult = await fetch('http://www.kosirock.co.kr/api/contacts', {
                 method: 'POST',
-                header: fetchHeader,
-                body: JSON.stringify({
-                    type: 'R',
-                    status: 'Q',
-                    kosiwonName,
-                    kosiwonId: id,
-                    createdBy: _id,
-                    updatedBy: _id
-                })
+                headers: fetchHeader,
+                body: JSON.stringify(body)
             })
 
             if (questionResult.ok) {
-                this.togglePopup()
-            }*/
+                await this.setStateAsync({showPopup: true})
+            }
         } catch (e) {
             console.log(e)
         }

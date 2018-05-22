@@ -10,6 +10,7 @@ class SearchResultListContainer extends Component {
         this.doToggleClusterList = this.doToggleClusterList.bind(this)
         this.moveView = this.moveView.bind(this)
         this.goPage = this.goPage.bind(this)
+        this.toggleList = this.toggleList.bind(this)
     }
 
     moveView (id) {
@@ -17,16 +18,24 @@ class SearchResultListContainer extends Component {
     }
 
     doToggleClusterList (isShowClusterList) {
+        console.log(isShowClusterList)
         const {setParentState} = this.props
         setParentState({
             isShowClusterList
         })
     }
 
+    toggleList () {
+        const {setParentState, isShowMap} = this.props
+        setParentState({
+            isShowMap: !isShowMap
+        })
+    }
+
     async goPage (nextPageNo) {
         const {setParentStateAsync, itemList} = this.props
         try {
-            const fetchResult = await fetch('http://www.kosirock.com/api/kosiwons/listByIdListWithPaging', {
+            const fetchResult = await fetch('http://www.kosirock.co.kr/api/kosiwons/listByIdListWithPaging', {
                 method: 'POST',
                 headers: fetchHeader,
                 body: JSON.stringify({
@@ -84,16 +93,21 @@ class SearchResultListContainer extends Component {
             clusterList,
             pageNoList,
             totalPages,
-            pageNo
+            pageNo,
+            isShowClusterList,
+            isShowMap
         } = this.props
         return (
             <SearchList doToggleClusterList={this.doToggleClusterList}
+                        toggleList={this.toggleList}
                         moveView={this.moveView}
                         goPage={this.goPage}
                         clusterList={clusterList}
                         pageNoList={pageNoList}
                         totalPages={totalPages}
                         pageNo={pageNo}
+                        isShowClusterList={isShowClusterList}
+                        isShowMap={isShowMap}
             />
         );
     }

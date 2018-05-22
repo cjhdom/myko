@@ -11,7 +11,8 @@ const SearchMenu = ({
                         roomOptions,
                         handleOnChange,
                         handleOnChangeAll,
-                        handleSelect
+                        handleSelect,
+                        setParentState
                     }) => {
     return (
         <div id="list_filter">
@@ -113,7 +114,7 @@ const SearchMenu = ({
                     </form>
                 </li>
                 <li className="open_list">
-                    <p><a style={{cursor: 'pointer'}} ng-click="static.isShowMap=true">지도로 보기</a></p>
+                    <p><a style={{cursor: 'pointer'}} onClick={() => setParentState({isShowMap: true})}>지도로 보기</a></p>
                 </li>
             </ul>
         </div>

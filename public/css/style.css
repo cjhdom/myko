@@ -134,6 +134,7 @@ body.main #main div.image-swipe-infinite ul.indicator {position: absolute; left:
 body.main #main div.image-swipe-infinite ul.indicator li {display: inline-block; margin: 0 2px;}
 body.main #main div.image-swipe-infinite ul.indicator li a {display: block; width: 10px; height: 10px; border: 3px solid #eeeeee; border-radius: 50%; overflow: hidden; text-indent: -999px; box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.5);}
 body.main #main div.image-swipe-infinite ul.indicator li.on a {border-color: #ff9999; background: #ff9999;}
+body.main #main div.image-swipe-infinite ul.indicator li.slick-active a {border-color: #ff9999; background: #ff9999;}
 body.main #main div.image-swipe-infinite p.control a {opacity: 0.5;}
 body.main #main div.image-swipe-infinite p.control a:hover {opacity: inherit;}
 body.main #main div.image-swipe-infinite p.control a.prev {position: absolute; top: 50%; margin-top: -40px; left: 40px;}
@@ -441,6 +442,7 @@ body.sub_search_list #main_search_list {border-top: 2px solid #ff9999;}
 #sub_detail div.image-swipe ul.indicator li {display: inline-block; margin: 0 2px;}
 #sub_detail div.image-swipe ul.indicator li a {display: block; width: 10px; height: 10px; border: 3px solid #eeeeee; border-radius: 50%; overflow: hidden; text-indent: -999px; box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.5);}
 #sub_detail div.image-swipe ul.indicator li.on a {border-color: #ff9999; background: #ff9999;}
+#sub_detail div.image-swipe ul.indicator li.slick-active a {border-color: #ff9999; background: #ff9999;}
 #sub_detail div.image-swipe p.control a {opacity: 0.5;}
 #sub_detail div.image-swipe p.control a:hover {opacity: inherit;}
 #sub_detail div.image-swipe p.control a.prev {position: absolute; top: 50%; margin-top: -40px; left: 20px;}

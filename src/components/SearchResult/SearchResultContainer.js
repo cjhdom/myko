@@ -98,6 +98,8 @@ class SearchResultContainer extends Component {
     }
 
     componentDidMount() {
+        document.getElementsByTagName('body')[0].setAttribute('class', 'sub_search_list');
+
         $('a[href="#"]').on('click', function (e) {
             e.preventDefault();
         });
@@ -158,7 +160,8 @@ class SearchResultContainer extends Component {
                                     roomOptions={roomOptions}
                                     handleOnChange={this.handleOnChange}
                                     handleOnChangeAll={this.handleOnChangeAll}
-                                    handleSelect={this.handleSelect}/>
+                                    handleSelect={this.handleSelect}
+                                    setParentState={this.setParentState}/>
                         {isShowMap && <SearchResultMapContainer longitude={longitude}
                                                                 latitude={latitude}
                                                                 priceRange={priceRange}
@@ -176,6 +179,7 @@ class SearchResultContainer extends Component {
                                                                          setParentStateAsync={this.setParentStateAsync}
                                                                          isShowClusterList={isShowClusterList}
                                                                          itemList={itemList}
+                                                                         isShowMap={isShowMap}
                         />}
                     </div>
                 </div>
