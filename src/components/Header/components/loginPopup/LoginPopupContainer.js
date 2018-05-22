@@ -4,22 +4,31 @@ import PropTypes from 'prop-types'
 import LoginPopup from './LoginPopup';
 
 import {getIsLoggedIn} from "../../../../reducers/user";
-import {isLoginPopup} from "../../../../reducers/ui";
-import {toggleLoginPopup} from "../../../../actions"
+import {getWonjangLoginPopup, isLoginPopup} from "../../../../reducers/ui";
+import {toggleLoginPopup, toggleWonjangPopup} from "../../../../actions"
+import WonjangLoginPopup from "./WonjangLoginPopup";
 
 class LoginPopupContainer extends Component {
     render() {
         const {
             isLoggedIn,
             loginPopup,
-            toggleLoginPopup
+            toggleLoginPopup,
+            toggleWonjangPopup,
+            wonjangLoginPopup
         } = this.props
-        if (isLoggedIn || !loginPopup) {
+        if (isLoggedIn || (!loginPopup && !wonjangLoginPopup)) {
             return null
         } else {
-            return (
-                <LoginPopup toggleLoginPopup={toggleLoginPopup}/>
-            )
+            if (wonjangLoginPopup) {
+                return (
+                    <WonjangLoginPopup toggleWonjangPopup={toggleWonjangPopup} />
+                )
+            } else {
+                return (
+                    <LoginPopup toggleLoginPopup={toggleLoginPopup}/>
+                )
+            }
         }
     }
 };
@@ -33,9 +42,11 @@ LoginPopupContainer.propTypes = {
 export default connect(
     state => ({
         isLoggedIn: getIsLoggedIn(state.user),
+        wonjangLoginPopup: getWonjangLoginPopup(state.ui),
         loginPopup: isLoginPopup(state.ui)
     }),
     {
-        toggleLoginPopup
+        toggleLoginPopup,
+        toggleWonjangPopup
     }
 )(LoginPopupContainer)

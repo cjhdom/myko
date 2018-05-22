@@ -51,7 +51,7 @@ const Menu = ({
                 </li>
                 <li>
                     <Link target="blank"
-                       to={kosiwonUrl}>홈페이지</Link>
+                       to={kosiwonUrl || '#'}>홈페이지</Link>
                 </li>
                 <li>
                     <Link to={`/report/${id}/${encodeURI(kosiwonName)}`}>신고하기</Link>

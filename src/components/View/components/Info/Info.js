@@ -37,7 +37,7 @@ const Info = ({
                 <dd>{isWoman ? '여성전용' : '혼용'}</dd>
                 <hr/>
                 <dt>냉난방 종류</dt>
-                <dd>{isPublic ? '중앙냉난방?' : '중앙냉난방'}</dd>
+                <dd>{isPublic ? '중앙냉난방' : '중앙냉난방'}</dd>
                 <hr/>
             </dl>
         </div>

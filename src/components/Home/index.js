@@ -17,8 +17,8 @@ class Home extends Component {
                 <SearchContainer/>
                 <MasterContainer/>
                 <DiaContainer/>
-                <RecentContainer/>
-                <FavoriteContainer/>
+                {/*<RecentContainer/>*/}
+                {/*<FavoriteContainer/>*/}
             </div>
         );
     }

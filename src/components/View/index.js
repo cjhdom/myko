@@ -109,14 +109,27 @@ class View extends Component {
                 })
 
                 const recentData = await recent.json()
-                const recentDataKosiwon = (recentData.items && recentData.items[0] && recentData.items[0]) || null
+                const recentDataKosiwon = (recentData.items && recentData.items[0] && recentData.items[0])
 
-                if (recentDataKosiwon) {
-                    // 최근본 고시원 추가
+                if (recentData.totalItems > 0) {
                     await fetch(`http://www.kosirock.co.kr/api/myKosiwons/${recentDataKosiwon.id}`, {
+                        method: 'PUT',
+                        headers: fetchHeader,
+                        body: JSON.stringify({
+                            ...recentDataKosiwon,
+                            updated: new Date()
+                        })
+                    })
+                } else {
+                    await fetch('http://www.kosirock.co.kr/api/myKosiwons', {
                         method: 'POST',
                         headers: fetchHeader,
-                        body: JSON.stringify(recentDataKosiwon)
+                        body: JSON.stringify({
+                            type: 'V',
+                            kosiwonId: id,
+                            createdBy: userData._id,
+                            updatedBy: userData._id
+                        })
                     })
                 }
 
@@ -163,7 +176,8 @@ class View extends Component {
             if (isFavorite) {
                 const result = await fetch(`http://www.kosirock.co.kr/api/myKosiwons/${favoriteData._id}`, {
                     method: 'DELETE',
-                    headers: fetchHeader
+                    headers: fetchHeader,
+                    body: JSON.stringify(favoriteData)
                 })
 
                 if (result.ok) {

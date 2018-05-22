@@ -8,6 +8,8 @@ export const isLoginPopup = ui => ui.loginPopup
 
 export const isDeletePopup = ui => ui.deletePopup
 
+export const getWonjangLoginPopup = ui => ui.wonjangLoginPopup
+
 const defaultState = {
     loginPopup: false,
     wonjangLoginPopup: false,
@@ -24,7 +26,7 @@ const ui = (state = defaultState, action) => {
         case TOGGLE_WONJANG_LOGIN_POPUP:
             return {
                 ...state,
-                loginPopup: !state.loginPopup
+                wonjangLoginPopup: !state.wonjangLoginPopup,
             }
         case TOGGLE_DELETE_POPUP:
             return {

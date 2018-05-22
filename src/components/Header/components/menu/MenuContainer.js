@@ -11,6 +11,7 @@ class MenuContainer extends Component {
         const {id} = e.target
         const {isLoggedIn, toggleLoginPopup, toggleWonjangPopup, isWonjang} = this.props
         const {history} = this.props
+        console.log(id)
         if (id === 'recent') {
             history.push('/list/recent')
         } else if (id === 'favorite') {
@@ -22,6 +23,9 @@ class MenuContainer extends Component {
         } else if (id === 'upload') {
             if (isWonjang) {
                 history.push('/members/upload/-1')
+            } else {
+                console.log('hi')
+                return toggleWonjangPopup()
             }
         }
     }

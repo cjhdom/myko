@@ -465,5 +465,6 @@ export const logout = () => dispatch => {
 }
 
 export const routeTo = (url) => dispatch => {
+    console.log(url)
     dispatch(push(url))
 }

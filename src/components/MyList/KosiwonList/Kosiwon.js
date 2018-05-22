@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 const Kosiwon = ({kosiwon, routeTo, removeRecent, index}) => {
     const {
@@ -15,7 +16,7 @@ const Kosiwon = ({kosiwon, routeTo, removeRecent, index}) => {
     } = kosiwon
     return (
         <li>
-            <a onClick={() => routeTo(`/view/${id}`)}>
+            <Link to={`/view/${id}`}>
                 <div className="thumbnail_img">
                     {thumbnailUri && <img alt="" src={thumbnailUri}/>}
                 </div>
@@ -30,7 +31,7 @@ const Kosiwon = ({kosiwon, routeTo, removeRecent, index}) => {
                         <li className={isRestRoom ? 'on' : ''}>개별 화장실</li>
                     </ul>
                 </div>
-            </a>
+            </Link>
             <a className="delete_list" onClick={() => removeRecent(id, index)}>
                 <img alt="삭제" src="www/img/exit_gray.png"/>
             </a>

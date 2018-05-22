@@ -6,6 +6,15 @@ import {getIsLoggedIn, getUserData} from "../../../reducers/user";
 import {routeTo} from "../../../actions";
 import Kosiwon from "./Kosiwon";
 
+const makeArray = (length) => {
+    let retArray = []
+    let i = 0
+    while (i < length) {
+        retArray.push(++i)
+    }
+    return retArray
+}
+
 class KosiwonListContainer extends Component {
     constructor(props) {
         super(props)
@@ -46,7 +55,7 @@ class KosiwonListContainer extends Component {
             orOption: [],
             sortOption: '-created',
             pageNo: 1,
-            pageSize: 10000
+            pageSize: 10
         }
 
         try {
@@ -66,7 +75,7 @@ class KosiwonListContainer extends Component {
             await setParentStateAsync({
                 items: data ? data.items.map(a => a.kosiwonId) : [],
                 lastIndex: data.items.length,
-                pageNoList: data.items.map((item, key) => (key + 1))
+                pageNoList: makeArray(Math.ceil(data.totalItems / 10))
             })
         } catch (e) {
             console.log(`error! ${e}`)
