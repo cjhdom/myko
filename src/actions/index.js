@@ -376,9 +376,16 @@ export const uploadKosiwon = (isParking, isMeal, isWoman, isSeparate, isRestRoom
                               optionCloset, optionFan, optionAircon, optionRefrigerator, kosiwonName, kosiwonPhoneNo,
                               kosiwonZipcode, majorAddress, minorAddress, floor, priceMin, priceMax, intro, description,
                               userId, kosiwonId, files) => async (dispatch) => {
+    const id = kosiwonId === '-1' ? null : kosiwonId
+    let url ='http://www.kosirock.co.kr/api/kosiwons'
+
+    if (id) {
+        url = url + `/${id}`
+    }
+    
     try {
-        const uploadResult = await fetch(`http://www.kosirock.co.kr/api/kosiwons/${kosiwonId}`, {
-            method: kosiwonId ? 'PUT' : 'POST',
+        const uploadResult = await fetch(url, {
+            method: id ? 'PUT' : 'POST',
             headers: fetchHeader,
             body: JSON.stringify({
                 isParking,
@@ -404,7 +411,7 @@ export const uploadKosiwon = (isParking, isMeal, isWoman, isSeparate, isRestRoom
                 intro,
                 description,
                 nanbangType: 'C',
-                uploadedBy: userId,
+                updatedBy: userId,
                 createdBy: userId,
                 location: [0, 0]
             })
@@ -448,7 +455,11 @@ export const uploadKosiwon = (isParking, isMeal, isWoman, isSeparate, isRestRoom
                 })
             }
 
-            alert('수정 되었습니다')
+            if (id) {
+                alert('수정 되었습니다')
+            } else {
+                alert('업로드 되었습니다')
+            }
             dispatch(routeTo(`/members/uploadcompleted/${_id}`))
         }
     } catch (e) {

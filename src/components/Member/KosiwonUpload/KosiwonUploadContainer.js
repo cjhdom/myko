@@ -13,7 +13,19 @@ class KosiwonUploadContainer extends Component {
             isShowPopup: false,
             isUpdate: false,
             tempList: [],
-            removeList: []
+            removeList: [],
+            isParking: false,
+            isMeal: false,
+            isWoman: false,
+            isSeparate: false,
+            isRestRoom: false,
+            isElevator: false,
+            optionDesk: false,
+            optionBed: false,
+            optionCloset: false,
+            optionFan: false,
+            optionAircon: false,
+            optionRefrigerator: false
         }
         this.togglePopup = this.togglePopup.bind(this)
     }
@@ -81,7 +93,7 @@ class KosiwonUploadContainer extends Component {
         }, () => {
             if (files && files[0]) {
                 Array.from(files).forEach(file => {
-                    if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+                    if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
                         let reader = new FileReader()
                         reader.onload = () => {
                             this.setState({
@@ -202,7 +214,7 @@ class KosiwonUploadContainer extends Component {
         const isEdit = this.props.match.params.id !== '-1'
         return (
             <div>
-                <img src="" id="test" />
+                <img src="" id="test"/>
                 <KosiwonUpload onChanged={this.onChanged.bind(this)}
                                onToggle={this.onToggle.bind(this)}
                                togglePopup={this.togglePopup}

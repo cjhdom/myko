@@ -75,7 +75,27 @@ class SearchResultMapContainer extends Component {
 
         this.showDoGroup()
         this.map.setLevel(initMapCityLevel - 3)
+
+        window.doClickCityOverlay = (index) => {
+            this.map.setLevel(initMapCityLevel - 3);
+            this.map.setCenter(customCityList[index].position);
+            this.map.panTo(customCityList[index].position);
+            this.props.setParentState({
+                isShowClusterList: false
+            });
+        }
+
+        window.doClickDoOverlay = (index) => {
+            this.map.setLevel(initMapCityLevel);
+            this.map.setCenter(customDoList[index].position);
+            this.map.panTo(customDoList[index].position);
+        }
     }
+
+    componentWillUnmount() {
+        window.map = undefined
+    }
+
 
     clearCityGroup() {
         customCityList.forEach(function (customOverlay) {
