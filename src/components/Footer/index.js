@@ -9,8 +9,8 @@ const Footer = () => {
                 <span>kosirock.winni@gmail.com</span>
             </address>
             <p>Copyright 2015. Winni all right reverved.</p>
-            <a href="https://www.facebook.com/kosirock.winni" target="_blank"><img alt="facebook" src="/img/facebook.png" /></a>
-            <a href="http://play.google.com/store/apps/details?id=kosirock2.winni.com" target="_blank"><img alt="playstore" src="/img/playstore.png" /></a>
+            <a href="https://www.facebook.com/kosirock.winni" target="_blank"><img alt="facebook" src="/www/img/facebook.png" /></a>
+            <a href="http://play.google.com/store/apps/details?id=kosirock2.winni.com" target="_blank"><img alt="playstore" src="/www/img/playstore.png" /></a>
         </div>
     );
 };

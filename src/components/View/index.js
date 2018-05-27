@@ -306,5 +306,8 @@ export default connect(
         toggleLoginPopup: toggleLoginPopup,
         userData: getUserData(state.user),
         isWonjang: getIsWonjang(state.user)
-    })
+    }),
+    {
+        toggleLoginPopup
+    }
 )(View)

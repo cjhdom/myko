@@ -4,7 +4,7 @@ import ImageView from "./ImageView";
 const NextButton = ({onClick}) => {
     return (
         <p className="control">
-            <a className="next" onClick={onClick} style={{zIndex: 1}}><img alt="다음 이미지" src="/img/btn_right.png"/></a>
+            <a className="next" onClick={onClick} style={{zIndex: 1}}><img alt="다음 이미지" src="/www/img/btn_right.png"/></a>
         </p>
     )
 }
@@ -12,7 +12,7 @@ const NextButton = ({onClick}) => {
 const PrevButton = ({onClick}) => {
     return (
         <p className="control">
-            <a className="prev" onClick={onClick} style={{zIndex: 1}}><img alt="이전 이미지" src="/img/btn_left.png"/></a>
+            <a className="prev" onClick={onClick} style={{zIndex: 1}}><img alt="이전 이미지" src="/www/img/btn_left.png"/></a>
         </p>
     )
 }

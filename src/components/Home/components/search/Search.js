@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
 import $ from 'jquery'
+import {Link} from "react-router-dom";
 
 class Search extends Component {
     constructor() {
@@ -91,8 +92,7 @@ class Search extends Component {
                     />
                 </fieldset>
                 <div className="huesik">
-                    <a ng-click="moveView('5a24fc784d07bbff4160aff7', '휴식 사가정 본점')" target="_blank">
-                    </a>
+                    <Link to={'/view/5a24fc784d07bbff4160aff7'} target='_blank' />
                 </div>
             </form>
         )

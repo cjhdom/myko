@@ -29,7 +29,8 @@ class MasterContainer extends Component {
             slidesToScroll: 1,
             prevArrow: <PrevButton/>,
             nextArrow: <NextButton/>,
-            lazyLoad: true
+            lazyLoad: true,
+            adaptiveHeight: true
         };
 
         return (

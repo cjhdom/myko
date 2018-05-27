@@ -40,7 +40,7 @@ const Menu = ({
                         <ul>
                             <li><h2>문의전화</h2></li>
                             <li><a onClick={togglePhonePopup}>
-                                <img alt="exit" src="/img/exit_gray.png"/>
+                                <img alt="exit" src="/www/img/exit_gray.png"/>
                             </a>
                             </li>
                             <div ng-click="gaCheck(model.kosiwonName)">{kosiwonVirtualNo || kosiwonPhoneNo}</div>

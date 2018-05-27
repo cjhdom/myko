@@ -19,7 +19,7 @@ class Header extends Component {
         const showSearch = pathname !== '/'
         return (
             <div id="header">
-                <h1><a style={cursorStyle} onClick={this.goHome.bind(this)}><img alt="kosirock" src="/img/Logo.png"/></a></h1>
+                <h1><a style={cursorStyle} onClick={this.goHome.bind(this)}><img alt="kosirock" src="/www/img/Logo.png"/></a></h1>
                 {showSearch && <SearchContainer/>}
                 <LoginContainer />
                 <MenuContainer/>

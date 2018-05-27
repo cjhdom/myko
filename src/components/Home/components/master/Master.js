@@ -1,5 +1,6 @@
 import React from 'react'
 import Slider from 'react-slick';
+import {Link} from "react-router-dom";
 
 const Master = ({settings, masterList, moveView}) => {
     return (<div className="master">
@@ -12,7 +13,7 @@ const Master = ({settings, masterList, moveView}) => {
                             <ul>
                                 {masterPage.map((master, i) => {
                                     return (<li key={i}>
-                                        <a onClick={() => moveView(master.id, master.fullName)}>
+                                        <Link to={`/view/${master.id}`} target='_blank'>
                                             <div className="thumbnail_top">
                                                 <img alt="고시원 사진" src={master.imgPath}/>
                                             </div>
@@ -23,7 +24,7 @@ const Master = ({settings, masterList, moveView}) => {
                                                 )}</p>
                                                 <p>{master.desc}</p>
                                             </div>
-                                        </a>
+                                        </Link>
                                     </li>)
                                 })}
                             </ul>

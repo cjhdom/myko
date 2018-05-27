@@ -14,7 +14,7 @@ const Dia = ({settings, diaList}) => {
                             <ul>
                                 {diaPage.map((dia, i) => {
                                     return (<li key={i}>
-                                        <Link to={`/View/${dia.id}`}>
+                                        <Link to={`/View/${dia.id}`} target='_blank'>
                                             <div className="thumbnail_top">
                                                 <img alt="고시원 사진" src={dia.imgPath}/>
                                             </div>

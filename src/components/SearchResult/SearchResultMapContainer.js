@@ -199,7 +199,7 @@ class SearchResultMapContainer extends Component {
         } else {
             this.clusterer.removeMarkers(this.markers);
         }
-        var imageSrc = '/img/marker.png'; // 마커이미지의 주소입니다
+        var imageSrc = '/www/img/marker.png'; // 마커이미지의 주소입니다
         var imageSize = new daum.maps.Size(30, 30), // 마커이미지의 크기입니다
             imageOption = {offset: new daum.maps.Point(0, 0)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
         var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
