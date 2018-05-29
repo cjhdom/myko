@@ -35,7 +35,7 @@ class ContactContainer extends Component {
     }
 
     doMoveKosiwonContact() {
-
+        // if not logged in show wonjang login popup
     }
 
     render() {
