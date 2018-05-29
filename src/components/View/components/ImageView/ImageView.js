@@ -7,24 +7,21 @@ const ImageView = ({settings, imageList}) => {
     return (
         <div className="image-swipe">
             <div className="box">
-
-                {/*<ul className="image">*/}
-                    <Slider {...settings}>
-                        {imageList.map((image, i) => {
-                            return (
-                                <div key={i}>
-                                    <img src={`http://www.kosirock.co.kr/${image.imageUri}`} style={{
-                                        width: '720px',
-                                        height: '480px'
-                                    }}/>
-                                </div>
-                            )
-                        })}
-                    </Slider>
-                {/*</ul>*/}
-                {/*<ul className="indicator">
-                    <li className=""/>
-                </ul>*/}
+                <Slider {...settings}>
+                    {imageList.map((image, i) => {
+                        return (
+                            <div key={i}>
+                                <img src={`http://www.kosirock.co.kr${image.imageUri}`} style={{
+                                    height: '480px',
+                                    textAlign: 'center',
+                                    display: 'block',
+                                    marginLeft: 'auto',
+                                    marginRight: 'auto'
+                                }}/>
+                            </div>
+                        )
+                    })}
+                </Slider>
             </div>
         </div>
     )

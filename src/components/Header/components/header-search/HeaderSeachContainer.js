@@ -12,6 +12,9 @@ class HeaderSearchContainer extends Component {
     }
 
     handleSelect(address) {
+        if (!address && !this.state.address) {
+            this.props.history.push('/search?latitude=37.55375859999999&longitude=126.98096959999998')
+        }
         geocodeByAddress(address || this.state.address)
             .then(results => getLatLng(results[0]))
             .then(latLng => this.props.history.push(`/search?latitude=${latLng.lat}&longitude=${latLng.lng}`))

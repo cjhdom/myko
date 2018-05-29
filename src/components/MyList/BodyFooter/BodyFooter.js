@@ -13,7 +13,7 @@ const BodyFooter = ({setIndex, index, lastIndex, pageNoList}) => {
                     </li>
                 )
             })}
-            <li><a className={`next${index < lastIndex ? 'on' : ''}`}
+            <li><a className={`next${index < lastIndex ? ' on' : ''}`}
                    onClick={() => setIndex(index + 1)}>다음</a></li>
         </ul>
     )
