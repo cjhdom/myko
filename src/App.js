@@ -13,6 +13,7 @@ import ContactContainer from "./components/Contact/ContactContainer";
 import MyList from "./components/MyList/index";
 import ReportContainer from "./components/Report/ReportContainer";
 import SearchResultContainer from "./components/SearchResult/SearchResultContainer";
+import QuestionContainer from "./components/Question/QuestionContainer";
 
 class App extends Component {
     render() {
@@ -31,6 +32,7 @@ class App extends Component {
                             <Route path="/list" component={MyList}/>
                             <Route path="/report/:id/:kosiwonName" component={ReportContainer}/>
                             <Route path="/search" component={SearchResultContainer}/>
+                            <Route path="/question/:type" component={QuestionContainer}/>
                         </Switch>
                         <Footer/>
                     </div>

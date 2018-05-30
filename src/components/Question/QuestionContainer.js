@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux'
-import Report from './Report'
+import Question from './Question'
 import {fetchHeader} from "../../data/consts";
-import {getUserData} from "../../reducers/user";
 
-class ReportContainer extends Component {
+class QuestionContainer extends Component {
     constructor(props) {
         super(props);
+        const {type} = this.props.match.params || 'E'
         this.state = {
             showPopup: false,
-            question: ''
+            question: '',
+            type
         }
     }
 
@@ -18,7 +18,7 @@ class ReportContainer extends Component {
     }
 
     onGoBackClicked() {
-        this.props.history.goBack()
+        this.props.history.push('/contact')
     }
 
     onChange(e) {
@@ -37,29 +37,18 @@ class ReportContainer extends Component {
     }
 
     async onSave() {
-        const {id, kosiwonName} = this.props.match.params
-        const {userData} = this.props
-        const {question} = this.state
+        const {question, type} = this.state
 
         if (question.length === 0) {
             return alert('문의내용을 입력하지 않았습니다')
         }
 
         let body = {
-            type: 'R',
+            type,
             status: 'Q',
-            kosiwonName,
-            kosiwonId: id,
             question
         }
 
-        if (userData && userData._id) {
-            body = {
-                ...body,
-                createdBy: _id,
-                updatedBy: _id
-            }
-        }
         try {
             const questionResult = await fetch('http://www.kosirock.co.kr/api/contacts', {
                 method: 'POST',
@@ -71,16 +60,12 @@ class ReportContainer extends Component {
                 await this.setStateAsync({showPopup: true})
             }
         } catch (e) {
-            console.log(e)
         }
     }
 
     render() {
-        const {id, kosiwonName} = this.props.match.params
         return (
-            <Report id={id}
-                    kosiwonName={decodeURI(kosiwonName)}
-                    onGoBackClicked={this.onGoBackClicked.bind(this)}
+            <Question onGoBackClicked={this.onGoBackClicked.bind(this)}
                     onChange={this.onChange.bind(this)}
                     onSave={this.onSave.bind(this)}
                     {...this.state}
@@ -89,8 +74,4 @@ class ReportContainer extends Component {
     }
 }
 
-export default connect(
-    state => ({
-        userData: getUserData(state.user)
-    })
-)(ReportContainer);
+export default QuestionContainer;

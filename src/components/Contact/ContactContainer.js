@@ -1,10 +1,12 @@
-import React, {Component, ReactDOM} from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import $ from 'jquery'
+import {getIsLoggedIn, getIsWonjang, getUserData} from "../../reducers/user";
+import {toggleWonjangPopup} from "../../actions";
 
 const cursor = {cursor: 'pointer'}
 
 class ContactContainer extends Component {
-
     componentDidMount() {
         $('body.forsupplier ul#info li#info_1 a').on('click', function () {
             $('body.forsupplier div.popup').css({'display': 'block'});
@@ -34,8 +36,14 @@ class ContactContainer extends Component {
         window.scrollTo(0, 0)
     }
 
-    doMoveKosiwonContact() {
-        // if not logged in show wonjang login popup
+    doMoveKosiwonContact(type) {
+        const {userData, toggleWonjangPopup, isLoggedIn, isWonjang} = this.props
+
+        if (!userData || !isLoggedIn || !isWonjang) {
+            return toggleWonjangPopup()
+        } else {
+            this.props.history.push(`/question/${type}`)
+        }
     }
 
     render() {
@@ -45,7 +53,7 @@ class ContactContainer extends Component {
                     <li id="info_1" ref="info_1">
                         <h2>스마트폰도 PC도 이제 모두 고시락!</h2>
                         <h3>고시락 무료 등록으로 고시원 홍보 한방에 해결하세요.</h3>
-                        <a style={cursor} style={cursor} onClick={() => () => this.doMoveKosiwonContact('A')}>고시락 무료
+                        <a style={cursor} onClick={() => this.doMoveKosiwonContact('A')}>고시락 무료
                             등록</a><br/>
                         <img className="weare" alt="" src="/www/img/contact00.jpg"/><br/>
                         <img alt="" src="/www/img/contact01.jpg"/>
@@ -111,19 +119,18 @@ class ContactContainer extends Component {
                     </li>
                 </ul>
                 <a style={cursor} className="top ng-scope" onClick={() => this.scrollTop(top)}>TOP</a>
-                {/*<div className="popup ng-scope">
-                    <p>
-                        원장님이신가요?
-                        <br/>
-                        고시원 원장 전용 로그인 후 이용이 가능합니다.
-                        <a href="sub_login.html" className="login">로그인 페이지로</a>
-                        <a href="#" className="cancel">취소</a>
-                    </p>
-                    <div className="cancel"/>
-                </div>*/}
             </div>
         );
     }
 }
 
-export default ContactContainer;
+export default connect(
+    state => ({
+        userData: getUserData(state.user),
+        isLoggedIn: getIsLoggedIn(state.user),
+        isWonjang: getIsWonjang(state.user)
+    }),
+    {
+        toggleWonjangPopup
+    }
+)(ContactContainer);
