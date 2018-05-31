@@ -239,7 +239,8 @@ class View extends Component {
                 imageList,
                 priceMax,
                 priceMin,
-                floor
+                floor,
+                nanbangType
             } = this.state.data
             return (
                 <div className="contentWrapper">
@@ -274,7 +275,7 @@ class View extends Component {
                                 isElevator={isElevator}
                                 isMeal={isMeal}
                                 isParking={isParking}
-                                isPublic={isPublic}
+                                nanbangType={nanbangType}
                                 isRestRoom={isRestRoom}
                                 isSeparate={isSeparate}
                                 isWoman={isWoman}/>

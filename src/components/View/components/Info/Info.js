@@ -5,7 +5,7 @@ const Info = ({
                   isElevator,
                   isMeal,
                   isParking,
-                  isPublic,
+                  nanbangType,
                   isRestRoom,
                   isSeparate,
                   isWoman
@@ -22,13 +22,13 @@ const Info = ({
                 <dd>{isElevator ? '있음' : '없음'}</dd>
                 <hr/>
                 <dt>남/여 층</dt>
-                <dd>{isSeparate ? '분리' : '분리안'}</dd>
+                <dd>{isSeparate ? '분리' : '분리안됨'}</dd>
                 <hr/>
                 <dt>주차</dt>
                 <dd>{isParking ? '가능' : '불가'}</dd>
                 <hr/>
                 <dt>식사</dt>
-                <dd>{isMeal ? '제공' : '제공안'}</dd>
+                <dd>{isMeal ? '제공' : '제공안함'}</dd>
                 <hr/>
                 <dt>화장실</dt>
                 <dd>{isRestRoom ? '개별' : '공용'}</dd>
@@ -37,7 +37,7 @@ const Info = ({
                 <dd>{isWoman ? '여성전용' : '혼용'}</dd>
                 <hr/>
                 <dt>냉난방 종류</dt>
-                <dd>{isPublic ? '중앙냉난방' : '중앙냉난방'}</dd>
+                <dd>{nanbangType === 'C' ? '중앙냉난방' : '개별냉방'}</dd>
                 <hr/>
             </dl>
         </div>
