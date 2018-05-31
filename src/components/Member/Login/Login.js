@@ -19,7 +19,7 @@ const Login = ({handleChange, onLoginClicked, handleKeyPress, facebookResponse, 
                        ng-model="vars.isChecked"/>
                 <label ng-click="vars.isChecked = !vars.isChecked">로그인 정보 저장</label>
             </form>
-            <a ng-click="go('/members/find-password')">비밀번호 찾기</a>
+            <Link to={'/members/findpassword'}>비밀번호 찾기</Link>
             <p className="messenger">
                 <FacebookLogin appId="1791787454442544"
                                autoLoad={true}

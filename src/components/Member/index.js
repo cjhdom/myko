@@ -11,6 +11,7 @@ import UnregisterContainer from "./Unregister/UnregisterContainer";
 import KosiwonUploadContainer from "./KosiwonUpload/KosiwonUploadContainer";
 import KosiwonUploadCompleteContainer from "./KosiwonUploadComplete/KosiwonUploadCompleteContainer";
 import MyKosiwonListContainer from "./MyKosiwonList/MyKosiwonListContainer";
+import FindPasswordContainer from "./FindPassword/FindPasswordContainer";
 
 class Member extends Component {
     componentWillMount() {
@@ -33,6 +34,7 @@ class Member extends Component {
                     <Route path={`${baseUrl}/upload/:id`} component={KosiwonUploadContainer}/>
                     <Route path={`${baseUrl}/uploadcompleted/:id`} component={KosiwonUploadCompleteContainer}/>
                     <Route path={`${baseUrl}/my-kosiwon-list`} component={MyKosiwonListContainer}/>
+                    <Route path={`${baseUrl}/findpassword`} component={FindPasswordContainer}/>
                 </div>
             </div>
         );
