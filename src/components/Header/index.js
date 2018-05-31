@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom'
 import SearchContainer from './components/header-search/HeaderSeachContainer';
 import LoginContainer from './components/login/LoginContainer';
 import LoginPopupContainer from "./components/loginPopup/LoginPopupContainer";
-import MenuContainer from "./components/Menu/MenuContainer";
+import MenuContainer from "./components/menu/MenuContainer";
 
 const cursorStyle = {cursor: 'pointer'};
 const displayNoneStyle = {display: 'none'};

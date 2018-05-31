@@ -101,9 +101,4 @@ const realConf = {
     ]
 };
 
-console.log(process.env.NODE_ENV);
-console.log(typeof process.env.NODE_ENV);
-console.log('production');
-console.log(process.env.NODE_ENV === 'production');
-
 module.exports = process.env.NODE_ENV === 'production' ? realConf : devConf;
