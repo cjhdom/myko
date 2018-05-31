@@ -33,7 +33,7 @@ const Kosiwon = ({kosiwon, routeTo, removeRecent, index}) => {
                 </div>
             </Link>
             <a className="delete_list" onClick={() => removeRecent(id, index)}>
-                <img alt="삭제" src="www/img/exit_gray.png"/>
+                <img alt="삭제" src="/www/img/exit_gray.png"/>
             </a>
         </li>
     );
