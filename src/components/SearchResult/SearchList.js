@@ -8,7 +8,7 @@ const cursorStyle = {
 
 const getListClass = isShowClusterList => isShowClusterList ? '-2px 2px 2px 0 rgba(0,0,0,0.3)' : 'none'
 // const getWidth = isShowClusterList => isShowClusterList ? window.width : window.width - 540
-const getClusterListImageUri = isShowClusterList => isShowClusterList ? 'img/exit.png' : 'img/plus.png'
+const getClusterListImageUri = isShowClusterList => isShowClusterList ? '/www/img/exit.png' : '/www/img/plus.png'
 
 const SearchList = ({
                         clusterList,
