@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 
-module.exports = {
+const devConf = {
     entry: [
         'whatwg-fetch',
         'babel-polyfill',
@@ -55,3 +55,55 @@ module.exports = {
         })
     ]
 };
+
+const realConf = {
+    entry: [
+        'whatwg-fetch',
+        'babel-polyfill',
+        './src/index.js'
+    ],
+
+    output: {
+        path: __dirname + '/public/www/',
+        filename: 'bundle.js'
+    },
+
+    externals: [
+        {
+            "daum": "daum"
+        }
+    ],
+
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|css|font|img)/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
+            {
+                test: /.(png|jpg)$/,
+                loader: 'url-loader?limit=8192'
+            }
+        ]
+    },
+
+    plugins: [
+        new webpack.NamedModulesPlugin(),
+        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+            }
+        })
+    ]
+};
+
+console.log(process.env.NODE_ENV);
+console.log(typeof process.env.NODE_ENV);
+console.log('production');
+console.log(process.env.NODE_ENV === 'production');
+
+module.exports = process.env.NODE_ENV === 'production' ? realConf : devConf;
