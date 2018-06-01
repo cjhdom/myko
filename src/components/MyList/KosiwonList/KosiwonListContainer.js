@@ -73,7 +73,7 @@ class KosiwonListContainer extends Component {
             const data = await result.json()
 
             await setParentStateAsync({
-                items: data ? data.items.map(a => a.kosiwonId) : [],
+                items: data ? data.items : [],
                 lastIndex: data.items.length,
                 pageNoList: makeArray(Math.ceil(data.totalItems / 10))
             })
@@ -89,11 +89,12 @@ class KosiwonListContainer extends Component {
     render() {
         const {routeTo, items} = this.props
         return (
-            items.map((view, i) => {
+            items.map(({_id, kosiwonId}, i) => {
                 return <Kosiwon
+                    id={_id}
                     index={i}
-                    key={view.id}
-                    kosiwon={view}
+                    key={_id}
+                    kosiwon={kosiwonId}
                     routeTo={routeTo}
                     removeRecent={this.removeRecentAsync.bind(this)}
                 />

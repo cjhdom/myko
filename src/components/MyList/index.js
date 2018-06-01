@@ -9,17 +9,18 @@ import BodyFooterContainer from "./BodyFooter/BodyFooterContainer";
 import BodyHeader from "./BodyHeader/BodyHeader";
 
 const itemsPerPage = 10
+const defaultState = {
+    showPopup: false,
+    index: 1,
+    items: [],
+    lastIndex: 1,
+    pageNoList: []
+}
 
 class MyList extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            showPopup: false,
-            index: 1,
-            items: [],
-            lastIndex: 1,
-            pageNoList: []
-        }
+        this.state = defaultState
         this.setIndex = this.setIndex.bind(this)
         this.setParentState = this.setParentState.bind(this)
         this.setParentStateAsync = this.setParentStateAsync.bind(this)
@@ -36,17 +37,30 @@ class MyList extends Component {
         })
     }
 
-    removeRecentList() {
+    async removeRecentList() {
         const {isLoggedIn} = this.props
+        const {items} = this.state
         if (isLoggedIn) {
-
+            // todo
+            try {
+                await fetch('http://www.kosirock.co.kr/api/myKosiwons/deleteMulti', {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Pragma': 'no-cache',
+                        'Cache-Control': 'no-cache'
+                    }),
+                    body: JSON.stringify(items.map(_ => _._id))
+                })
+                this.setParentStateAsync(defaultState)
+            } catch (e) {
+                console.log(`error ${e}`)
+            }
         } else {
             localStorage.removeItem('recentViewList')
+            this.setParentStateAsync(defaultState)
         }
-        this.setState({
-            ...this.state,
-            showPopup: false
-        })
     }
 
     setIndex(index) {

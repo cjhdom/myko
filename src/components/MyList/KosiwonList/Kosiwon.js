@@ -1,9 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 
-const Kosiwon = ({kosiwon, routeTo, removeRecent, index}) => {
+const Kosiwon = ({
+                     id,
+                     index,
+                     kosiwon,
+                     routeTo,
+                     removeRecent
+                 }) => {
     const {
-        id,
         kosiwonName,
         priceMax,
         priceMin,
@@ -16,7 +21,7 @@ const Kosiwon = ({kosiwon, routeTo, removeRecent, index}) => {
     } = kosiwon
     return (
         <li>
-            <Link to={`/view/${id}`}>
+            <Link to={`/view/${kosiwon.id}`}>
                 <div className="thumbnail_img">
                     {thumbnailUri && <img alt="" src={thumbnailUri}/>}
                 </div>

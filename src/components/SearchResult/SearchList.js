@@ -43,7 +43,7 @@ const SearchList = ({
                                 </div>
                                 <div className="thumbnail_info">
                                     <p>{data.kosiwonName}</p>
-                                    <p>입실료 {data.priceMin} {data.priceMax}만원</p>
+                                    <p>입실료 {data.priceMin}~{data.priceMax}만원</p>
                                     <p className="info">{data.intro}</p>
                                     <ul>
                                         <li className={data.isParking ? 'on' : ''}>주차가능</li>
