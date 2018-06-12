@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {chunk} from 'lodash'
+import {chunk, shuffle} from 'lodash'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {compose} from 'redux'
 
 import Master from './Master'
 import PrevButton from './PrevButton';
@@ -18,7 +17,10 @@ class MasterContainer extends Component {
     }
 
     render () {
-        const masterList = chunk(MasterList, 8)
+        console.log('master', MasterList.length)
+        const masterList = shuffle(chunk(MasterList, 8).map(_ => {
+            return shuffle(_)
+        }))
         const settings = {
             dots: false,
             infinite: true,
@@ -46,7 +48,7 @@ class MasterContainer extends Component {
 const connectMe = connect(
     null,
     {
-        routeTo: routeTo
+        routeTo
     }
 )
 

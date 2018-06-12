@@ -3,13 +3,16 @@ import React, {Component} from 'react';
 import Dia from './Dia'
 import PrevButton from './PrevButton';
 import NextButton from './NextButton';
-import {chunk} from 'lodash'
+import {chunk, shuffle} from 'lodash'
 
 import {DiamondList} from "../../../../data/consts";
 
 class DiaContainer extends Component {
     render() {
-        const diaList = chunk(DiamondList, 12)
+        console.log('dia', DiamondList.length)
+        const diaList = shuffle(chunk(DiamondList, 12).map(_ => {
+            return shuffle(_)
+        }))
         var settings = {
             dots: false,
             infinite: true,
