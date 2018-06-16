@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import $ from 'jquery'
 
 import DescContainer from "./components/Desc/DescContainer";
 import ImageViewContainer from "./components/ImageView/ImageViewContainer";
@@ -42,6 +43,13 @@ class View extends Component {
         document.getElementsByTagName('body')[0].setAttribute('class', 'sub_search_list');
     }
 
+
+    componentWillUnmount() {
+        $('meta[name=description]').attr('content', '고시원 찾을 땐? 고시원 구할 땐? 고시락')
+        $('meta[name=title]').attr('content', '고시락');
+        document.title = '고시락';
+    }
+
     async componentDidMount() {
         const {match, userData, isLoggedIn} = this.props
         const id = match.params.id
@@ -51,10 +59,14 @@ class View extends Component {
                 method: 'GET',
                 headers: fetchHeader
             })
+            const kosiwon = await data.json()
             await this.setStateAsync({
                 success: true,
-                data: await data.json()
+                data: kosiwon
             })
+            $('meta[name=description]').attr('content', kosiwon.descriptionHP || kosiwon.intro);
+            $('meta[name=title]').attr('content', kosiwon.titleHP || kosiwon.kosiwonName);
+            document.title = kosiwon.titleHP || kosiwon.kosiwonName;
         } catch (e) {
             console.log(`error! ${e}`)
         }
