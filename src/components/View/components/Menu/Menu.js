@@ -18,7 +18,8 @@ const Menu = ({
                   isFavorite,
                   toggleFavorite,
                   priceMax,
-                  priceMin
+                  priceMin,
+                  kosiwonBlogUrl
               }) => {
     return (
         <div className="detail_info">
@@ -50,11 +51,10 @@ const Menu = ({
                     </div>}
                 </li>
                 <li>
-                    <Link target="blank"
-                       to={kosiwonUrl || '#'}>홈페이지</Link>
+                    <a href={kosiwonUrl} target="_blank">홈페이지</a>
                 </li>
                 <li>
-                    <Link to={`/report/${id}/${encodeURI(kosiwonName)}`}>신고하기</Link>
+                    <a href={kosiwonBlogUrl} target="_blank" style={{padding: '10px 70px'}}>블로그 리뷰</a>
                 </li>
             </ul>
         </div>

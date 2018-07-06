@@ -246,6 +246,7 @@ class View extends Component {
                 kosiwonName,
                 kosiwonPhoneNo,
                 kosiwonUrl,
+                kosiwonBlogUrl,
                 kosiwonVirtualNo,
                 kosiwonZipcode,
                 imageList,
@@ -265,6 +266,7 @@ class View extends Component {
                                 kosiwonName={kosiwonName}
                                 kosiwonPhoneNo={kosiwonPhoneNo}
                                 kosiwonUrl={kosiwonUrl}
+                                kosiwonBlogUrl={kosiwonBlogUrl}
                                 kosiwonVirtualNo={kosiwonVirtualNo}
                                 kosiwonZipcode={kosiwonZipcode}
                                 isMeal={isMeal}
