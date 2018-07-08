@@ -43,7 +43,7 @@ class MyList extends Component {
         if (isLoggedIn) {
             // todo
             try {
-                await fetch('http://www.kosirock.co.kr/api/myKosiwons/deleteMulti', {
+                await fetch('/api/myKosiwons/deleteMulti', {
                     method: 'POST',
                     headers: new Headers({
                         'Accept': 'application/json',

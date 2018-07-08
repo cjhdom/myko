@@ -61,7 +61,7 @@ class ReportContainer extends Component {
             }
         }
         try {
-            const questionResult = await fetch('http://www.kosirock.co.kr/api/contacts', {
+            const questionResult = await fetch('/api/contacts', {
                 method: 'POST',
                 headers: fetchHeader,
                 body: JSON.stringify(body)

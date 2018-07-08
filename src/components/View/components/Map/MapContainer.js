@@ -42,7 +42,7 @@ class MapContainer extends Component {
                     <div id="kosiwonMap" align="absmiddle" style={{width: '1000px', height: '400px', zIndex: 0}}/>
                 </div>
                 <a className="roadview"
-                   href={`http://www.kosirock.co.kr/daumJuso/roadview.html?latitude=${location[1]}&longitude=${location[0]}`}
+                   href={`/daumJuso/roadview.html?latitude=${location[1]}&longitude=${location[0]}`}
                    target="_blank">로드뷰 보기</a>
             </div>
         );

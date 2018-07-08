@@ -35,7 +35,7 @@ class SearchResultListContainer extends Component {
     async goPage (nextPageNo) {
         const {setParentStateAsync, itemList} = this.props
         try {
-            const fetchResult = await fetch('http://www.kosirock.co.kr/api/kosiwons/listByIdListWithPaging', {
+            const fetchResult = await fetch('/api/kosiwons/listByIdListWithPaging', {
                 method: 'POST',
                 headers: fetchHeader,
                 body: JSON.stringify({

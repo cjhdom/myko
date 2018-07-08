@@ -42,7 +42,7 @@ class MyKosiwonListContainer extends Component {
         }
 
         try {
-            const result = await fetch('http://www.kosirock.co.kr/api/kosiwons/listBySearchOption', {
+            const result = await fetch('/api/kosiwons/listBySearchOption', {
                 method: 'POST',
                 headers: fetchHeader,
                 body: JSON.stringify(body)

@@ -257,7 +257,7 @@ class SearchResultMapContainer extends Component {
         });
 
         try {
-            const fetchResult = await fetch('http://www.kosirock.co.kr/api/kosiwons/listByIdListWithPaging', {
+            const fetchResult = await fetch('/api/kosiwons/listByIdListWithPaging', {
                 method: 'POST',
                 headers: fetchHeader,
                 body: JSON.stringify({
@@ -332,7 +332,7 @@ class SearchResultMapContainer extends Component {
         this.idArrayList.push(marker.kosiwon._id);
 
         try {
-            const fetchResult = await fetch('http://www.kosirock.co.kr/api/kosiwons/listByIdList', {
+            const fetchResult = await fetch('/api/kosiwons/listByIdList', {
                 method: 'POST',
                 headers: fetchHeader,
                 body: JSON.stringify({
@@ -466,7 +466,7 @@ class SearchResultMapContainer extends Component {
         }
 
         try {
-            const searchFetch = await fetch(`http://www.kosirock.co.kr/api/kosiwons/listBySearchOptionNear`, {
+            const searchFetch = await fetch(`/api/kosiwons/listBySearchOptionNear`, {
                 method: 'POST',
                 headers: fetchHeader,
                 body: JSON.stringify(body)

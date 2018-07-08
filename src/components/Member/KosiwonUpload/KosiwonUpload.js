@@ -127,7 +127,7 @@ const KosiwonUpload = ({
                 {isEdit && <ul className="img_upload">
                         {imageList.map((img) => (
                             <li key={img.imageUri}>
-                                <img src={`http://www.kosirock.co.kr${img.imageUri}`} style={{width: "100px", height: "100px"}}/>
+                                <img src={`${img.imageUri}`} style={{width: "100px", height: "100px"}}/>
                                 <a>삭제</a>
                             </li>
                         ))}
@@ -138,7 +138,7 @@ const KosiwonUpload = ({
                 <ul className="img_upload">
                     {imageList.map((img) => (
                         <li key={img.imageUri}>
-                            <img src={`http://www.kosirock.co.kr${img.imageUri}`} style={{width: "100px", height: "100px"}}/>
+                            <img src={`${img.imageUri}`} style={{width: "100px", height: "100px"}}/>
                             <a>삭제</a>
                         </li>
                     ))}

@@ -64,7 +64,7 @@ class KosiwonUploadContainer extends Component {
 
         if (id !== '-1') {
             try {
-                const data = await fetch(`http://www.kosirock.co.kr/api/kosiwons/${id}`, {
+                const data = await fetch(`/api/kosiwons/${id}`, {
                     method: 'GET',
                     headers: fetchHeader
                 })

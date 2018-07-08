@@ -55,7 +55,7 @@ class View extends Component {
         const id = match.params.id
 
         try {
-            const data = await fetch(`http://www.kosirock.co.kr/api/kosiwons/${id}`, {
+            const data = await fetch(`/api/kosiwons/${id}`, {
                 method: 'GET',
                 headers: fetchHeader
             })
@@ -105,7 +105,7 @@ class View extends Component {
             }
         } else {
             try {
-                const recent = await fetch('http://www.kosirock.co.kr/api/myKosiwons/listBySearchOption', {
+                const recent = await fetch('/api/myKosiwons/listBySearchOption', {
                     method: 'POST',
                     headers: fetchHeader,
                     body: JSON.stringify({
@@ -124,7 +124,7 @@ class View extends Component {
                 const recentDataKosiwon = (recentData.items && recentData.items[0] && recentData.items[0])
 
                 if (recentData.totalItems > 0) {
-                    await fetch(`http://www.kosirock.co.kr/api/myKosiwons/${recentDataKosiwon.id}`, {
+                    await fetch(`/api/myKosiwons/${recentDataKosiwon.id}`, {
                         method: 'PUT',
                         headers: fetchHeader,
                         body: JSON.stringify({
@@ -133,7 +133,7 @@ class View extends Component {
                         })
                     })
                 } else {
-                    await fetch('http://www.kosirock.co.kr/api/myKosiwons', {
+                    await fetch('/api/myKosiwons', {
                         method: 'POST',
                         headers: fetchHeader,
                         body: JSON.stringify({
@@ -145,7 +145,7 @@ class View extends Component {
                     })
                 }
 
-                const favorite = await fetch('http://www.kosirock.co.kr/api/myKosiwons/listBySearchOption', {
+                const favorite = await fetch('/api/myKosiwons/listBySearchOption', {
                     method: 'POST',
                     headers: fetchHeader,
                     body: JSON.stringify({
@@ -186,7 +186,7 @@ class View extends Component {
 
         try {
             if (isFavorite) {
-                const result = await fetch(`http://www.kosirock.co.kr/api/myKosiwons/${favoriteData._id}`, {
+                const result = await fetch(`/api/myKosiwons/${favoriteData._id}`, {
                     method: 'DELETE',
                     headers: fetchHeader,
                     body: JSON.stringify(favoriteData)
@@ -199,7 +199,7 @@ class View extends Component {
                     })
                 }
             } else {
-                const favorite = await fetch('http://www.kosirock.co.kr/api/myKosiwons/', {
+                const favorite = await fetch('/api/myKosiwons/', {
                     method: 'POST',
                     headers: fetchHeader,
                     body: JSON.stringify({

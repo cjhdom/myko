@@ -40,7 +40,7 @@ class FindPasswordContainer extends Component {
         }
 
         try {
-            const queryResult = await fetch('http://www.kosirock.co.kr/api/users/listBySearchOption', {
+            const queryResult = await fetch('/api/users/listBySearchOption', {
                 method: 'POST',
                 headers: fetchHeader,
                 body: JSON.stringify(body)
@@ -51,7 +51,7 @@ class FindPasswordContainer extends Component {
                 if (data1.items.length < 1) {
                     return alert('이메일 주소가 유효하지 않습니다.')
                 } else {
-                    const sendRequest = await fetch('http://www.kosirock.co.kr/api/users/sendEmail', {
+                    const sendRequest = await fetch('/api/users/sendEmail', {
                         method: 'POST',
                         headers: fetchHeader,
                         body: JSON.stringify(data1.items[0])

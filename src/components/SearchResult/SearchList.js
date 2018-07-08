@@ -39,7 +39,7 @@ const SearchList = ({
                             <a style={cursorStyle} onClick={() => moveView(data._id)}>
                                 <div className="thumbnail_img">
                                     {data.thumbnailUri && data.thumbnailUri.length > 0 &&
-                                    <img alt="" src={`http://www.kosirock.co.kr/${data.thumbnailUri}`}/>}
+                                    <img alt="" src={`/${data.thumbnailUri}`}/>}
                                 </div>
                                 <div className="thumbnail_info">
                                     <p>{data.kosiwonName}</p>

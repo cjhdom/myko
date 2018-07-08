@@ -22,7 +22,7 @@ class KosiwonListContainer extends Component {
 
     async removeRecentAsync(id) {
         try {
-            await fetch('http://www.kosirock.co.kr/api/myKosiwons/deleteMulti', {
+            await fetch('/api/myKosiwons/deleteMulti', {
                 method: 'POST',
                 headers: new Headers({
                     'Accept': 'application/json',
@@ -59,7 +59,7 @@ class KosiwonListContainer extends Component {
         }
 
         try {
-            const result = await fetch('http://www.kosirock.co.kr/api/myKosiwons/listBySearchOption', {
+            const result = await fetch('/api/myKosiwons/listBySearchOption', {
                 method: 'POST',
                 headers: new Headers({
                     'Accept': 'application/json',

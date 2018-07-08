@@ -41,7 +41,7 @@ class FavoriteContainer extends Component {
                 pageSize: 4
             }
             try {
-                const result = await fetch('http://www.kosirock.co.kr/api/myKosiwons/listBySearchOption', {
+                const result = await fetch('/api/myKosiwons/listBySearchOption', {
                     method: 'POST',
                     headers: new Headers({
                         'Accept': 'application/json',

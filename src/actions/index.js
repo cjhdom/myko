@@ -29,7 +29,7 @@ export const doLogin = (username, password) => async (dispatch, getState) => {
             password
         }
         try {
-            const data = await fetch('http://www.kosirock.co.kr/api/users/listByNameAndPassword', {
+            const data = await fetch('/api/users/listByNameAndPassword', {
                 method: 'POST',
                 headers: fetchHeader,
                 body: JSON.stringify(body)
@@ -65,7 +65,7 @@ export const onRegisterClicked = (email, password, passwordConfirm, name, phoneN
             pageNo: 1,
             pageSize: 10
         }
-        const data = await fetch('http://www.kosirock.co.kr/api/users/listBySearchOption', {
+        const data = await fetch('/api/users/listBySearchOption', {
             method: 'POST',
             headers: fetchHeader,
             body: JSON.stringify(body)
@@ -75,7 +75,7 @@ export const onRegisterClicked = (email, password, passwordConfirm, name, phoneN
         if (result.totalItems > 0) {
             alert('이미 사용중인 이메일입니다')
         } else {
-            const registerData = await fetch('http://www.kosirock.co.kr/api/users', {
+            const registerData = await fetch('/api/users', {
                 method: 'POST',
                 headers: new Headers({
                     'Accept': 'application/json',
@@ -130,7 +130,7 @@ export const onSocialLoginClicked = (id, name, loginType) => async dispatch => {
             pageSize:   1
         }
 
-        const data = await fetch('http://www.kosirock.co.kr/api/users/listBySearchOption', {
+        const data = await fetch('/api/users/listBySearchOption', {
             method: 'POST',
             headers: fetchHeader,
             body: JSON.stringify(body)
@@ -166,7 +166,7 @@ export const onWonjangRegisterClicked =
                     pageNo: 1,
                     pageSize: 10
                 }
-                const data = await fetch('http://www.kosirock.co.kr/api/users/listBySearchOption', {
+                const data = await fetch('/api/users/listBySearchOption', {
                     method: 'POST',
                     headers: fetchHeader,
                     body: JSON.stringify(body)
@@ -176,7 +176,7 @@ export const onWonjangRegisterClicked =
                 if (result.totalItems > 0) {
                     alert('이미 사용중인 이메일입니다')
                 } else {
-                    const registerData = await fetch('http://www.kosirock.co.kr/api/users', {
+                    const registerData = await fetch('/api/users', {
                         method: 'POST',
                         headers: fetchHeader,
                         body: JSON.stringify({
@@ -215,7 +215,7 @@ export const onWonjangRegisterClicked =
                         formData.append('fileName', `${registerResult._id}_registration`)
                         formData.append('file', files)
 
-                        const fileTest = await fetch('http://www.kosirock.co.kr/api/upload', {
+                        const fileTest = await fetch('/api/upload', {
                             method: 'POST',
                             body: formData
                         })
@@ -243,7 +243,7 @@ export const onWonjangEditClicked = (password, newPassword, newPasswordConfirm, 
                                      kosiwonPhoneNo, registrationNo, files) => async (dispatch, getState) => {
     const state = getState()
     try {
-        const userResult = await fetch('http://www.kosirock.co.kr/api/users/listByNameAndPassword', {
+        const userResult = await fetch('/api/users/listByNameAndPassword', {
             method: 'POST',
             headers: fetchHeader,
             body: JSON.stringify({
@@ -268,7 +268,7 @@ export const onWonjangEditClicked = (password, newPassword, newPasswordConfirm, 
                 body.newPassword = newPasswordConfirm
                 body.newPasswordConfirm = newPasswordConfirm
             }
-            const editResult = await fetch(`http://www.kosirock.co.kr/api/users/${result.user._id}`, {
+            const editResult = await fetch(`/api/users/${result.user._id}`, {
                 method: 'PUT',
                 headers: fetchHeader,
                 body: JSON.stringify(body)
@@ -291,7 +291,7 @@ export const onWonjangEditClicked = (password, newPassword, newPasswordConfirm, 
                 formData.append('fileName', `${editData._id}_registration`)
                 formData.append('file', files)
 
-                const fileTest = await fetch('http://www.kosirock.co.kr/api/upload', {
+                const fileTest = await fetch('/api/upload', {
                     method: 'POST',
                     body: formData
                 })
@@ -314,7 +314,7 @@ export const onWonjangEditClicked = (password, newPassword, newPasswordConfirm, 
 export const onUserEditClicked = (password, newPassword, newPasswordConfirm, phoneNo) => async (dispatch, getState) => {
     const state = getState()
     try {
-        const userResult = await fetch('http://www.kosirock.co.kr/api/users/listByNameAndPassword', {
+        const userResult = await fetch('/api/users/listByNameAndPassword', {
             method: 'POST',
             headers: fetchHeader,
             body: JSON.stringify({
@@ -335,7 +335,7 @@ export const onUserEditClicked = (password, newPassword, newPasswordConfirm, pho
                 body.newPassword = newPasswordConfirm
                 body.newPasswordConfirm = newPasswordConfirm
             }
-            const editResult = await fetch(`http://www.kosirock.co.kr/api/users/${result.user._id}`, {
+            const editResult = await fetch(`/api/users/${result.user._id}`, {
                 method: 'PUT',
                 headers: fetchHeader,
                 body: JSON.stringify(body)
@@ -361,7 +361,7 @@ export const onUserEditClicked = (password, newPassword, newPasswordConfirm, pho
 }
 
 export const onUnregisterClicked = (id) => async (dispatch) => {
-    const unregisterResult = await fetch(`http://www.kosirock.co.kr/api/users/${id}`, {
+    const unregisterResult = await fetch(`/api/users/${id}`, {
         method: 'DELETE',
         headers: fetchHeader
     })
@@ -377,7 +377,7 @@ export const uploadKosiwon = (isParking, isMeal, isWoman, isSeparate, isRestRoom
                               kosiwonZipcode, majorAddress, minorAddress, floor, priceMin, priceMax, intro, description,
                               userId, kosiwonId, files) => async (dispatch) => {
     const id = kosiwonId === '-1' ? null : kosiwonId
-    let url ='http://www.kosirock.co.kr/api/kosiwons'
+    let url ='/api/kosiwons'
 
     if (id) {
         url = url + `/${id}`
@@ -429,7 +429,7 @@ export const uploadKosiwon = (isParking, isMeal, isWoman, isSeparate, isRestRoom
                     formData.append('fileName', `${_id}_kosiwon_${imageList.length + index}`)
                     formData.append('file', file)
 
-                    const fileTest = await fetch('http://www.kosirock.co.kr/api/upload', {
+                    const fileTest = await fetch('/api/upload', {
                         method: 'POST',
                         body: formData
                     })
@@ -445,7 +445,7 @@ export const uploadKosiwon = (isParking, isMeal, isWoman, isSeparate, isRestRoom
                     imageUri: `/files/kosiwons/${_id}/${_}`
                 }))
 
-                await fetch(`http://www.kosirock.co.kr/api/kosiwons/${_id}`, {
+                await fetch(`/api/kosiwons/${_id}`, {
                     method: 'PUT',
                     headers: fetchHeader,
                     body: JSON.stringify({
