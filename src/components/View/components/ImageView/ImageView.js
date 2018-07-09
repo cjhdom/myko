@@ -11,7 +11,7 @@ const ImageView = ({settings, imageList}) => {
                     {imageList.map((image, i) => {
                         return (
                             <div key={i}>
-                                <img src={`${image.imageUri}`} style={{
+                                <img src={`http://www.kosirock.co.kr${image.imageUri}`} style={{
                                     height: '480px',
                                     textAlign: 'center',
                                     display: 'block',
