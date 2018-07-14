@@ -34,10 +34,18 @@ class ImageViewContainer extends Component {
             nextArrow: <NextButton/>,
             lazyLoad: false
         };
-        return (
-            <ImageView settings={settings}
-                imageList={imageList}/>
-        )
+        if (imageList.length > 0) {
+            return (
+                <ImageView settings={settings}
+                           imageList={imageList}/>
+            )
+        } else {
+            return (
+                <div className="image-swipe">
+                    <img src="/www/img/thumbnail_none_detail.jpg" height="480px" />
+                </div>
+            )
+        }
     }
 }
 
