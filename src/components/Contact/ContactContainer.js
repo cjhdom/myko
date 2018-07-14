@@ -94,7 +94,7 @@ class ContactContainer extends Component {
                         <a style={cursor} className="faq" onClick={() => this.doMoveKosiwonContact('A')}>문의하기</a><br/>
                         <img alt="" src="/www/img/contact02.jpg"/><br/>
                         <img alt="" src="/www/img/contact04.jpg"/><br/>
-                        <img alt="" src="/www/img/contact03.jpg"/>
+                        {/*<img alt="" src="/www/img/contact03.jpg"/>*/}
                     </li>
                     <li id="info_5" ref="info_5">
                         <h2>모바일 홈페이지</h2>
