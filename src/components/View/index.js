@@ -253,13 +253,15 @@ class View extends Component {
                 priceMax,
                 priceMin,
                 floor,
-                nanbangType
+                nanbangType,
+                priority
             } = this.state.data
             return (
                 <div className="contentWrapper">
                     <div className="sub_detail_wrapper">
                         <div id="sub_detail">
                             <ImageViewContainer
+                                priority={priority}
                                 imageList={imageList}/>
                             <MenuContainer
                                 id={_id}

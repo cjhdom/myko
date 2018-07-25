@@ -19,7 +19,7 @@ const PrevButton = ({onClick}) => {
 
 class ImageViewContainer extends Component {
     render() {
-        const {imageList} = this.props
+        const {imageList, priority} = this.props
         const settings = {
             dots: true,
             dotsClass: 'indicator',
@@ -35,9 +35,11 @@ class ImageViewContainer extends Component {
             lazyLoad: false
         };
         if (imageList.length > 0) {
+    
+            const newImageList = priority < 5 ? imageList.slice(0, 5) : imageList
             return (
                 <ImageView settings={settings}
-                           imageList={imageList}/>
+                           imageList={newImageList}/>
             )
         } else {
             return (
